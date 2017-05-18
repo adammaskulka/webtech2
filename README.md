@@ -2,6 +2,8 @@
 Adam Maškulka, Juraj Vrabec, Martin Meľuch, Andrej Dubeň, Radoslav Škopek
 FEI STU 2016/2017
 
+http://elearn.elf.stuba.sk/moodle/pluginfile.php/54857/mod_resource/content/7/ZP_pokyny_2017.pdf
+
 
 | Uloha        | Riesitel           | Stav  |
 | ------------- |:-------------:| -----:|
