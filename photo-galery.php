@@ -243,7 +243,7 @@
 
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="photo-galery.html">Fotogaléria</a>
+                            <a href="photo-galery.php">Fotogaléria</a>
                         </li>
                         <li>
                             <a href="#">Videá</a>

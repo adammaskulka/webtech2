@@ -7,13 +7,14 @@
     <meta name="description" content="Ústav automobilovej mechatroniky FEI STU">
 
     <title>
-        Ústav automobilovej mechatroniky FEI STU | Média
+        Ústav automobilovej mechatroniky FEI STU | Intranet
     </title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/theme.css" rel="stylesheet">
     <link href="css/bootstrap-reset.css" rel="stylesheet">
+    <link href="css/sidebar.css" rel="stylesheet">
     <!--
 <link href="css/bootstrap.min.css" rel="stylesheet">
 -->
@@ -65,13 +66,14 @@
 
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
+
                 <li>
                     <a href="about.html"></a>
                 </li>
 
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
-                            "dropdown" data-toggle="dropdown" href="#">O nás<i class="fa fa-angle-down"></i>
+                    "dropdown" data-toggle="dropdown" href="#">O nás<i class="fa fa-angle-down"></i>
                     </a>
 
                     <ul class="dropdown-menu">
@@ -120,7 +122,7 @@
 
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
-                            "dropdown" data-toggle="dropdown" href="#">Štúdium<i class="fa fa-angle-down"></i>
+                    "dropdown" data-toggle="dropdown" href="#">Štúdium<i class="fa fa-angle-down"></i>
                     </a>
 
                     <ul class="dropdown-menu">
@@ -131,11 +133,11 @@
                                 <li class="dropdown-submenu"></li>
 
                                 <li>
-                                    <a href="#">Bakalárske štúdium</a>
+                                    <a href="applicants-bachelor.html">Bakalárske štúdium</a>
                                 </li>
 
                                 <li>
-                                    <a href="#">Inžinierske štúdium</a>
+                                    <a href="applicants-master.html">Inžinierske štúdium</a>
                                 </li>
                             </ul>
                         </li>
@@ -146,7 +148,7 @@
                                 <li class="dropdown-submenu"></li>
 
                                 <li>
-                                    <a href="#">Všeobecné informácie</a>
+                                    <a href="bachelor-info.html">Všeobecné informácie</a>
                                 </li>
 
                                 <li class="dropdown-submenu">
@@ -154,11 +156,11 @@
 
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="#">Pokyny</a>
+                                            <a href="bachelor-instructions.html">Pokyny</a>
                                         </li>
 
                                         <li>
-                                            <a href="#">Voľné témy</a>
+                                            <a href="bachelor-thesis.html">Voľné témy</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -172,7 +174,7 @@
                                 <li class="dropdown-submenu"></li>
 
                                 <li>
-                                    <a href="#">Všeobecné informácie</a>
+                                    <a href="master-info.html">Všeobecné informácie</a>
                                 </li>
 
                                 <li class="dropdown-submenu">
@@ -180,11 +182,11 @@
 
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="#">Pokyny</a>
+                                            <a href="master-instructions.html">Pokyny</a>
                                         </li>
 
                                         <li>
-                                            <a href="#">Voľné témy</a>
+                                            <a href="master-thesis.html">Voľné témy</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -192,14 +194,14 @@
                         </li>
 
                         <li>
-                            <a href="#">Doktorandské štúdium</a>
+                            <a href="doctor-info.html">Doktorandské štúdium</a>
                         </li>
                     </ul>
                 </li>
 
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
-                            "dropdown" data-toggle="dropdown" href="#">Výskum<i class="fa fa-angle-down"></i>
+                    "dropdown" data-toggle="dropdown" href="#">Výskum<i class="fa fa-angle-down"></i>
                     </a>
 
                     <ul class="dropdown-menu">
@@ -239,7 +241,7 @@
 
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
-                            "dropdown" data-toggle="dropdown" href="#">Aktivity<i class="fa fa-angle-down"></i>
+                    "dropdown" data-toggle="dropdown" href="#">Aktivity<i class="fa fa-angle-down"></i>
                     </a>
 
                     <ul class="dropdown-menu">
@@ -273,7 +275,7 @@
                 </li>
 
                 <li>
-                    <a href="login.html">Prihlásenie</a>
+                    <a href="login.php">Prihlásenie</a>
                 </li>
 
             </ul>
@@ -284,23 +286,16 @@
 
 <!--breadcrumbs start-->
 <div class="breadcrumbs">
+    <span style="font-size:30px;cursor:pointer; margin-left: 20px" onclick="openNav()">&#9776; Menu</span>
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-sm-4">
-                <h1>
-                    Média
-                </h1>
+                <h1>Intranet</h1>
             </div>
             <div class="col-lg-8 col-sm-8">
                 <ol class="breadcrumb pull-right">
-                    <li>
-                        <a href="#">
-                            Domov
-                        </a>
-                    </li>
-                    <li class="active">
-                        Média
-                    </li>
+                    <li><a href="index.html">Domov</a></li>
+                    <li class="active">Intranet</li>
                 </ol>
             </div>
         </div>
@@ -308,239 +303,26 @@
 </div>
 <!--breadcrumbs end-->
 
-<!--container start-->
-<div class="container">
-    <div class="row">
-
-
-        <div class="col-md-6">
-            <div class="blog-left wow fadeInLeft">
-                <div class="blog-img">
-                    <img src="img/media/motokara.jpg" alt=""/>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="blog-two-info">
-                            <p>
-                                <i class="fa fa-user">
-                                </i>
-                                <a href="http://dennik.hnonline.sk">
-                                    Hospodárske noviny
-                                </a>
-                                |
-                                <i class="fa fa-calendar">
-                                </i>
-                                14.10.2014
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="blog-content">
-                    <h3>
-                        Študenti z Bratislavy vyvinuli u nás prvú elektrickú motokáru
-                    </h3>
-                </div>
-                <a href="http://dennik.hnonline.sk/ekonomika-a-firmy/591621-studenti-z-bratislavy-vyvinuli-u-nas-prvu-elektricku-motokaru#.VETnmBjntpk.facebook"
-                   class="btn btn-primary">Viac</a>
-            </div>
-
-            <div class="blog-left wow fadeInLeft">
-                <div class="blog-img">
-                    <img src="img/media/motokara2.jpg" alt=""/>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="blog-two-info">
-                            <p>
-                                <i class="fa fa-user">
-                                </i>
-                                <a href="https://spravy.pravda.sk">
-                                    Pravda
-                                </a>
-                                |
-                                <i class="fa fa-calendar">
-                                </i>
-                                20.10.2014
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="blog-content">
-                    <h3>
-                        Prvá elektrická motokára na Slovensku vznikla v škole
-                    </h3>
-                </div>
-                <a href="https://spravy.pravda.sk/ekonomika/clanok/333718-prva-elektricka-motokara-na-slovensku-vznikla-v-skole/"
-                   class="btn btn-primary">Viac</a>
-            </div>
-
-            <div class="blog-left wow fadeInLeft">
-                <div class="blog-img">
-                    <img src="img/media/akupunktura.jpg" alt=""/>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="blog-two-info">
-                            <p>
-                                <i class="fa fa-user">
-                                </i>
-                                <a href="http://reginazapad.rtvs.sk">
-                                    Rádio Regina
-                                </a>
-                                |
-                                <i class="fa fa-calendar">
-                                </i>
-                                19.1.2016
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="blog-content">
-                    <h3>
-                        Mladí vedci navrhli snímač akupunktúrnych bodov
-                    </h3>
-                </div>
-                <a href="http://reginazapad.rtvs.sk/clanky/deti/98134/mladi-vedci-navrhli-snimac-akupunkturnych-bodov"
-                   class="btn btn-primary">Viac</a>
-            </div>
-
-            <div class="blog-left wow fadeInLeft">
-                <div class="blog-img">
-                    <img src="img/media/akupunktura2.jpg" alt=""/>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="blog-two-info">
-                            <p>
-                                <i class="fa fa-user">
-                                </i>
-                                <a href="http://www.pluska.sk/zena/sarm/">
-                                    Šarm
-                                </a>
-                                |
-                                <i class="fa fa-calendar">
-                                </i>
-                                10.11.2015
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="blog-content">
-                    <h3>
-                        Poodkryl tajomstvo
-                    </h3>
-                </div>
-                <a href="./files/sarm201546.pdf" download="sarm201546.pdf"
-                   class="btn btn-primary">Stiahnúť</a>
-            </div>
-
-        </div>
-        <div class="col-md-6">
-
-            <div class="blog-right wow fadeInRight">
-                <div class="blog-img">
-                    <img src="img/media/akupunktura3.jpg" alt=""/>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="blog-two-info">
-                            <p>
-                                <i class="fa fa-user">
-                                </i>
-                                <a href="http://science.dennikn.sk/clankyarozhovory/">
-                                    Denník N
-                                </a>
-                                |
-                                <i class="fa fa-calendar">
-                                </i>
-                                29.3.2016
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="blog-content">
-                    <h3>
-                        Vďaka biomechatronikom z STU sa už akupunktúrne body neskryjú
-                    </h3>
-                </div>
-                <a href="http://science.dennikn.sk/clanky-a-rozhovory/neziva-priroda/technika/6196-vdaka-slovenskym-biomechatronikom-sa-uz-akupunkturne-body-neskryju"
-                   class="btn btn-primary">Viac</a>
-                <a href="./files/science20162903.pdf" download="science20162903.pdf"
-                   class="btn btn-primary">Stiahnúť</a>
-
-            </div>
-
-
-            <div class="blog-right wow fadeInRight">
-                <div class="blog-img">
-                    <img src="img/media/mechatronika.jpg" alt=""/>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="blog-two-info">
-                            <p>
-                                <i class="fa fa-user">
-                                </i>
-                                <a href="https://www.rtvs.sk/televizia/archiv/">
-                                    VAT RTVS
-                                </a>
-                                |
-                                <i class="fa fa-calendar">
-                                </i>
-                                12.1.2017
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="blog-content">
-                    <h3>
-                        Automobilová mechatronika (od 6:35 min)
-                    </h3>
-                </div>
-                <a href="https://www.rtvs.sk/televizia/archiv/11767/115433"
-                   class="btn btn-primary">Viac</a>
-
-            </div>
-
-
-            <div class="blog-right wow fadeInRight">
-                <div class="blog-img">
-                    <img src="img/media/mechatronika.jpg" alt=""/>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="blog-two-info">
-                            <p>
-                                <i class="fa fa-user">
-                                </i>
-                                <a href="https://www.rtvs.sk/televizia/archiv/">
-                                    VAT RTVS
-                                </a>
-                                |
-                                <i class="fa fa-calendar">
-                                </i>
-                                19.1.2017
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="blog-content">
-                    <h3>
-                        Prvý slovenský elektrický skúter (od 7:50 min)
-                    </h3>
-                </div>
-                <a href="https://www.rtvs.sk/televizia/archiv/11767/117377"
-                   class="btn btn-primary">Viac</a>
-
-            </div>
-
-        </div>
-
-
-        <!--blog end-->
-    </div>
-
+<!-- left menu start -->
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="intranet-users.php">Používatelia</a>
+    <a href="intranet-photos.php">Fotky</a>
+    <a href="intranet-video.php">Videá</a>
+    <a href="intranet-actuality.php">Aktuality</a>
+    <a href="intranet-dochadzka.php">Dochádzka</a>
+    <a href="intranet-pedagogika.php">Pedagogika</a>
+    <a href="intranet-doktorandi.php">Doktorandi</a>
+    <a href="intranet-publikacie.php">Publikacie</a>
+    <a href="intranet-sluzobne-cesty.php">Služobné cesty</a>
+    <a href="intranet-nakupy.php">Nákupy</a>
+    <a href="intranet-tasks.php">Rozdelenie úloh</a>
 </div>
+<!-- left menu end -->
+
+<!--container start-->
+
+
 <!--container end-->
 
 <!--footer start-->
@@ -629,10 +411,10 @@
             <div class="col-lg-6 col-sm-6 pull-right">
                 <ul class="social-link-footer list-unstyled">
                     <li class="wow flipInX" data-wow-duration="2s" data-wow-delay=".1s"><a
-                            href="https://www.facebook.com/UAMTFEISTU"><i class="fa fa-facebook"></i></a></li>
+                                href="https://www.facebook.com/UAMTFEISTU"><i class="fa fa-facebook"></i></a></li>
                     <li class="wow flipInX" data-wow-duration="2s" data-wow-delay=".2s"><a
-                            href="https://www.youtube.com/channel/UCo3WP2kC0AVpQMIiJR79TdA"><i
-                            class="fa fa-youtube"></i></a></li>
+                                href="https://www.youtube.com/channel/UCo3WP2kC0AVpQMIiJR79TdA"><i
+                                    class="fa fa-youtube"></i></a></li>
                 </ul>
             </div>
             <div class="col-md-4">
@@ -645,41 +427,75 @@
 </footer>
 <!--small footer end-->
 
-<!-- js placed at the end of the document so the pages load faster -->
-<script src="js/jquery.js">
-</script>
-<script src="js/bootstrap.min.js">
-</script>
-<script type="text/javascript" src="js/hover-dropdown.js">
-</script>
-<script defer src="js/jquery.flexslider.js">
-</script>
-<script type="text/javascript" src="assets/bxslider/jquery.bxslider.js">
-</script>
+<!-- js placed at the end of the document so the pages load faster
+<script src="js/jquery.js"></script>-->
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/hover-dropdown.js"></script>
+<script defer src="js/jquery.flexslider.js"></script>
+<script type="text/javascript" src="assets/bxslider/jquery.bxslider.js"></script>
 
-<script src="js/jquery.easing.min.js">
-</script>
-<script src="js/link-hover.js">
-</script>
+<script type="text/javascript" src="js/jquery.parallax-1.1.3.js"></script>
+<script src="js/wow.min.js"></script>
+<script src="assets/owlcarousel/owl.carousel.js"></script>
+
+<script src="js/jquery.easing.min.js"></script>
+<script src="js/link-hover.js"></script>
+<script src="js/superfish.js"></script>
 
 
 <!--common script for all pages-->
-<script src="js/common-scripts.js">
-</script>
+<script src="js/common-scripts.js"></script>
 
 
-<script src="js/wow.min.js">
-</script>
+<!-- Sequence Moder -slider js -->
+<script src="js/seq-slider/jquery.sequence-min.js"></script>
+<!--<script src="js/slider/sequencejs-options.modern-slide-in.js"></script>-->
+<script src="js/seq-slider/sequencejs-options.apple-style.js"></script>
+<!-- end of sequence slider js-->
+
+
 <script>
-    wow = new WOW(
-        {
-            boxClass: 'wow',      // default
-            animateClass: 'animated', // default
-            offset: 0          // default
-        }
-    )
-    wow.init();
-</script>
+    $('a.info').tooltip();
+    $(window).load(function () {
+        $('.flexslider').flexslider({
+            animation: "slide",
+            start: function (slider) {
+                $('body').removeClass('loading');
+            }
+        });
+    });
 
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+        document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+        document.body.style.backgroundColor = "white";
+    }
+
+
+    $(document).ready(function () {
+
+        $("#owl-demo").owlCarousel({
+
+            items: 4
+
+        });
+
+    });
+
+    jQuery(document).ready(function () {
+        jQuery('ul.superfish').superfish();
+    });
+
+    new WOW().init();
+
+
+</script>
 </body>
 </html>
