@@ -32,7 +32,36 @@
     <script src="js/respond.min.js"></script>
     <![endif]-->
 </head>
+<?php
+if( $_POST["login"] && $_POST["password"] ) {
+   login($_POST["login"],$_POST["password"]);
+   exit();
+}
 
+function login($login, $pass){
+  $adServer = "ldap.stuba.sk";
+  $port= "389";
+  $ldap = ldap_connect($adServer,$port);
+  $ldaprdn = 'uid='.$login.',ou=People,DC=stuba,DC=sk';
+
+  ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
+  $bind = ldap_bind($ldap, $ldaprdn, $pass);
+  //$bind = 1; //TODO: test smazat
+  if ($bind) {
+    require('src/userController.php');
+    $ldapFilter = array("uid", "userPassword", "employeetype", "uisid", "cn", "sn", "givenname");
+    $ldapSearchResult = @ldap_search($ldap, $ldaprdn, 'uid='.$login, $ldapFilter);
+    $entries = ldap_get_entries($ldap, $ldapSearchResult);
+    //$login = 'xvrabec'; //TODO: test smazat
+    $user = getUser($login);
+    session_start();
+    $_SESSION["user"] = $user;
+    require('cfg/config.php');
+    header("Location: index.html");
+    exit();
+  }
+}
+?>
 <body>
 <!--header start-->
 <header class="head-section">
@@ -266,36 +295,14 @@
 <div class="login-bg">
     <div class="container">
         <div class="form-wrapper">
-            <form class="form-signin wow fadeInUp" action="index.html">
+            <form class="form-signin wow fadeInUp" method="post" action="login.php">
                 <h2 class="form-signin-heading">sign in now</h2>
                 <div class="login-wrap">
-                    <input type="text" class="form-control" placeholder="User ID" autofocus>
-                    <input type="password" class="form-control" placeholder="Password">
-                    <label class="checkbox">
-                        <input type="checkbox" value="remember-me"> Remember me
-                        <span class="pull-right">
-                        <a data-toggle="modal" href="#myModal"> Forgot Password?</a>
+                    <input name="login" type="text" class="form-control" placeholder="User ID" autofocus>
+                    <input name="password" type="password" class="form-control" placeholder="Password">
 
-                    </span>
-                    </label>
                     <button class="btn btn-lg btn-login btn-block" type="submit">Sign in</button>
-                    <p>or you can sign in via social network</p>
-                    <div class="login-social-link">
-                        <a href="index.html" class="facebook">
-                            <i class="fa fa-facebook"></i>
-                            Facebook
-                        </a>
-                        <a href="index.html" class="twitter">
-                            <i class="fa fa-twitter"></i>
-                            Twitter
-                        </a>
-                    </div>
-                    <div class="registration">
-                        Don't have an account yet?
-                        <a class="" href="registration.html">
-                            Create an account
-                        </a>
-                    </div>
+
 
                 </div>
 
