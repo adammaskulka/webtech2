@@ -7,14 +7,13 @@
     <meta name="description" content="Ústav automobilovej mechatroniky FEI STU">
 
     <title>
-        Ústav automobilovej mechatroniky FEI STU | Intranet
+        Ústav automobilovej mechatroniky FEI STU | Vedenie ústavu
     </title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/theme.css" rel="stylesheet">
     <link href="css/bootstrap-reset.css" rel="stylesheet">
-    <link href="css/sidebar.css" rel="stylesheet">
     <!--
 <link href="css/bootstrap.min.css" rel="stylesheet">
 -->
@@ -68,7 +67,7 @@
             <ul class="nav navbar-nav">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
-                    "dropdown" data-toggle="dropdown" href="#">O nás<i class="fa fa-angle-down"></i>
+                            "dropdown" data-toggle="dropdown" href="#">O nás<i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
@@ -112,7 +111,7 @@
 
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
-                    "dropdown" data-toggle="dropdown" href="#">Štúdium<i class="fa fa-angle-down"></i>
+                            "dropdown" data-toggle="dropdown" href="#">Štúdium<i class="fa fa-angle-down"></i>
                     </a>
 
                     <ul class="dropdown-menu">
@@ -191,7 +190,7 @@
 
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
-                    "dropdown" data-toggle="dropdown" href="#">Výskum<i class="fa fa-angle-down"></i>
+                            "dropdown" data-toggle="dropdown" href="#">Výskum<i class="fa fa-angle-down"></i>
                     </a>
 
                     <ul class="dropdown-menu">
@@ -231,7 +230,7 @@
 
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
-                    "dropdown" data-toggle="dropdown" href="#">Aktivity<i class="fa fa-angle-down"></i>
+                            "dropdown" data-toggle="dropdown" href="#">Aktivity<i class="fa fa-angle-down"></i>
                     </a>
 
                     <ul class="dropdown-menu">
@@ -275,16 +274,15 @@
 
 <!--breadcrumbs start-->
 <div class="breadcrumbs">
-    <span style="font-size:30px;cursor:pointer; margin-left: 20px" onclick="openNav()">&#9776; Menu</span>
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-sm-4">
-                <h1>Intranet</h1>
+                <h1>Vedenie ústavu</h1>
             </div>
             <div class="col-lg-8 col-sm-8">
                 <ol class="breadcrumb pull-right">
                     <li><a href="index.html">Domov</a></li>
-                    <li class="active">Intranet</li>
+                    <li class="active">Vedenie ústavu</li>
                 </ol>
             </div>
         </div>
@@ -292,26 +290,162 @@
 </div>
 <!--breadcrumbs end-->
 
-<!-- left menu start -->
-<div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="intranet-users.php">Používatelia</a>
-    <a href="intranet-photos.php">Fotky</a>
-    <a href="intranet-video.php">Videá</a>
-    <a href="intranet-actuality.php">Aktuality</a>
-    <a href="intranet-dochadzka.php">Dochádzka</a>
-    <a href="intranet-pedagogika.php">Pedagogika</a>
-    <a href="intranet-doktorandi.php">Doktorandi</a>
-    <a href="intranet-publikacie.php">Publikacie</a>
-    <a href="intranet-sluzobne-cesty.php">Služobné cesty</a>
-    <a href="intranet-nakupy.php">Nákupy</a>
-    <a href="intranet-tasks.php">Rozdelenie úloh</a>
+<div class="container" id="tourpackages-carousel">
+
+    <div class="row">
+        <div class="profile">
+            <h2>
+                Vedenie ústavu
+            </h2>
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <div class="thumbnail wow fadeInUp" data-wow-delay=".1s">
+                    <img src="img/staff_photo/huba.jpg" alt="">
+                    <div class="caption">
+                        <h4>
+                            prof. Ing. Mikuláš Huba, PhD.
+                        </h4>
+                        <p>
+                            Riaditeľ ústavu
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <div class="thumbnail wow fadeInUp" data-wow-delay=".3s">
+                    <img src="img/staff_photo/murin.jpg" alt="">
+                    <div class="caption">
+                        <h4>
+                            prof. Ing. Justín Murín, DrSc.
+                        </h4>
+                        <p>
+                            Zástupca riaditeľa ústavu pre rozvoj ústavu
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <div class="thumbnail wow fadeInUp" data-wow-delay=".5s">
+                    <img src="img/staff_photo/kozak.jpg" alt="">
+                    <div class="caption">
+                        <h4>
+                            prof. Ing. Štefan Kozák, PhD.
+                        </h4>
+                        <p>
+                            Zástupca riaditeľa ústavu pre rozvoj ústavu
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <div class="thumbnail wow fadeInUp" data-wow-delay=".7s">
+                    <img src="img/staff_photo/zakova.jpg" alt="">
+                    <div class="caption">
+                        <h4>
+                            doc. Ing. Katarína Žáková, PhD.
+                        </h4>
+                        <p>
+                            Zástupca riaditeľa ústavu pre pedagogickú činnosť
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- End row -->
+
+    </div>
+
+    <!-- End container -->
 </div>
-<!-- left menu end -->
-
-<!--container start-->
 
 
+<!--container end-->
+
+<<!--container start-->
+<div class="white-bg">
+    <div class="container career-inner">
+        <div class="row">
+            <div class="hiring">
+                <h2 class="wow flipInX">
+                    ODDELENIA ÚSTAVU AUTOMOBILOVEJ MECHATRONIKY
+                </h2>
+                <div class="col-lg-6 col-sm-6 about-hiring">
+                    <div class="icon-wrap ico-bg round-five wow zoomIn" data-wow-duration="1s" data-wow-delay=".1s">
+                        <i class="fa fa-user">
+                        </i>
+                    </div>
+                    <div class="content">
+                        <h3 class="title wow flipInX">
+                            Oddelenie aplikovanej mechaniky a mechatroniky (OAMM)
+                        </h3>
+                        <p>
+                            Vedúci: prof. Ing. Justín Murín, DrSc.<br>
+                            Zástupca: doc. Ing. Vladimír Kutiš, PhD.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-6 about-hiring">
+                    <div class="icon-wrap ico-bg round-five wow zoomIn" data-wow-duration="1s" data-wow-delay=".3s">
+                        <i class="fa fa-user">
+                        </i>
+                    </div>
+                    <div class="content">
+                        <h3 class="title wow flipInX">
+                            Oddelenie informačných, komunikačných a riadiacich systémov (OIKR)
+                        </h3>
+                        <p>
+                            Vedúci: doc. Ing. Danica Rosinová, PhD. <br>
+                            Zástupca: doc. Ing. Katarína Žáková, PhD.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-6 about-hiring">
+                    <div class="icon-wrap ico-bg round-five wow zoomIn" data-wow-duration="1s" data-wow-delay=".5s">
+                        <i class="fa fa-user">
+                        </i>
+                    </div>
+                    <div class="content">
+                        <h3 class="title wow flipInX">
+                            Oddelenie elektroniky, mikropočítačov a PLC systémov (OEMP)
+                        </h3>
+                        <p>
+                            Vedúci: prof. Ing. Štefan Kozák, PhD. <br>
+                            Zástupca: Ing. Richard Balogh, PhD.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-6 about-hiring">
+                    <div class="icon-wrap ico-bg round-five wow zoomIn" data-wow-duration="1s" data-wow-delay=".7s">
+                        <i class="fa fa-user">
+                        </i>
+                    </div>
+                    <div class="content">
+                        <h3 class="title wow flipInX">
+                            Oddelenie E-mobility, automatizácie a pohonov (OEAP)
+                        </h3>
+                        <p>
+                            Vedúci: prof. Ing. Mikuláš Huba, PhD. <br>
+                            Zástupca: prof. Ing. Viktor Ferencey, CSc.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 career-contact">
+                <p class="text-center wow pulse"><a href="./files/organizacny_poriadok.pdf"
+                                                    download="organizacny_poriadok.pdf">Organizačný poriadok Ústavu
+                    automobilovej mechatroniky</a></p>
+
+            </div>
+        </div>
+
+    </div>
+</div>
 <!--container end-->
 
 <!--footer start-->
@@ -400,10 +534,10 @@
             <div class="col-lg-6 col-sm-6 pull-right">
                 <ul class="social-link-footer list-unstyled">
                     <li class="wow flipInX" data-wow-duration="2s" data-wow-delay=".1s"><a
-                                href="https://www.facebook.com/UAMTFEISTU"><i class="fa fa-facebook"></i></a></li>
+                            href="https://www.facebook.com/UAMTFEISTU"><i class="fa fa-facebook"></i></a></li>
                     <li class="wow flipInX" data-wow-duration="2s" data-wow-delay=".2s"><a
-                                href="https://www.youtube.com/channel/UCo3WP2kC0AVpQMIiJR79TdA"><i
-                                    class="fa fa-youtube"></i></a></li>
+                            href="https://www.youtube.com/channel/UCo3WP2kC0AVpQMIiJR79TdA"><i
+                            class="fa fa-youtube"></i></a></li>
                 </ul>
             </div>
             <div class="col-md-4">
@@ -443,7 +577,6 @@
 <script src="js/seq-slider/sequencejs-options.apple-style.js"></script>
 <!-- end of sequence slider js-->
 
-
 <script>
     $('a.info').tooltip();
     $(window).load(function () {
@@ -454,18 +587,6 @@
             }
         });
     });
-
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-        document.getElementById("main").style.marginLeft = "250px";
-        document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-    }
-
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.getElementById("main").style.marginLeft = "0";
-        document.body.style.backgroundColor = "white";
-    }
 
 
     $(document).ready(function () {

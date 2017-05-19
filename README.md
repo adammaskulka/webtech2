@@ -33,6 +33,8 @@ FEI STU 2016/2017
 | Studium - texty  | Adam | in progress |
 | Studium - publikacie  | Martin | TBD |
 
+**Bolo by fajn ak by ste dodrziavali existujúcu strukturu stranky nech to nejak vyzera, pripadne elementy z inych stranok alebo z nasho templatu**
+
 V ulohe 15. - Prvé štyri záložky budú umožňovať vytvárať obsah podobný tomu, ako je to vidieť na
 obrázku. T.j. treba vedieť v rámci stránky vytvárať určité kategórie, pod ktoré je možné
 ukladať rôzne dokumenty na stiahnutie. Na stránke by malo byť možné vytvárať aj odkazy na

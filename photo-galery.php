@@ -65,26 +65,20 @@
 
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li>
-                    <a href="about.html"></a>
-                </li>
-
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
-                            "dropdown" data-toggle="dropdown" href="#">O nás<i class="fa fa-angle-down"></i>
+                    "dropdown" data-toggle="dropdown" href="#">O nás<i class="fa fa-angle-down"></i>
                     </a>
-
                     <ul class="dropdown-menu">
                         <li>
                             <a href="history.html">História</a>
                         </li>
                         <li>
-                            <a href="#">Vedenie ústavu</a>
+                            <a href="management.html">Vedenie ústavu</a>
                         </li>
 
                         <li class="dropdown-submenu">
                             <a href="#" tabindex="-1">Oddelenia</a>
-
                             <ul class="dropdown-menu">
                                 <li class="dropdown-submenu"></li>
 
@@ -108,18 +102,16 @@
                                 </li>
                             </ul>
                         </li>
-
                     </ul>
                 </li>
 
                 <li>
-                    <a href="about.html">Pracovníci</a>
+                    <a href="pracovnici.php">Pracovníci</a>
                 </li>
-
 
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
-                            "dropdown" data-toggle="dropdown" href="#">Štúdium<i class="fa fa-angle-down"></i>
+                    "dropdown" data-toggle="dropdown" href="#">Štúdium<i class="fa fa-angle-down"></i>
                     </a>
 
                     <ul class="dropdown-menu">
@@ -130,11 +122,11 @@
                                 <li class="dropdown-submenu"></li>
 
                                 <li>
-                                    <a href="#">Bakalárske štúdium</a>
+                                    <a href="applicants-bachelor.html">Bakalárske štúdium</a>
                                 </li>
 
                                 <li>
-                                    <a href="#">Inžinierske štúdium</a>
+                                    <a href="applicants-master.html">Inžinierske štúdium</a>
                                 </li>
                             </ul>
                         </li>
@@ -145,7 +137,7 @@
                                 <li class="dropdown-submenu"></li>
 
                                 <li>
-                                    <a href="#">Všeobecné informácie</a>
+                                    <a href="bachelor-info.html">Všeobecné informácie</a>
                                 </li>
 
                                 <li class="dropdown-submenu">
@@ -153,11 +145,11 @@
 
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="#">Pokyny</a>
+                                            <a href="bachelor-instructions.html">Pokyny</a>
                                         </li>
 
                                         <li>
-                                            <a href="#">Voľné témy</a>
+                                            <a href="bachelor-thesis.html">Voľné témy</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -171,7 +163,7 @@
                                 <li class="dropdown-submenu"></li>
 
                                 <li>
-                                    <a href="#">Všeobecné informácie</a>
+                                    <a href="master-info.html">Všeobecné informácie</a>
                                 </li>
 
                                 <li class="dropdown-submenu">
@@ -179,11 +171,11 @@
 
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="#">Pokyny</a>
+                                            <a href="master-instructions.html">Pokyny</a>
                                         </li>
 
                                         <li>
-                                            <a href="#">Voľné témy</a>
+                                            <a href="master-thesis.html">Voľné témy</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -191,19 +183,19 @@
                         </li>
 
                         <li>
-                            <a href="#">Doktorandské štúdium</a>
+                            <a href="doctor-info.html">Doktorandské štúdium</a>
                         </li>
                     </ul>
                 </li>
 
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
-                            "dropdown" data-toggle="dropdown" href="#">Výskum<i class="fa fa-angle-down"></i>
+                    "dropdown" data-toggle="dropdown" href="#">Výskum<i class="fa fa-angle-down"></i>
                     </a>
 
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#">Projekty</a>
+                            <a href="vyskum-projekty.php">Projekty</a>
                         </li>
 
                         <li class="dropdown-submenu">
@@ -213,18 +205,18 @@
                                 <li class="dropdown-submenu"></li>
 
                                 <li>
-                                    <a href="#">Elektrická motokára</a>
+                                    <a href="vyskum-motokara.php">Elektrická motokára</a>
                                 </li>
 
                                 <li>
-                                    <a href="#">Autonómne vozidlo 6×6</a>
+                                    <a href="vyskum-vozidlo.php">Autonómne vozidlo 6×6</a>
                                 </li>
                                 <li>
-                                    <a href="#">3D LED kocka</a>
+                                    <a href="vyskum-kocka.php">3D LED kocka</a>
                                 </li>
 
                                 <li>
-                                    <a href="#">Biomechatronika</a>
+                                    <a href="vyskum-biomechanika.php">Biomechatronika</a>
                                 </li>
                             </ul>
                         </li>
@@ -233,12 +225,12 @@
                 </li>
 
                 <li>
-                    <a href="blog.html">Aktuality</a>
+                    <a href="aktuality.php">Aktuality</a>
                 </li>
 
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
-                            "dropdown" data-toggle="dropdown" href="#">Aktivity<i class="fa fa-angle-down"></i>
+                    "dropdown" data-toggle="dropdown" href="#">Aktivity<i class="fa fa-angle-down"></i>
                     </a>
 
                     <ul class="dropdown-menu">
@@ -246,10 +238,10 @@
                             <a href="photo-galery.php">Fotogaléria</a>
                         </li>
                         <li>
-                            <a href="#">Videá</a>
+                            <a href="video-galery.php">Videá</a>
                         </li>
                         <li>
-                            <a href="#">Média</a>
+                            <a href="media.html">Média</a>
                         </li>
 
                         <li class="dropdown-submenu">
@@ -263,7 +255,6 @@
                                 </li>
                             </ul>
                         </li>
-
                     </ul>
                 </li>
 
@@ -272,7 +263,7 @@
                 </li>
 
                 <li>
-                    <a href="login.html">Prihlásenie</a>
+                    <a href="login.php">Intranet</a>
                 </li>
 
             </ul>

@@ -7,14 +7,13 @@
     <meta name="description" content="Ústav automobilovej mechatroniky FEI STU">
 
     <title>
-        Ústav automobilovej mechatroniky FEI STU | Intranet
+        Ústav automobilovej mechatroniky FEI STU | Aktuality
     </title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/theme.css" rel="stylesheet">
     <link href="css/bootstrap-reset.css" rel="stylesheet">
-    <link href="css/sidebar.css" rel="stylesheet">
     <!--
 <link href="css/bootstrap.min.css" rel="stylesheet">
 -->
@@ -66,10 +65,16 @@
 
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
+
+                <li>
+                    <a href="about.html"></a>
+                </li>
+
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
                     "dropdown" data-toggle="dropdown" href="#">O nás<i class="fa fa-angle-down"></i>
                     </a>
+
                     <ul class="dropdown-menu">
                         <li>
                             <a href="history.html">História</a>
@@ -80,6 +85,7 @@
 
                         <li class="dropdown-submenu">
                             <a href="#" tabindex="-1">Oddelenia</a>
+
                             <ul class="dropdown-menu">
                                 <li class="dropdown-submenu"></li>
 
@@ -103,12 +109,15 @@
                                 </li>
                             </ul>
                         </li>
+
+
                     </ul>
                 </li>
 
                 <li>
                     <a href="pracovnici.php">Pracovníci</a>
                 </li>
+
 
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
@@ -256,6 +265,7 @@
                                 </li>
                             </ul>
                         </li>
+
                     </ul>
                 </li>
 
@@ -275,16 +285,15 @@
 
 <!--breadcrumbs start-->
 <div class="breadcrumbs">
-    <span style="font-size:30px;cursor:pointer; margin-left: 20px" onclick="openNav()">&#9776; Menu</span>
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-sm-4">
-                <h1>Intranet</h1>
+                <h1>Aktuality</h1>
             </div>
             <div class="col-lg-8 col-sm-8">
                 <ol class="breadcrumb pull-right">
                     <li><a href="index.html">Domov</a></li>
-                    <li class="active">Intranet</li>
+                    <li class="active">Aktuality</li>
                 </ol>
             </div>
         </div>
@@ -292,26 +301,154 @@
 </div>
 <!--breadcrumbs end-->
 
-<!-- left menu start -->
-<div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="intranet-users.php">Používatelia</a>
-    <a href="intranet-photos.php">Fotky</a>
-    <a href="intranet-video.php">Videá</a>
-    <a href="intranet-actuality.php">Aktuality</a>
-    <a href="intranet-dochadzka.php">Dochádzka</a>
-    <a href="intranet-pedagogika.php">Pedagogika</a>
-    <a href="intranet-doktorandi.php">Doktorandi</a>
-    <a href="intranet-publikacie.php">Publikacie</a>
-    <a href="intranet-sluzobne-cesty.php">Služobné cesty</a>
-    <a href="intranet-nakupy.php">Nákupy</a>
-    <a href="intranet-tasks.php">Rozdelenie úloh</a>
-</div>
-<!-- left menu end -->
-
 <!--container start-->
+<div class="container">
+    <div class="row">
+        <!--blog start-->
+        <div class="col-lg-9 ">
+            <div class="blog-item">
+                <div class="row">
+                    <div class="col-lg-2 col-sm-2">
+                        <div class="date-wrap">
+                  <span class="date">
+                    11
+                  </span>
+                            <span class="month">
+                    January
+                  </span>
+                        </div>
 
+                    </div>
+                    <div class="col-lg-10 col-sm-10">
+                        <div class="blog-img">
+                            <img src="img/blog/img7.jpg" alt=""/>
+                        </div>
 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2 col-sm-2 text-right">
+                        <div class="author">
+                            By
+                            <a href="#">
+                                Admin
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-10 col-sm-10">
+                        <h1>
+                            <a href="blog-detail.html">
+                                Suspendisse dignissim in sem eget pulvinar. Mauris aliquam nulla at libero pretium.
+                            </a>
+                        </h1>
+                        <p>
+                            Lid est laborum dolo rumes fugats untras. Etharums ser quidem rerum facilis dolores nemis
+                            omnis fugats vitaes nemo minima rerums unsers sadips amets.. Sed ut perspiciatis unde omnis
+                            iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque
+                            ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="blog-item">
+                <div class="row">
+                    <div class="col-lg-2 col-sm-2">
+                        <div class="date-wrap">
+                  <span class="date">
+                    11
+                  </span>
+                            <span class="month">
+                    January
+                  </span>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-10 col-sm-10">
+                        <div class="blog-img">
+                            <img src="img/blog/img7.jpg" alt=""/>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2 col-sm-2 text-right">
+                        <div class="author">
+                            By
+                            <a href="#">
+                                Admin
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-10 col-sm-10">
+                        <h1>
+                            <a href="blog-detail.html">
+                                Suspendisse dignissim in sem eget pulvinar. Mauris aliquam nulla at libero pretium.
+                            </a>
+                        </h1>
+                        <p>
+                            Lid est laborum dolo rumes fugats untras. Etharums ser quidem rerum facilis dolores nemis
+                            omnis fugats vitaes nemo minima rerums unsers sadips amets.. Sed ut perspiciatis unde omnis
+                            iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque
+                            ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="blog-side-item">
+                <div class="category">
+                    <h3>
+                        Kategórie
+                    </h3>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="javascript:;">
+                                <i class="fa fa-angle-right pr-10">
+                                </i>
+                                Animals
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <i class="fa fa-angle-right pr-10">
+                                </i>
+                                Landscape
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <i class="fa fa-angle-right pr-10">
+                                </i>
+                                Portait
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <i class="fa fa-angle-right pr-10">
+                                </i>
+                                Wild Life
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <i class="fa fa-angle-right pr-10">
+                                </i>
+                                Video
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!--blog end-->
+    </div>
+
+</div>
 <!--container end-->
 
 <!--footer start-->
@@ -324,8 +461,10 @@
                         O nás
                     </h1>
                     <p>
-                        Ústav automobilovej mechatroniky bol zriadený k 1. júlu 2013 ako pedagogické a vedecko-výskumné
-                        pracovisko FEI STU. Zriadenie ústavu bolo logickým vyústením zámerov vedenia FEI STU vytvoriť
+                        Ústav automobilovej mechatroniky bol zriadený k 1. júlu 2013 ako pedagogické a
+                        vedecko-výskumné
+                        pracovisko FEI STU. Zriadenie ústavu bolo logickým vyústením zámerov vedenia FEI STU
+                        vytvoriť
                         taký ústav, ktorý by zohľadňoval súčasné požiadavky a potreby automobilového priemyslu.
                     </p>
                 </div>
@@ -338,7 +477,8 @@
                     <p><i class="fa fa-home pr-10"></i>Fakulta elektrotechniky a informatiky</p>
                     <p><i class="fa fa-globe pr-10"></i>Ilkovičova 3, 812 19 Bratislava</p>
                     <p><i class="fa fa-mobile pr-10"></i>+421 260 291 598</p>
-                    <p><i class="fa fa-envelope pr-10"></i><a href="mailto:uamt.fei@gmail.com">uamt.fei@gmail.com</a>
+                    <p><i class="fa fa-envelope pr-10"></i><a
+                                href="mailto:uamt.fei@gmail.com">uamt.fei@gmail.com</a>
                     </p>
                 </address>
             </div>
@@ -454,18 +594,6 @@
             }
         });
     });
-
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-        document.getElementById("main").style.marginLeft = "250px";
-        document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-    }
-
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.getElementById("main").style.marginLeft = "0";
-        document.body.style.backgroundColor = "white";
-    }
 
 
     $(document).ready(function () {

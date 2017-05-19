@@ -66,16 +66,10 @@
 
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-
-                <li>
-                    <a href="about.html"></a>
-                </li>
-
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
                     "dropdown" data-toggle="dropdown" href="#">O nás<i class="fa fa-angle-down"></i>
                     </a>
-
                     <ul class="dropdown-menu">
                         <li>
                             <a href="history.html">História</a>
@@ -86,7 +80,6 @@
 
                         <li class="dropdown-submenu">
                             <a href="#" tabindex="-1">Oddelenia</a>
-
                             <ul class="dropdown-menu">
                                 <li class="dropdown-submenu"></li>
 
@@ -110,15 +103,12 @@
                                 </li>
                             </ul>
                         </li>
-
-
                     </ul>
                 </li>
 
                 <li>
-                    <a href="about.html">Pracovníci</a>
+                    <a href="pracovnici.php">Pracovníci</a>
                 </li>
-
 
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
@@ -206,7 +196,7 @@
 
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#">Projekty</a>
+                            <a href="vyskum-projekty.php">Projekty</a>
                         </li>
 
                         <li class="dropdown-submenu">
@@ -216,18 +206,18 @@
                                 <li class="dropdown-submenu"></li>
 
                                 <li>
-                                    <a href="#">Elektrická motokára</a>
+                                    <a href="vyskum-motokara.php">Elektrická motokára</a>
                                 </li>
 
                                 <li>
-                                    <a href="#">Autonómne vozidlo 6×6</a>
+                                    <a href="vyskum-vozidlo.php">Autonómne vozidlo 6×6</a>
                                 </li>
                                 <li>
-                                    <a href="#">3D LED kocka</a>
+                                    <a href="vyskum-kocka.php">3D LED kocka</a>
                                 </li>
 
                                 <li>
-                                    <a href="#">Biomechatronika</a>
+                                    <a href="vyskum-biomechanika.php">Biomechatronika</a>
                                 </li>
                             </ul>
                         </li>
@@ -236,7 +226,7 @@
                 </li>
 
                 <li>
-                    <a href="blog.html">Aktuality</a>
+                    <a href="aktuality.php">Aktuality</a>
                 </li>
 
                 <li class="dropdown">
@@ -266,7 +256,6 @@
                                 </li>
                             </ul>
                         </li>
-
                     </ul>
                 </li>
 
@@ -275,7 +264,7 @@
                 </li>
 
                 <li>
-                    <a href="login.php">Prihlásenie</a>
+                    <a href="login.php">Intranet</a>
                 </li>
 
             </ul>

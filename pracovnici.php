@@ -7,14 +7,13 @@
     <meta name="description" content="Ústav automobilovej mechatroniky FEI STU">
 
     <title>
-        Ústav automobilovej mechatroniky FEI STU | Intranet
+        Ústav automobilovej mechatroniky FEI STU | Pracovnící
     </title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/theme.css" rel="stylesheet">
     <link href="css/bootstrap-reset.css" rel="stylesheet">
-    <link href="css/sidebar.css" rel="stylesheet">
     <!--
 <link href="css/bootstrap.min.css" rel="stylesheet">
 -->
@@ -275,16 +274,15 @@
 
 <!--breadcrumbs start-->
 <div class="breadcrumbs">
-    <span style="font-size:30px;cursor:pointer; margin-left: 20px" onclick="openNav()">&#9776; Menu</span>
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-sm-4">
-                <h1>Intranet</h1>
+                <h1>Pracovnící</h1>
             </div>
             <div class="col-lg-8 col-sm-8">
                 <ol class="breadcrumb pull-right">
                     <li><a href="index.html">Domov</a></li>
-                    <li class="active">Intranet</li>
+                    <li class="active">Pracovnící</li>
                 </ol>
             </div>
         </div>
@@ -292,26 +290,27 @@
 </div>
 <!--breadcrumbs end-->
 
-<!-- left menu start -->
-<div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="intranet-users.php">Používatelia</a>
-    <a href="intranet-photos.php">Fotky</a>
-    <a href="intranet-video.php">Videá</a>
-    <a href="intranet-actuality.php">Aktuality</a>
-    <a href="intranet-dochadzka.php">Dochádzka</a>
-    <a href="intranet-pedagogika.php">Pedagogika</a>
-    <a href="intranet-doktorandi.php">Doktorandi</a>
-    <a href="intranet-publikacie.php">Publikacie</a>
-    <a href="intranet-sluzobne-cesty.php">Služobné cesty</a>
-    <a href="intranet-nakupy.php">Nákupy</a>
-    <a href="intranet-tasks.php">Rozdelenie úloh</a>
-</div>
-<!-- left menu end -->
-
 <!--container start-->
+<div class="white-bg">
+
+    <!-- career -->
+    <div class="container career-inner">
+        <div class="row">
+            <div class="col-md-12 career-head">
+                <h1 class="wow fadeIn">Pracovnící</h1>
+
+            </div>
+        </div>
+        <hr>
+        <div class="row">
 
 
+        </div>
+        <hr>
+
+        <!-- career -->
+    </div>
+</div>
 <!--container end-->
 
 <!--footer start-->
@@ -454,18 +453,6 @@
             }
         });
     });
-
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-        document.getElementById("main").style.marginLeft = "250px";
-        document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-    }
-
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.getElementById("main").style.marginLeft = "0";
-        document.body.style.backgroundColor = "white";
-    }
 
 
     $(document).ready(function () {
