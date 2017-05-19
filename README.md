@@ -17,22 +17,22 @@ http://elearn.elf.stuba.sk/moodle/pluginfile.php/54857/mod_resource/content/7/ZP
 | 8. vyskum      | Andrej      |   TBD |
 | 9. aktuality | Andrej      |    TBD |
 | 10. kontakt      | Adam | done |
-| 11. fotky      | Adam      |   done |
-| 12. videa | Adam      |    done |
+| 11. fotky      | Adam      |   in progress |
+| 12. videa | Adam      |    in progress |
 | 13. media      | Adam | done |
 | 14. login      | Juraj      |  in progress |
 | 14. panel aktuality      | Andrej      |  TBD |
-| 14. panel fotky      | Adam      |  TBD |
-| 14. panel videa      | Adam      |  TBD |
+| 14. panel fotky      | Adam      |  in progress |
+| 14. panel videa      | Adam      |  in progress |
 | 15. dochadzka | Martin      |    TBD |
 | 15. pedagogika  | Radoslav | TBD |
 | 15. doktorandi  | Radoslav | TBD |
 | 15. publikacie  | Radoslav | TBD |
 | 15. sluzobne cesty  | Radoslav | TBD |
 | 15. nakupy  | Martin + Andrej | TBD |
-| 15. rozdelenie uloh  | Adam | TBD |
+| 15. rozdelenie uloh  | Adam | done |
 | O nas  | Adam | done |
-| Studium - texty  | Adam | in progress |
+| Studium - texty  | Adam | done |
 | Studium - publikacie  | Martin | TBD |
 
 **Bolo by fajn ak by ste dodrziavali existujúcu strukturu stranky nech to nejak vyzera, pripadne elementy z inych stranok alebo z nasho templatu**
