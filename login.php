@@ -60,7 +60,7 @@
             <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse"
                     type="button"><span class="icon-bar"></span> <span class="icon-bar"></span>
                 <span class="icon-bar"></span></button>
-            <a class="navbar-brand" href="index.html">FEI M<span>echatronika</span></a>
+            <a class="navbar-brand" href="index.php">FEI M<span>echatronika</span></a>
         </div>
 
         <div class="navbar-collapse collapse">
@@ -71,10 +71,10 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="history.html">História</a>
+                            <a href="history.php">História</a>
                         </li>
                         <li>
-                            <a href="management.html">Vedenie ústavu</a>
+                            <a href="management.php">Vedenie ústavu</a>
                         </li>
 
                         <li class="dropdown-submenu">
@@ -83,21 +83,21 @@
                                 <li class="dropdown-submenu"></li>
 
                                 <li>
-                                    <a href="department_oamm.html">Oddelenie aplikovanej mechaniky a mechatroniky
+                                    <a href="department_oamm.php">Oddelenie aplikovanej mechaniky a mechatroniky
                                         (OAMM)</a>
                                 </li>
 
                                 <li>
-                                    <a href="department_oikr.html">Oddelenie informačných, komunikačných a riadiacich
+                                    <a href="department_oikr.php">Oddelenie informačných, komunikačných a riadiacich
                                         systémov (OIKR)</a>
                                 </li>
                                 <li>
-                                    <a href="department_oemp.html">Oddelenie elektroniky, mikropočítačov a PLC systémov
+                                    <a href="department_oemp.php">Oddelenie elektroniky, mikropočítačov a PLC systémov
                                         (OEMP)</a>
                                 </li>
 
                                 <li>
-                                    <a href="department_oeap.html">Oddelenie E-mobility, automatizácie a pohonov
+                                    <a href="department_oeap.php">Oddelenie E-mobility, automatizácie a pohonov
                                         (OEAP)</a>
                                 </li>
                             </ul>
@@ -122,11 +122,11 @@
                                 <li class="dropdown-submenu"></li>
 
                                 <li>
-                                    <a href="applicants-bachelor.html">Bakalárske štúdium</a>
+                                    <a href="applicants-bachelor.php">Bakalárske štúdium</a>
                                 </li>
 
                                 <li>
-                                    <a href="applicants-master.html">Inžinierske štúdium</a>
+                                    <a href="applicants-master.php">Inžinierske štúdium</a>
                                 </li>
                             </ul>
                         </li>
@@ -145,7 +145,7 @@
 
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="bachelor-instructions.html">Pokyny</a>
+                                            <a href="bachelor-instructions.php">Pokyny</a>
                                         </li>
 
                                         <li>
@@ -163,7 +163,7 @@
                                 <li class="dropdown-submenu"></li>
 
                                 <li>
-                                    <a href="master-info.html">Všeobecné informácie</a>
+                                    <a href="master-info.php">Všeobecné informácie</a>
                                 </li>
 
                                 <li class="dropdown-submenu">
@@ -171,11 +171,11 @@
 
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="master-instructions.html">Pokyny</a>
+                                            <a href="master-instructions.php">Pokyny</a>
                                         </li>
 
                                         <li>
-                                            <a href="master-thesis.html">Voľné témy</a>
+                                            <a href="master-thesis.php">Voľné témy</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -183,7 +183,7 @@
                         </li>
 
                         <li>
-                            <a href="doctor-info.html">Doktorandské štúdium</a>
+                            <a href="doctor-info.php">Doktorandské štúdium</a>
                         </li>
                     </ul>
                 </li>
@@ -241,7 +241,7 @@
                             <a href="video-galery.php">Videá</a>
                         </li>
                         <li>
-                            <a href="media.html">Média</a>
+                            <a href="media.php">Média</a>
                         </li>
 
                         <li class="dropdown-submenu">
@@ -259,7 +259,7 @@
                 </li>
 
                 <li>
-                    <a href="contact.html">Kontakt</a>
+                    <a href="contact.php">Kontakt</a>
                 </li>
 
                 <li>
@@ -281,7 +281,7 @@
             </div>
             <div class="col-lg-8 col-sm-8">
                 <ol class="breadcrumb pull-right">
-                    <li><a href="index.html">Domov</a></li>
+                    <li><a href="index.php">Domov</a></li>
                     <li class="active">Prihlásenie</li>
                 </ol>
             </div>
