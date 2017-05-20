@@ -1,3 +1,65 @@
+<?php
+//error_reporting(E_ALL);
+//ini_set('display_errors', 'On');
+//ini_set("log_errors", 1);
+require_once "src/multimediaController.php";
+
+function deleteDirectory($dir)
+{
+    system('rm -rf ' . escapeshellarg($dir), $retval);
+    return $retval == 0; // UNIX commands return zero on success
+}
+
+if (isset($_GET['delete'])) {
+
+//    echo $_GET['delete'];
+    if (deleteDirectory("img/" . $_GET['delete'])) {
+        deletePhoto($_GET['delete']);
+    }
+
+}
+
+//if (isset($_POST['folder'])) {
+//
+//    echo $_POST['folder'];
+//    mkdir("img/" . $_POST['folder']);
+//
+//}
+
+if (isset($_POST['titleSK']) && isset($_POST['titleEN']) && isset($_POST['folder']) && isset($_POST['date'])) {
+    $valid_formats = array("jpg", "png", "gif", "jpeg", "bmp");
+    $max_file_size = 1024 * 1000; //1000 kb
+    $path = "img/" . $_POST['folder'] . "/"; // Upload directory
+    $count = 0;
+
+    if (!mkdir("img/" . $_POST['folder'], 0777)) {
+        die('Failed to create folder...');
+    } else {
+
+        foreach ($_FILES['files']['name'] as $f => $name) {
+            if ($_FILES['files']['error'][$f] == 4) {
+                continue; // Skip file if any error found
+            }
+            if ($_FILES['files']['error'][$f] == 0) {
+                if ($_FILES['files']['size'][$f] > $max_file_size) {
+                    $message[] = "$name is too large!.";
+                    continue; // Skip large files
+                } elseif (!in_array(pathinfo($name, PATHINFO_EXTENSION), $valid_formats)) {
+                    $message[] = "$name is not a valid format";
+                    continue; // Skip invalid file formats
+                } else { // No error found! Move uploaded files
+                    if (move_uploaded_file($_FILES["files"]["tmp_name"][$f], $path . $name))
+                        $count++; // Number of successfully uploaded file
+                }
+            }
+        }
+        $photo = new Photo();
+        $photo->create($_POST['folder'], $_POST['titleSK'], $_POST['titleEN'], $_POST['date']);
+        addPhoto($photo);
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="sk">
 <head>
@@ -324,7 +386,7 @@
         <div class="row">
 
             <div class="bs-example">
-                <form role="form">
+                <form role="form" action="intranet-photos.php" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="titleSKInput">Titulok - slovensky</label>
                         <input type="text" name="titleSK" class="form-control" id="titleSKInput"
@@ -337,21 +399,41 @@
                     </div>
                     <div class="form-group">
                         <label for="folderInput">Názov zložky</label>
-                        <input type="text" name="folder" class="form-control" id="folderInput"
+                        <input type="text" name="folder" class="form-control" id="folderInput" pattern="\w+"
                                placeholder="Zadajte zložky" required>
                     </div>
                     <div class="form-group">
                         <label for="dateInput">Dátum</label>
-                        <input type="date" class="form-control" id="dateInput" placeholder="Dátum" required>
+                        <input type="date" name="date" class="form-control" id="dateInput" placeholder="Dátum" required>
                     </div>
                     <div class="form-group">
                         <label for="inputFile">Vložte fotky</label>
-                        <input type="file" name="files" id="inputFile" accept="image/*" multiple required>
+                        <input type="file" name="files[]" id="inputFile" accept="image/*" multiple required>
                     </div>
                     <button type="submit" class="btn btn-default">Vložiť</button>
                 </form>
             </div>
         </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-12 career-head">
+                <h1 class="wow fadeIn">Vymazávanie udalostí z fotogalérie</h1>
+            </div>
+        </div>
+        <table class="table">
+            <tbody>
+            <?php
+            require_once "src/multimediaController.php";
+            $videos = getAllPhotos();
+            foreach ($videos as $video) {
+                echo '<tr>';
+                echo '<td>' . $video->title_sk . ' - ' . $video->folder . '</td>';
+                echo '<td><form action=\'intranet-photos.php?delete=' . $video->folder . '\' method=\'post\'><input type=\'submit\' value=\'X\'></form>';
+                echo '</tr>';
+            }
+            ?>
+            </tbody>
+        </table>
     </div>
 </div>
 <!--container end-->

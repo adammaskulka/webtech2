@@ -14,35 +14,21 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/theme.css" rel="stylesheet">
     <link href="css/bootstrap-reset.css" rel="stylesheet">
-    <!--
-<link href="css/bootstrap.min.css" rel="stylesheet">
--->
-
     <!--external css-->
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
     <link rel="stylesheet" href="css/flexslider.css"/>
     <link href="assets/bxslider/jquery.bxslider.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="assets/owlcarousel/owl.carousel.css">
-    <link rel="stylesheet" href="assets/owlcarousel/owl.theme.css">
-
-    <link href="css/superfish.css" rel="stylesheet" media="screen">
-    <link rel="stylesheet" href="css/seq-slider/sequencejs-theme.apple-style.css"/>
+    <link rel="stylesheet" href="css/animate.css"/>
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-    <!--
-<link href='http://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
--->
+    <link rel="stylesheet" href="assets/owlcarousel/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="css/mixitup.css">
 
-    <!-- Custom styles for this template -->
     <link rel="stylesheet" type="text/css" href="css/component.css">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet"/>
 
 
-    <!--
-<link rel="stylesheet" media="screen" href="css/slider/sequencejs-theme.modern-slide-in.css" />
--->
-
+    <link rel="stylesheet" href="css/magnific-popup.css">
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js">
@@ -290,17 +276,63 @@
 </div>
 <!--breadcrumbs end-->
 
-<?php
-require_once "src/multimediaController.php";
-$folders = getAllPhotos();
-echo json_encode($folders);
-//foreach ($videos as $video) {
-//    echo '<tr>';
-//    echo '<td><a href="'.$video.'">'.$video.'</a></td>';
-//    echo '<td><form action=\'intranet-video.php?delete='.$video.'\' method=\'post\'><input type=\'submit\' value=\'X\'></form>';
-//    echo '</tr>';
-//}
-?>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6">
+            <ul id="filters" class="clearfix">
+
+                <?php
+                error_reporting(E_ALL);
+                ini_set('display_errors', 'On');
+                ini_set("log_errors", 1);
+                require_once "src/multimediaController.php";
+                $folders = getAllPhotos();
+                $folders_string = "";
+                foreach ($folders as $folder) {
+                    $folders_string = $folders_string . " " . $folder->folder;
+                }
+                echo '<li><span class="filter active" data-filter="' . $folders_string . '">Všetky</span></li>';
+                foreach ($folders as $folder) {
+
+                    echo '<li><span class="filter" data-filter="' . htmlentities($folder->folder) . '">';
+                    echo htmlentities($folder->title_en);
+                    echo '</span></li>';
+                }
+
+                ?>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row mar-b-30">
+        <div id="portfoliolist-three">
+            <div class="col-md-12">
+
+                <?php
+                require_once "src/multimediaController.php";
+                $folders = getAllPhotos();
+                foreach ($folders as $folder) {
+                    $dir = "img/" . $folder->folder;
+                    $files1 = array_slice(scandir($dir), 2);
+                    foreach ($files1 as $item) {
+                        echo '<div class="portfolio ' . $folder->folder . '" data-cat="' . $folder->folder . '">';
+                        echo '<div class="portfolio-wrapper">';
+                        echo '<div class="portfolio-hover">';
+                        echo ' <div class="image-caption">';
+                        echo '<a href="img/' . $folder->folder . '/' . $item . '" class="label magnefig label-info icon" data-toggle="tooltip" data-placement="left" title="Zoom"><i class="fa fa-eye"></i></a>';
+                        echo '</div>';
+                        echo '<img src="img/' . $folder->folder . '/' . $item . '" alt="" />';
+                        echo '</div> </div> </div>';
+                    }
+                }
+                ?>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 
 <!--footer start-->
@@ -389,10 +421,10 @@ echo json_encode($folders);
             <div class="col-lg-6 col-sm-6 pull-right">
                 <ul class="social-link-footer list-unstyled">
                     <li class="wow flipInX" data-wow-duration="2s" data-wow-delay=".1s"><a
-                            href="https://www.facebook.com/UAMTFEISTU"><i class="fa fa-facebook"></i></a></li>
+                                href="https://www.facebook.com/UAMTFEISTU"><i class="fa fa-facebook"></i></a></li>
                     <li class="wow flipInX" data-wow-duration="2s" data-wow-delay=".2s"><a
-                            href="https://www.youtube.com/channel/UCo3WP2kC0AVpQMIiJR79TdA"><i
-                            class="fa fa-youtube"></i></a></li>
+                                href="https://www.youtube.com/channel/UCo3WP2kC0AVpQMIiJR79TdA"><i
+                                    class="fa fa-youtube"></i></a></li>
                 </ul>
             </div>
             <div class="col-md-4">
@@ -406,7 +438,7 @@ echo json_encode($folders);
 <!--small footer end-->
 
 <!-- js placed at the end of the document so the pages load faster
-<script src="js/jquery.js"></script>-->
+<script src="js/jquery.js"></script> -->
 <script src="js/jquery-1.8.3.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/hover-dropdown.js"></script>
@@ -416,47 +448,86 @@ echo json_encode($folders);
 <script type="text/javascript" src="js/jquery.parallax-1.1.3.js"></script>
 <script src="js/wow.min.js"></script>
 <script src="assets/owlcarousel/owl.carousel.js"></script>
-
+<script src="js/mixitup.js"></script>
 <script src="js/jquery.easing.min.js"></script>
 <script src="js/link-hover.js"></script>
-<script src="js/superfish.js"></script>
-
 
 <!--common script for all pages-->
 <script src="js/common-scripts.js"></script>
 
 
-<!-- Sequence Moder -slider js -->
-<script src="js/seq-slider/jquery.sequence-min.js"></script>
-<!--<script src="js/slider/sequencejs-options.modern-slide-in.js"></script>-->
-<script src="js/seq-slider/sequencejs-options.apple-style.js"></script>
-<!-- end of sequence slider js-->
+<script src="js/jquery.magnific-popup.js"></script>
 
+<script type="text/javascript">
+    $('.image-caption a').tooltip();
 
-<script>
-    $('a.info').tooltip();
-    $(window).load(function () {
-        $('.flexslider').flexslider({
-            animation: "slide",
-            start: function (slider) {
-                $('body').removeClass('loading');
+    $(function () {
+
+        var filterList = {
+
+            init: function () {
+
+                // MixItUp plugin
+                // http://mixitup.io
+                $('#portfoliolist-three').mixitup({
+                    targetSelector: '.portfolio',
+                    filterSelector: '.filter',
+                    effects: ['fade'],
+                    easing: 'snap',
+                    // call the hover effect
+                    onMixEnd: filterList.hoverEffect()
+                });
+
+            },
+
+            hoverEffect: function () {
+                $("[rel='tooltip']").tooltip();
+                // Simple parallax effect
+                $('#portfoliolist-three .portfolio .portfolio-hover').hover(
+                    function () {
+                        $(this).find('.image-caption').slideDown(250); //.fadeIn(250)
+                    },
+                    function () {
+                        $(this).find('.image-caption').slideUp(250); //.fadeOut(205)
+                    }
+                );
             }
+
+        };
+
+        // Run the show!
+        filterList.init();
+
+
+    });
+
+    $(document).ready(function () {
+        $('.magnefig').each(function () {
+            $(this).magnificPopup({
+                type: 'image',
+                removalDelay: 300,
+                mainClass: 'mfp-fade'
+            })
         });
     });
+</script>
+
+<script>
 
 
     $(document).ready(function () {
 
         $("#owl-demo").owlCarousel({
 
-            items: 4
+            autoPlay: 3000, //Set AutoPlay to 3 seconds
+
+            items: 4,
+            itemsDesktop: [1199, 3],
+            itemsDesktopSmall: [979, 3],
+            stopOnHover: true,
 
         });
 
-    });
-
-    jQuery(document).ready(function () {
-        jQuery('ul.superfish').superfish();
     });
 
     new WOW().init();
