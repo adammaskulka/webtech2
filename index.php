@@ -57,6 +57,9 @@
   function getRole() {
     return $_SESSION["user"]->roles;
   }
+
+  require('src/multimediaController.php');
+  deleteVideo("POKUS");
 ?>
 
 <body>
