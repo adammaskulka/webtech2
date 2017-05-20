@@ -59,7 +59,7 @@ function getAllPhotos(){
   $stmt->close();
   $conn->close();
 
-  if($photo->login == null)
+  if($photo->folder == null)
     return null;
   return $photos;
 }
