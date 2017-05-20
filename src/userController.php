@@ -85,17 +85,7 @@ function removeRole($login, $role)
     die("Connection failed: " . $conn->connect_error);
   }
 
-  $sql = "SELECT * FROM users INNER JOIN roles ON users.id = roles.users_id  WHERE login=? LIMIT 1";
-  $stmt = $conn->prepare($sql);
-  $stmt->bind_param("s", $login);
-  $stmt->execute();
-
-  $stmt->store_result();
-  $id = null; $id2 = null; $id2 = null; $login = null; $name = null; $surname = null; $roles = null;
-  $stmt->bind_result($id ,$login, $name, $surname, $id2,$id3, $roles);
-
-  $row = $stmt->fetch();
-  $stmt->close();
+  $id = getRoleId($login);
 
   $sql = "DELETE FROM roles WHERE roles.users_id = ? AND roles.role = ?";
 
@@ -107,6 +97,28 @@ function removeRole($login, $role)
 
 
   $conn->close();
+}
+
+function getRoleId($login)
+{
+  require('cfg/config.php');
+  $conn = new mysqli($CONF_DB_HOST, $CONF_DB_USER, $CONF_DB_PASS, $CONF_DB_NAME);
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+  }
+
+  $sql = "SELECT * FROM users INNER JOIN roles ON users.id = roles.users_id  WHERE login=? LIMIT 1";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param("s", $login);
+  $stmt->execute();
+
+  $stmt->store_result();
+  $id = null; $id2 = null; $id2 = null; $login = null; $name = null; $surname = null; $roles = null;
+  $stmt->bind_result($id ,$login, $name, $surname, $id2,$id3, $roles);
+
+  $row = $stmt->fetch();
+  $stmt->close();
+  return $id;
 }
 
 function getUser($login)
