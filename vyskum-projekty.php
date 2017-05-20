@@ -302,6 +302,138 @@
         </div>
         <hr>
         <div class="row">
+<?php
+		require('config.php');
+		$mysqli = new mysqli($CONF_DB_HOST, $CONF_DB_USER, $CONF_DB_PASS, $CONF_DB_NAME);
+		if($mysqli->connect_error){
+		die("Connect error" . $mysqli->connect_error);
+		}
+		mysqli_set_charset($mysqli,"utf8");
+
+		include('fetch_record');
+		
+		//medzinarodny
+		$sql="SELECT * FROM Projekty WHERE Type='Inter' ORDER BY EndDuration DESC";
+		$result = $mysqli->query($sql);
+		
+		//hlavicka
+		echo  "<h2>Medzinárodné projekty</h2>";
+		echo "<table class='table'><tr><th>Číslo projektu</th><th>Názov projektu</th><th>Doba riešenia</th><th>Zodpovedný riešiteľ</th></tr>";
+
+		if (mysqli_num_rows($result) > 0) {
+			while($row = mysqli_fetch_assoc($result)) {
+			
+			$od = date("Y", strtotime($row['StartDuration']));
+			$do = date("Y", strtotime($row['EndDuration']));
+
+			echo "<tr>";	
+			echo "<td>".$row['Number']."</td>";
+			echo "<td>".$row['skTitle']."</td>";
+			echo "<td>".$od." - ".$do."</td>";
+			echo "<td>".$row['Coordinator']."</td>";
+			echo "</tr>";
+			}
+		}
+		echo "</table>";
+
+		//VEGA
+		$sql="SELECT * FROM Projekty WHERE Type='VEGA' ORDER BY EndDuration DESC";
+		$result = $mysqli->query($sql);
+		
+		//hlavicka
+		echo "<br><h2>VEGA projekty</h2>";
+		echo "<table class='table'><tr><th>Číslo projektu</th><th>Názov projektu</th><th>Doba riešenia</th><th>Zodpovedný riešiteľ</th></tr>";
+
+		if (mysqli_num_rows($result) > 0) {
+			while($row = mysqli_fetch_assoc($result)) {
+			
+			$od = date("Y", strtotime($row['StartDuration']));
+			$do = date("Y", strtotime($row['EndDuration']));
+
+			echo "<tr>";	
+			echo "<td>".$row['Number']."</td>";
+			echo "<td>".$row['skTitle']."</td>";
+			echo "<td>".$od." - ".$do."</td>";
+			echo "<td>".$row['Coordinator']."</td>";
+			echo "</tr>";
+			}
+		}
+		echo "</table>";
+		
+		//APVV
+		$sql="SELECT * FROM Projekty WHERE Type='APVV' ORDER BY EndDuration DESC";
+		$result = $mysqli->query($sql);
+		
+		//hlavicka
+		echo "<br><h2>APVV projekty</h2>";
+		echo "<table class='table'><tr><th>Číslo projektu</th><th>Názov projektu</th><th>Doba riešenia</th><th>Zodpovedný riešiteľ</th></tr>";
+
+		if (mysqli_num_rows($result) > 0) {
+			while($row = mysqli_fetch_assoc($result)) {
+			
+			$od = date("Y", strtotime($row['StartDuration']));
+			$do = date("Y", strtotime($row['EndDuration']));
+
+			echo "<tr>";	
+			echo "<td>".$row['Number']."</td>";
+			echo "<td>".$row['skTitle']."</td>";
+			echo "<td>".$od." - ".$do."</td>";
+			echo "<td>".$row['Coordinator']."</td>";
+			echo "</tr>";
+			}
+		}
+		echo "</table>";
+		
+		//KEGA
+		$sql="SELECT * FROM Projekty WHERE Type='KEGA' ORDER BY EndDuration DESC";
+		$result = $mysqli->query($sql);
+		
+		//hlavicka
+		echo  "<br><h2>KEGA projekty</h2>";
+		echo "<table class='table'><tr><th>Číslo projektu</th><th>Názov projektu</th><th>Doba riešenia</th><th>Zodpovedný riešiteľ</th></tr>";
+
+		if (mysqli_num_rows($result) > 0) {
+			while($row = mysqli_fetch_assoc($result)) {
+			
+			$od = date("Y", strtotime($row['StartDuration']));
+			$do = date("Y", strtotime($row['EndDuration']));
+
+			echo "<tr>";	
+			echo "<td>".$row['Number']."</td>";
+			echo "<td>".$row['skTitle']."</td>";
+			echo "<td>".$od." - ".$do."</td>";
+			echo "<td>".$row['Coordinator']."</td>";
+			echo "</tr>";
+			}
+		}
+		echo "</table>";
+		
+		//iné
+		$sql="SELECT * FROM Projekty WHERE Type='INE' ORDER BY EndDuration DESC";
+		$result = $mysqli->query($sql);
+		
+		//hlavicka
+		echo  "<br><h2>Iné domáce projekty</h2>";
+		echo "<table class='table'><tr><th>Číslo projektu</th><th>Názov projektu</th><th>Doba riešenia</th><th>Zodpovedný riešiteľ</th></tr>";
+
+		if (mysqli_num_rows($result) > 0) {
+			while($row = mysqli_fetch_assoc($result)) {
+			
+			$od = date("Y", strtotime($row['StartDuration']));
+			$do = date("Y", strtotime($row['EndDuration']));
+			
+			echo "<tr>";	
+			echo "<td>".$row['Number']."</td>";
+			//echo "<td>".$row['skTitle']."</td>";
+			echo "<td><a href='#myModal' data-toggle='modal' data-id='".$row['ID']."'>".$row['skTitle']."</td>";
+			echo "<td>".$od." - ".$do."</td>";
+			echo "<td>".$row['Coordinator']."</td>";
+			echo "</tr>";
+			}
+		}
+		echo "</table>";
+		
+		?>
 
 
         </div>
