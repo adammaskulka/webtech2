@@ -312,6 +312,15 @@
 <!--container start-->
 <?php
   require('src/userController.php');
+  if(isset($_POST["delete"])) {
+    deleteUser($_POST["delete"]);
+  }
+  if(isset($_POST["create"])) {
+    $user = new User();
+    $user->create($_POST["login"], $_POST["name"], $_POST["surname"], "user");
+    addUser($user);
+  }
+
   $users = getAllUsers();
  ?>
 <table>
@@ -329,9 +338,20 @@
         <td><?php echo $user->login ?></td>
         <td><?php echo $user->name ?></td>
         <td><?php echo $user->surname ?></td>
-        <td><?php foreach($user->roles as $role) {echo $role;}?></td>
+        <td><?php foreach($user->roles as $role) {echo " " . $role;}?></td>
+        <form action="intranet-users.php" method="post">
+          <td> 	<button type="submit" name="delete"  value=<?php echo $user->login ?>>DELETE </button></td>
+        </form>
       </tr>
     <?php } ?>
+    <tr>
+      <form action="intranet-users.php" method="post">
+        <td><input type="text" name="login"></td>
+        <td><input type="text" name="name"></td>
+        <td><input type="text" name="surname"></td>
+        <td><button type="submit" name="create"  value="create">CREATE </button></td>
+      </form>
+    </tr>
   </tbody>
 </table>
 

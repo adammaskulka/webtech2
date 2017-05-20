@@ -29,8 +29,8 @@ function addUser($user)
 {
   require('cfg/config.php');
   $conn = new mysqli($CONF_DB_HOST, $CONF_DB_USER, $CONF_DB_PASS, $CONF_DB_NAME);
+  if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
-    if ($conn->connect_error) {
   }
 
   $sql = "INSERT INTO users (login, name, surname) VALUES (?, ?, ?)";
@@ -40,40 +40,25 @@ function addUser($user)
 
   $stmt->execute();
 
-  $stmt->close();
-  $conn->close();
+  addRole($user->login, "user");
 }
 
 function addRole($login, $role)
 {
+  $id = getUserId($login);
+
   require('cfg/config.php');
   $conn = new mysqli($CONF_DB_HOST, $CONF_DB_USER, $CONF_DB_PASS, $CONF_DB_NAME);
   if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
   }
 
-  $sql = "SELECT * FROM users INNER JOIN roles ON users.id = roles.users_id  WHERE login=? LIMIT 1";
-  $stmt = $conn->prepare($sql);
-  $stmt->bind_param("s", $login);
-  $stmt->execute();
-
-  $stmt->store_result();
-  $id = null; $id2 = null; $id2 = null; $login = null; $name = null; $surname = null; $roles = null;
-  $stmt->bind_result($id ,$login, $name, $surname, $id2,$id3, $roles);
-
-  $row = $stmt->fetch();
-  $stmt->close();
-
   $sql = "INSERT INTO roles (users_id, role_name) VALUES (?, ?)";
 
   $stmt = $conn->prepare($sql);
-  $stmt->bind_param("ii", $id, $role);//i - integer d - double s - string b - BLOB
+  $stmt->bind_param("is", $id, $role);//i - integer d - double s - string b - BLOB
 
   $stmt->execute();
-  $stmt->close();
-
-
-  $conn->close();
 }
 //DELETE FROM `roles` WHERE `roles`.`id` = 3;
 
@@ -87,15 +72,13 @@ function removeRole($login, $role)
 
   $id = getRoleId($login);
 
-  $sql = "DELETE FROM roles WHERE roles.users_id = ? AND roles.role = ?";
+  $sql = "DELETE FROM roles WHERE roles.users_id = ? AND roles.role_name = ?";
 
   $stmt = $conn->prepare($sql);
   $stmt->bind_param("is", $id, $role);//i - integer d - double s - string b - BLOB
 
   $stmt->execute();
   $stmt->close();
-
-
   $conn->close();
 }
 
@@ -154,6 +137,27 @@ function getUser($login)
   return $user;
 }
 
+function getUserId($login)
+{
+  require('cfg/config.php');
+  $conn = new mysqli($CONF_DB_HOST, $CONF_DB_USER, $CONF_DB_PASS, $CONF_DB_NAME);
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+  }
+
+  $sql = "SELECT * FROM users WHERE login=? LIMIT 1";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param("s", $login);
+  $stmt->execute();
+
+  $stmt->store_result();
+  $id = null; $login = null; $name = null; $surname = null;
+  $stmt->bind_result($id ,$login, $name, $surname);
+
+  $row = $stmt->fetch();
+  return $id;
+}
+
 function getAllUsers(){
   require('cfg/config.php');
   $conn = new mysqli($CONF_DB_HOST, $CONF_DB_USER, $CONF_DB_PASS, $CONF_DB_NAME);
@@ -179,6 +183,31 @@ function getAllUsers(){
     $users[$login]->addRole($roles);
   }
   return $users;
+}
+
+function deleteUser($login)
+{
+  $user = getUser($login);
+  foreach($user->roles as $role){
+    removeRole($login, $role);
+  }
+
+  require('cfg/config.php');
+  $conn = new mysqli($CONF_DB_HOST, $CONF_DB_USER, $CONF_DB_PASS, $CONF_DB_NAME);
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+  }
+
+  $sql = "DELETE FROM users WHERE users.login = ?";
+
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param("s", $login);//i - integer d - double s - string b - BLOB
+
+  $stmt->execute();
+  $stmt->close();
+
+
+  $conn->close();
 }
 
 ?>
