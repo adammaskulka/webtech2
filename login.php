@@ -170,7 +170,7 @@ function login($login, $pass)
                                 <li class="dropdown-submenu"></li>
 
                                 <li>
-                                    <a href="bachelor-info.html">Všeobecné informácie</a>
+                                    <a href="bachelor-info.php">Všeobecné informácie</a>
                                 </li>
 
                                 <li class="dropdown-submenu">
@@ -182,7 +182,7 @@ function login($login, $pass)
                                         </li>
 
                                         <li>
-                                            <a href="bachelor-thesis.html">Voľné témy</a>
+                                            <a href="bachelor-thesis.php">Voľné témy</a>
                                         </li>
                                     </ul>
                                 </li>

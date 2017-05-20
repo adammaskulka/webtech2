@@ -137,7 +137,7 @@
                                 <li class="dropdown-submenu"></li>
 
                                 <li>
-                                    <a href="bachelor-info.html">Všeobecné informácie</a>
+                                    <a href="bachelor-info.php">Všeobecné informácie</a>
                                 </li>
 
                                 <li class="dropdown-submenu">
@@ -149,7 +149,7 @@
                                         </li>
 
                                         <li>
-                                            <a href="bachelor-thesis.html">Voľné témy</a>
+                                            <a href="bachelor-thesis.php">Voľné témy</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -289,6 +289,18 @@
     </div>
 </div>
 <!--breadcrumbs end-->
+
+<?php
+require_once "src/multimediaController.php";
+$folders = getAllPhotos();
+echo json_encode($folders);
+//foreach ($videos as $video) {
+//    echo '<tr>';
+//    echo '<td><a href="'.$video.'">'.$video.'</a></td>';
+//    echo '<td><form action=\'intranet-video.php?delete='.$video.'\' method=\'post\'><input type=\'submit\' value=\'X\'></form>';
+//    echo '</tr>';
+//}
+?>
 
 
 <!--footer start-->

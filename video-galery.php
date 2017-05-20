@@ -137,7 +137,7 @@
                                 <li class="dropdown-submenu"></li>
 
                                 <li>
-                                    <a href="bachelor-info.html">Všeobecné informácie</a>
+                                    <a href="bachelor-info.php">Všeobecné informácie</a>
                                 </li>
 
                                 <li class="dropdown-submenu">
@@ -149,7 +149,7 @@
                                         </li>
 
                                         <li>
-                                            <a href="bachelor-thesis.html">Voľné témy</a>
+                                            <a href="bachelor-thesis.php">Voľné témy</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -307,91 +307,25 @@
     }
 </style>
 
-
-<div class="container">
-
-    <div class="row">
-        <div class="col-md-6">
-            <ul id="filters" class="clearfix">
-                <li><span class="filter active" data-filter="app card icon logo web">Všetky</span></li>
-                <li><span class="filter" data-filter="logo">Labák</span></li>
-                <li><span class="filter" data-filter="app">Predmet</span></li>
-                <li><span class="filter" data-filter="web">Propagácia</span></li>
-                <li><span class="filter" data-filter="icon">Zariadenie</span></li>
-            </ul>
-        </div>
-    </div>
-</div>
 <div class="container">
     <div class="row mar-b-30">
         <div id="portfoliolist-three">
             <div class="col-md-12">
-                <div class="portfolio logo" data-cat="logo">
-                    <div class="portfolio-wrapper">
-                        <div class="portfolio-hover">
-                            <div class="videoWrapper">
-                                <iframe src="https://www.youtube.com/embed/Z0zBwR_MKOI" allowfullscreen></iframe>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio app" data-cat="app">
-                    <div class="portfolio-wrapper">
-                        <div class="portfolio-hover">
-                            <div class="videoWrapper">
-                                <iframe src="https://www.youtube.com/embed/NKZmJB0PW3k" allowfullscreen></iframe>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio web" data-cat="web">
-                    <div class="portfolio-wrapper">
-                        <div class="portfolio-hover">
-                            <div class="videoWrapper">
-                                <iframe src="https://www.youtube.com/embed/vCYq4JspSCI" allowfullscreen></iframe>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio icon" data-cat="icon">
-                    <div class="portfolio-wrapper">
-                        <div class="portfolio-hover">
-                            <div class="videoWrapper">
-                                <iframe src="https://www.youtube.com/embed/qmijnl8jwaw" allowfullscreen></iframe>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio icon" data-cat="icon">
-                    <div class="portfolio-wrapper">
-                        <div class="portfolio-hover">
-                            <div class="videoWrapper">
-                                <iframe src="https://www.youtube.com/embed/ymqYxRYt5sY" allowfullscreen></iframe>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio web" data-cat="web">
-                    <div class="portfolio-wrapper">
-                        <div class="portfolio-hover">
-                            <div class="videoWrapper">
-                                <iframe src="https://www.youtube.com/embed/CLwEjKN9ixg" allowfullscreen></iframe>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio web" data-cat="web">
-                    <div class="portfolio-wrapper">
-                        <div class="portfolio-hover">
-                            <div class="videoWrapper">
-                                <iframe src="https://www.youtube.com/embed/IiNXYgbOKxw" allowfullscreen></iframe>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                <?php
+                //                error_reporting(E_ALL);
+                //                ini_set('display_errors', 'On');
+                //                ini_set("log_errors", 1);
+                require_once "src/multimediaController.php";
+                $videos = getAllVideos();
+                foreach ($videos as $video) {
+                    echo '<div class="portfolio logo" data-cat="logo">';
+                    echo '<div class="portfolio-wrapper">';
+                    echo '<div class="portfolio-hover">';
+                    echo '<div class="videoWrapper">';
+                    echo '<iframe src="' . $video . '" allowfullscreen></iframe>';
+                    echo '</div> </div> </div> </div>';
+                }
+                ?>
 
             </div>
 
@@ -487,10 +421,10 @@
             <div class="col-lg-6 col-sm-6 pull-right">
                 <ul class="social-link-footer list-unstyled">
                     <li class="wow flipInX" data-wow-duration="2s" data-wow-delay=".1s"><a
-                            href="https://www.facebook.com/UAMTFEISTU"><i class="fa fa-facebook"></i></a></li>
+                                href="https://www.facebook.com/UAMTFEISTU"><i class="fa fa-facebook"></i></a></li>
                     <li class="wow flipInX" data-wow-duration="2s" data-wow-delay=".2s"><a
-                            href="https://www.youtube.com/channel/UCo3WP2kC0AVpQMIiJR79TdA"><i
-                            class="fa fa-youtube"></i></a></li>
+                                href="https://www.youtube.com/channel/UCo3WP2kC0AVpQMIiJR79TdA"><i
+                                    class="fa fa-youtube"></i></a></li>
                 </ul>
             </div>
             <div class="col-md-4">
