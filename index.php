@@ -53,9 +53,9 @@
 </head>
 <?php
   session_start();
-  if ($_SESSION["user"]) {
-      header("Location: intranet-tasks.php");
-      exit();
+
+  function getRole() {
+    return $_SESSION["user"]->roles;
   }
 ?>
 

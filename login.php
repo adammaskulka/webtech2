@@ -3,7 +3,8 @@ if ($_POST["login"] && $_POST["password"]) {
     login($_POST["login"], $_POST["password"]);
     exit();
 }
-
+ini_set('display_errors', 'On');
+ini_set("log_errors", 1);
 function login($login, $pass)
 {
     $adServer = "ldap.stuba.sk";
@@ -24,7 +25,7 @@ function login($login, $pass)
         session_start();
         $_SESSION["user"] = $user;
         require('cfg/config.php');
-        header("Location: index.php");
+        header("Location: intranet-tasks.php");
         exit();
     }
 }
