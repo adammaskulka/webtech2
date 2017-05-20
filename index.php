@@ -57,9 +57,6 @@
   function getRole() {
     return $_SESSION["user"]->roles;
   }
-
-  require('src/multimediaController.php');
-  getAllPhotos();
 ?>
 
 <body>
