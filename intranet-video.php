@@ -1,3 +1,20 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 'On');
+ini_set("log_errors", 1);
+require_once "src/multimediaController.php";
+if (isset($_POST['url'])) {
+
+    echo $_POST['url'];
+    addVideo($_POST['url']);
+
+}
+if (isset($_GET['delete'])) {
+
+    echo $_GET['delete'];
+
+}
+?>
 <!DOCTYPE html>
 <html lang="sk">
 <head>
@@ -138,7 +155,7 @@
                                 <li class="dropdown-submenu"></li>
 
                                 <li>
-                                    <a href="bachelor-info.html">Všeobecné informácie</a>
+                                    <a href="bachelor-info.php">Všeobecné informácie</a>
                                 </li>
 
                                 <li class="dropdown-submenu">
@@ -150,7 +167,7 @@
                                         </li>
 
                                         <li>
-                                            <a href="bachelor-thesis.html">Voľné témy</a>
+                                            <a href="bachelor-thesis.php">Voľné témy</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -317,14 +334,13 @@
         <div class="row">
             <div class="col-md-12 career-head">
                 <h1 class="wow fadeIn">Pridávanie videí do galérie</h1>
-
             </div>
         </div>
         <hr>
         <div class="row">
 
             <div class="bs-example">
-                <form role="form">
+                <form action="intranet-video.php" method="post" role="form">
                     <div class="form-group">
                         <label for="url">URL adresa videa z YouTube - formát http://www.youtube.com/embed/...</label>
                         <input type="text" name="url" class="form-control" id="url"
@@ -335,6 +351,25 @@
                 </form>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12 career-head">
+                <h1 class="wow fadeIn">Vymazávanie videí z galérie</h1>
+            </div>
+        </div>
+        <table class="table">
+            <tbody>
+            <?php
+            require_once "src/multimediaController.php";
+            $videos = getAllVideos();
+            foreach ($videos as $video) {
+                echo '<tr>';
+                echo '<td><a href="' . $video . '">' . $video . '</a></td>';
+                echo '<td><form action=\'intranet-video.php?delete=' . $video . '\' method=\'post\'><input type=\'submit\' value=\'X\'></form>';
+                echo '</tr>';
+            }
+            ?>
+            </tbody>
+        </table>
     </div>
 </div>
 <!--container end-->
