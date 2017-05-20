@@ -310,7 +310,30 @@
 <!-- left menu end -->
 
 <!--container start-->
-
+<?php
+  require('src/userController.php');
+  $users = getAllUsers();
+ ?>
+<table>
+  <thead>
+    <tr>
+      <th>Login</th>
+      <th>Meno</th>
+      <th>Priezvisko</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach($users as $user) { ?>
+      <tr>
+        <td><?php echo $user->login ?></td>
+        <td><?php echo $user->name ?></td>
+        <td><?php echo $user->surname ?></td>
+        <td><?php foreach($user->roles as $role) {echo $role;}?></td>
+      </tr>
+    <?php } ?>
+  </tbody>
+</table>
 
 <!--container end-->
 

@@ -161,16 +161,13 @@ function getAllUsers(){
     die("Connection failed: " . $conn->connect_error);
   }
 
-  $sql = "SELECT * FROM users INNER JOIN roles ON users.id = roles.users_id  WHERE login=? LIMIT 1";
+  $sql = "SELECT * FROM users INNER JOIN roles ON users.id = roles.users_id";
   $stmt = $conn->prepare($sql);
-  $stmt->bind_param("s", $login);
   $stmt->execute();
 
   $stmt->store_result();
   $id = null; $id2 = null; $id2 = null; $login = null; $name = null; $surname = null; $roles = null;
   $stmt->bind_result($id ,$login, $name, $surname, $id2,$id3, $roles);
-
-  $result = array();
 
   $users = array();
   while ($stmt->fetch()) { // For each row
@@ -181,12 +178,7 @@ function getAllUsers(){
     }
     $users[$login]->addRole($roles);
   }
-  $stmt->close();
-  $conn->close();
-
-  if($user->login == null)
-    return null;
-  return $user;
+  return $users;
 }
 
 ?>
