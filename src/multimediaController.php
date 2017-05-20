@@ -20,14 +20,14 @@ function addPhoto($photo)
 {
   require('cfg/config.php');
   $conn = new mysqli($CONF_DB_HOST, $CONF_DB_USER, $CONF_DB_PASS, $CONF_DB_NAME);
-    die("Connection failed: " . $conn->connect_error);
     if ($conn->connect_error) {
-  }
+        die("Connection failed: " . $conn->connect_error);
+    }
 
   $sql = "INSERT INTO photos (folder, title_sk, title_en, date) VALUES (?, ?, ?, ?)";
 
   $stmt = $conn->prepare($sql);
-  $stmt->bind_param("ssss", $this->folder, $this->title_sk, $this->title_en, $this->date);//i - integer d - double s - string b - BLOB
+    $stmt->bind_param("ssss", $photo->folder, $photo->title_sk, $photo->title_en, $photo->date);//i - integer d - double s - string b - BLOB
 
   $stmt->execute();
 
@@ -77,6 +77,25 @@ function addVideo($url)
 
   $stmt->close();
   $conn->close();
+}
+
+function deletePhoto($folder)
+{
+
+    require('cfg/config.php');
+    $conn = new mysqli($CONF_DB_HOST, $CONF_DB_USER, $CONF_DB_PASS, $CONF_DB_NAME);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "DELETE FROM photos WHERE photos.folder = ?";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $folder);//i - integer d - double s - string b - BLOB
+
+    $stmt->execute();
+    $stmt->close();
+    $conn->close();
 }
 
 function deleteVideo ($url)

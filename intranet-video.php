@@ -1,17 +1,16 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 'On');
-ini_set("log_errors", 1);
+
 require_once "src/multimediaController.php";
 if (isset($_POST['url'])) {
 
-    echo $_POST['url'];
+//    echo $_POST['url'];
     addVideo($_POST['url']);
 
 }
 if (isset($_GET['delete'])) {
 
-    echo $_GET['delete'];
+//    echo $_GET['delete'];
+    deleteVideo($_GET['delete']);
 
 }
 ?>

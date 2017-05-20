@@ -504,68 +504,44 @@
         <div class="row">
             <div class="col-lg-12 recent">
                 <h3 class="recent-work">
-                    Posledné novinky z nášho blogu
+                    Fotky z našich podujatí
                 </h3>
                 <div id="owl-demo" class="owl-carousel owl-theme wow fadeIn">
 
                     <div class="item view view-tenth">
-                        <img src="img/works/img8.jpg" alt="work Image">
+                        <img src="img/events002/2015-09-25-6460.jpg" alt="work Image">
                         <div class="mask">
-                            <a href="blog-detail.html" class="info" data-toggle="tooltip" data-placement="top"
-                               title="Details">
-                                <i class="fa fa-link">
-                                </i>
-                            </a>
+
                         </div>
                     </div>
                     <div class="item view view-tenth">
-                        <img src="img/works/img9.jpg" alt="work Image">
+                        <img src="img/events002/2015-09-25-6483.jpg" alt="work Image">
                         <div class="mask">
-                            <a href="blog-detail.html" class="info" data-toggle="tooltip" data-placement="top"
-                               title="Details">
-                                <i class="fa fa-link">
-                                </i>
-                            </a>
+
                         </div>
                     </div>
                     <div class="item view view-tenth">
-                        <img src="img/works/img10.jpg" alt="work Image">
+                        <img src="img/events002/2015-09-25-6471.jpg" alt="work Image">
                         <div class="mask">
-                            <a href="blog-detail.html" class="info" data-toggle="tooltip" data-placement="top"
-                               title="Details">
-                                <i class="fa fa-link">
-                                </i>
-                            </a>
+
                         </div>
                     </div>
                     <div class="item view view-tenth">
-                        <img src="img/works/img11.jpg" alt="work Image">
+                        <img src="img/events002/2015-09-25-6568.jpg" alt="work Image">
                         <div class="mask">
-                            <a href="blog-detail.html" class="info" data-toggle="tooltip" data-placement="top"
-                               title="Details">
-                                <i class="fa fa-link">
-                                </i>
-                            </a>
+
                         </div>
                     </div>
                     <div class="item view view-tenth">
-                        <img src="img/works/img12.jpg" alt="work Image">
+                        <img src="img/events002/2015-09-25-6476.jpg" alt="work Image">
                         <div class="mask">
-                            <a href="blog-detail.html" class="info" data-toggle="tooltip" data-placement="top"
-                               title="Details">
-                                <i class="fa fa-link">
-                                </i>
-                            </a>
+
                         </div>
                     </div>
                     <div class="item view view-tenth">
-                        <img src="img/works/img13.jpg" alt="work Image">
+                        <img src="img/events002/2015-09-25-6477.jpg" alt="work Image">
                         <div class="mask">
-                            <a href="blog-detail.html" class="info" data-toggle="tooltip" data-placement="top"
-                               title="Details">
-                                <i class="fa fa-link">
-                                </i>
-                            </a>
+
                         </div>
                     </div>
 
