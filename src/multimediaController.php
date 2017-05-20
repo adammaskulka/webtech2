@@ -53,7 +53,7 @@ function getAllPhotos(){
   $photos = array();
   while ($stmt->fetch()) { // For each row
     $photo = new Photo();
-    $photo->create($login, $name, $surname, null);
+    $photo->create($folder, $title_sk, $title_en, $date);
     array_push($photos, $photo);
   }
   $stmt->close();
