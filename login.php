@@ -24,7 +24,7 @@ function login($login, $pass)
         session_start();
         $_SESSION["user"] = $user;
         require('cfg/config.php');
-        header("Location: index.html");
+        header("Location: index.php");
         exit();
     }
 }

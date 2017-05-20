@@ -51,6 +51,13 @@
     </script>
     <![endif]-->
 </head>
+<?php
+  session_start();
+  if ($_SESSION["user"]) {
+      header("Location: intranet-tasks.php");
+      exit();
+  }
+?>
 
 <body>
 <!--header start-->
