@@ -56,11 +56,7 @@ function getAllPhotos(){
     $photo->create($folder, $title_sk, $title_en, $date);
     array_push($photos, $photo);
   }
-  $stmt->close();
-  $conn->close();
 
-  if($photo->folder == null)
-    return null;
   return $photos;
 }
 

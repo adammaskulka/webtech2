@@ -59,7 +59,7 @@
   }
 
   require('src/multimediaController.php');
-  deleteVideo("POKUS");
+  getAllPhotos();
 ?>
 
 <body>
