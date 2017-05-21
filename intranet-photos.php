@@ -3,6 +3,15 @@
 //ini_set('display_errors', 'On');
 //ini_set("log_errors", 1);
 require_once "src/multimediaController.php";
+require_once "src/userController.php";
+session_start();
+
+function getRole() {
+  return $_SESSION['user']->roles;
+}
+if(getRole() != null){
+  echo "<h1>POKUS</h1>";
+}
 
 function deleteDirectory($dir)
 {

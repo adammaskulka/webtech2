@@ -320,6 +320,11 @@
     $user->create($_POST["login"], $_POST["name"], $_POST["surname"], "user");
     addUser($user);
   }
+  if(isset($_POST["add_role"])) {
+    addRole($_POST["add_role"], $_POST["role"]);
+  }
+  if(isset($_POST["delete_role"])) {
+  }
 
   $users = getAllUsers();
  ?>
@@ -340,7 +345,20 @@
         <td><?php echo $user->surname ?></td>
         <td><?php foreach($user->roles as $role) {echo " " . $role;}?></td>
         <form action="intranet-users.php" method="post">
-          <td> 	<button type="submit" name="delete"  value=<?php echo $user->login ?>>DELETE </button></td>
+          <td> 	<button type="submit" name="delete"  value=<?php echo $user->login ?>>DELETE</button></td>
+        </form>
+        <form action="intranet-users.php" method="post">
+          <td>
+            <select name="role">
+              <option value="user">User</option>
+              <option value="hr">hr</option>
+              <option value="reporter">Reporter</option>
+              <option value="editor">Editor</option>
+              <option value="admin">Admin</option>
+            </select>
+          </td>
+          <td> 	<button type="submit" name="add_role"   value=<?php echo $user->login ?>>ADD ROLE</button></td>
+          <td> 	<button type="submit" name="delete_role"   value=<?php echo $user->login ?>>DELETE ROLE</button></td>
         </form>
       </tr>
     <?php } ?>
