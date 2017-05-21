@@ -20,12 +20,13 @@ http://elearn.elf.stuba.sk/moodle/pluginfile.php/54857/mod_resource/content/7/ZP
 | 11. fotky      | Adam      |   done |
 | 12. videa | Adam      |    done |
 | 13. media      | Adam | done |
-| 14. login      | Juraj      |  in progress |
+| 14. login      | Juraj      |  done |
+| 14. panel uzivatelia      | Juraj      |  done |
 | 14. panel aktuality      | Andrej      |  TBD |
 | 14. panel fotky      | Adam      |  done |
 | 14. panel videa      | Adam      |  done |
 | 15. dochadzka | Martin      |    TBD |
-| 15. pedagogika  | Radoslav | TBD |
+| 15. pedagogika  | juraj | in progres |
 | 15. doktorandi  | Radoslav | TBD |
 | 15. publikacie  | Radoslav | TBD |
 | 15. sluzobne cesty  | Radoslav | TBD |
