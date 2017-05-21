@@ -51,13 +51,6 @@
     </script>
     <![endif]-->
 </head>
-<?php
-  session_start();
-
-  function getRole() {
-    return $_SESSION["user"]->roles;
-  }
-?>
 
 <body>
 <!--header start-->

@@ -295,8 +295,8 @@
                 echo '<li><span class="filter active" data-filter="' . $folders_string . '">Všetky</span></li>';
                 foreach ($folders as $folder) {
 
-                    echo '<li><span class="filter" data-filter="' . htmlentities($folder->folder) . '">';
-                    echo htmlentities($folder->title_en);
+                    echo '<li><span class="filter" data-filter="' . $folder->folder . '">';
+                    echo $folder->title_sk;
                     echo '</span></li>';
                 }
 

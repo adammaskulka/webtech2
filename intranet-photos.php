@@ -9,9 +9,7 @@ session_start();
 function getRole() {
   return $_SESSION['user']->roles;
 }
-if(getRole() != null){
-  echo "<h1>POKUS</h1>";
-}
+
 
 function deleteDirectory($dir)
 {
@@ -385,14 +383,14 @@ if (isset($_POST['titleSK']) && isset($_POST['titleEN']) && isset($_POST['folder
 
     <!-- career -->
     <div class="container career-inner">
-        <div class="row">
+        <div id="addPhotosTitle" class="row">
             <div class="col-md-12 career-head">
                 <h1 class="wow fadeIn">Pridávanie fotiek do galérie</h1>
 
             </div>
         </div>
         <hr>
-        <div class="row">
+        <div id="addPhotosForm" class="row">
 
             <div class="bs-example">
                 <form role="form" action="intranet-photos.php" method="post" enctype="multipart/form-data">
@@ -424,7 +422,7 @@ if (isset($_POST['titleSK']) && isset($_POST['titleEN']) && isset($_POST['folder
             </div>
         </div>
         <hr>
-        <div class="row">
+        <div id="deletePhotosTitle" class="row">
             <div class="col-md-12 career-head">
                 <h1 class="wow fadeIn">Vymazávanie udalostí z fotogalérie</h1>
             </div>
@@ -433,12 +431,29 @@ if (isset($_POST['titleSK']) && isset($_POST['titleEN']) && isset($_POST['folder
             <tbody>
             <?php
             require_once "src/multimediaController.php";
-            $videos = getAllPhotos();
-            foreach ($videos as $video) {
-                echo '<tr>';
-                echo '<td>' . $video->title_sk . ' - ' . $video->folder . '</td>';
-                echo '<td><form action=\'intranet-photos.php?delete=' . $video->folder . '\' method=\'post\'><input type=\'submit\' value=\'X\'></form>';
-                echo '</tr>';
+            if (getRole() != null) {
+                $role = getRole()[0];
+//                $role = "user";
+//                echo $role;
+                $videos = getAllPhotos();
+                if (isAdmin() || isReporter()) {
+                    foreach ($videos as $video) {
+                        echo '<tr>';
+                        echo '<td>' . $video->title_sk . ' - ' . $video->folder . '</td>';
+                        echo '<td><form action=\'intranet-photos.php?delete=' . $video->folder . '\' method=\'post\'><input type=\'submit\' value=\'X\'></form>';
+                        echo '</tr>';
+                    }
+                } else {
+                    echo '<style type="text/css">#deletePhotosTitle{display:none;}#addPhotosForm{display:none;}#addPhotosTitle{display:none;}</style>';
+                    foreach ($videos as $video) {
+                        echo '<tr>';
+                        echo '<td>' . $video->title_sk . ' - ' . $video->folder . '</td>';
+                        echo '</tr>';
+                    }
+                }
+
+            } else {
+                echo '<h1>Nemáte pridelenú žiadnu rolu!</h1> ';
             }
             ?>
             </tbody>
@@ -549,8 +564,8 @@ if (isset($_POST['titleSK']) && isset($_POST['titleEN']) && isset($_POST['folder
 </footer>
 <!--small footer end-->
 
-<!-- js placed at the end of the document so the pages load faster
-<script src="js/jquery.js"></script>-->
+<!-- js placed at the end of the document so the pages load faster-->
+<script src="js/jquery.js"></script>
 <script src="js/jquery-1.8.3.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/hover-dropdown.js"></script>

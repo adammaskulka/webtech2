@@ -23,6 +23,7 @@ function addPhoto($photo)
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
+    mysqli_set_charset($conn, "utf8");
 
   $sql = "INSERT INTO photos (folder, title_sk, title_en, date) VALUES (?, ?, ?, ?)";
 
@@ -41,6 +42,7 @@ function getAllPhotos(){
   if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
   }
+    mysqli_set_charset($conn, "utf8");
 
   $sql = "SELECT * FROM photos";
   $stmt = $conn->prepare($sql);
@@ -67,6 +69,7 @@ function addVideo($url)
   if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
   }
+    mysqli_set_charset($conn, "utf8");
 
   $sql = "INSERT INTO videos (url) VALUES (?)";
 
@@ -87,6 +90,7 @@ function deletePhoto($folder)
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
+    mysqli_set_charset($conn, "utf8");
 
     $sql = "DELETE FROM photos WHERE photos.folder = ?";
 
@@ -107,6 +111,7 @@ function deleteVideo ($url)
   if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
   }
+    mysqli_set_charset($conn, "utf8");
 
   $sql = "DELETE FROM videos WHERE videos.id = ?";
 
@@ -124,6 +129,7 @@ function getIdFromVideos($url){
   if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
   }
+    mysqli_set_charset($conn, "utf8");
 
   $sql = "SELECT * FROM videos WHERE videos.url=? LIMIT 1";
   $stmt = $conn->prepare($sql);
@@ -146,6 +152,7 @@ function getAllVideos(){
   if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
   }
+    mysqli_set_charset($conn, "utf8");
 
   $sql = "SELECT * FROM videos";
   $stmt = $conn->prepare($sql);
