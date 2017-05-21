@@ -1,6 +1,13 @@
 <?php
 
 require_once "src/multimediaController.php";
+require_once "src/userController.php";
+session_start();
+
+function getRole()
+{
+    return $_SESSION['user']->roles;
+}
 if (isset($_POST['url'])) {
 
 //    echo $_POST['url'];
@@ -330,13 +337,13 @@ if (isset($_GET['delete'])) {
 
     <!-- career -->
     <div class="container career-inner">
-        <div class="row">
+        <div id="addVideoTitle" class="row">
             <div class="col-md-12 career-head">
                 <h1 class="wow fadeIn">Pridávanie videí do galérie</h1>
             </div>
         </div>
         <hr>
-        <div class="row">
+        <div id="addVideoFrom" class="row">
 
             <div class="bs-example">
                 <form action="intranet-video.php" method="post" role="form">
@@ -350,21 +357,39 @@ if (isset($_GET['delete'])) {
                 </form>
             </div>
         </div>
-        <div class="row">
+        <div id="deleteVideoTitle" class="row">
             <div class="col-md-12 career-head">
                 <h1 class="wow fadeIn">Vymazávanie videí z galérie</h1>
             </div>
         </div>
         <table class="table">
             <tbody>
+
             <?php
             require_once "src/multimediaController.php";
-            $videos = getAllVideos();
-            foreach ($videos as $video) {
-                echo '<tr>';
-                echo '<td><a href="' . $video . '">' . $video . '</a></td>';
-                echo '<td><form action=\'intranet-video.php?delete=' . $video . '\' method=\'post\'><input type=\'submit\' value=\'X\'></form>';
-                echo '</tr>';
+            if (getRole() != null) {
+                $role = getRole()[0];
+//                $role = "user";
+//                echo $role;
+                $videos = getAllVideos();
+                if (strcmp($role, "admin") == 0 || strcmp($role, "reporter") == 0) {
+                    foreach ($videos as $video) {
+                        echo '<tr>';
+                        echo '<td><a href="' . $video . '">' . $video . '</a></td>';
+                        echo '<td><form action=\'intranet-video.php?delete=' . $video . '\' method=\'post\'><input type=\'submit\' value=\'X\'></form>';
+                        echo '</tr>';
+                    }
+                } else {
+                    echo '<style type="text/css">#deleteVideoTitle{display:none;}#addVideoFrom{display:none;}#addVideoTitle{display:none;}</style>';
+                    foreach ($videos as $video) {
+                        echo '<tr>';
+                        echo '<td><a href="' . $video . '">' . $video . '</a></td>';
+                        echo '</tr>';
+                    }
+                }
+
+            } else {
+                echo '<h1>Nemáte pridelenú žiadnu rolu!</h1> ';
             }
             ?>
             </tbody>
