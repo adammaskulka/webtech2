@@ -25,6 +25,23 @@ class User{
   }
 }
 
+function userIsAdmin(){return userFindRole("admin");}
+function userIsHR(){return userFindRole("hr");}
+function userIsReporter(){return userFindRole("reporter");}
+function userIsEditor(){return userFindRole("editor");}
+function userIsUser(){return userFindRole("user");}
+
+function userFindRole($find)
+{
+  session_start();
+  foreach($_SESSION['user']->roles as $role){
+    if(strcmp($role, $find) == 0){
+      return true;
+    }
+  }
+  return false;
+}
+
 function addUser($user)
 {
   require('cfg/config.php');
