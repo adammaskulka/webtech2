@@ -158,6 +158,20 @@ function getUserId($login)
   return $id;
 }
 
+function updateuser($user)
+{
+  require('cfg/config.php');
+  $conn = new mysqli($CONF_DB_HOST, $CONF_DB_USER, $CONF_DB_PASS, $CONF_DB_NAME);
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+  }
+
+  $sql = "UPDATE users SET name=?, surname=? WHERE login=?";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param("sss", $user->name, $user->surname, $user->login);
+  $stmt->execute();
+}
+
 function getAllUsers(){
   require('cfg/config.php');
   $conn = new mysqli($CONF_DB_HOST, $CONF_DB_USER, $CONF_DB_PASS, $CONF_DB_NAME);

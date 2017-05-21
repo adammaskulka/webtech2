@@ -324,26 +324,34 @@
     addRole($_POST["add_role"], $_POST["role"]);
   }
   if(isset($_POST["delete_role"])) {
+    removeRole($_POST["delete_role"], $_POST["role"]);
   }
-
+  if(isset($_POST["update"])) {
+    $user = new User();
+    $user->create($_POST["update"], $_POST["name"], $_POST["surname"], null);
+    updateUser($user);
+  }
   $users = getAllUsers();
  ?>
 <table>
   <thead>
     <tr>
       <th>Login</th>
+      <th>Role</th>
       <th>Meno</th>
       <th>Priezvisko</th>
-      <th>Role</th>
     </tr>
   </thead>
   <tbody>
     <?php foreach($users as $user) { ?>
       <tr>
         <td><?php echo $user->login ?></td>
-        <td><?php echo $user->name ?></td>
-        <td><?php echo $user->surname ?></td>
         <td><?php foreach($user->roles as $role) {echo " " . $role;}?></td>
+        <form action="intranet-users.php" method="post">
+        <td><input type="text" name="name" value=<?php echo $user->name ?>></td>
+        <td><input type="text" name="surname" value=<?php echo $user->surname ?>></td>
+          <td> 	<button type="submit" name="update"  value=<?php echo $user->login ?>>UPDATE</button></td>
+        </form>
         <form action="intranet-users.php" method="post">
           <td> 	<button type="submit" name="delete"  value=<?php echo $user->login ?>>DELETE</button></td>
         </form>
