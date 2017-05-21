@@ -436,7 +436,7 @@ if (isset($_POST['titleSK']) && isset($_POST['titleEN']) && isset($_POST['folder
 //                $role = "user";
 //                echo $role;
                 $videos = getAllPhotos();
-                if (strcmp($role, "admin") == 0 || strcmp($role, "reporter") == 0) {
+                if (isAdmin() || isReporter()) {
                     foreach ($videos as $video) {
                         echo '<tr>';
                         echo '<td>' . $video->title_sk . ' - ' . $video->folder . '</td>';

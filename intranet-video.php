@@ -8,6 +8,7 @@ function getRole()
 {
     return $_SESSION['user']->roles;
 }
+
 if (isset($_POST['url'])) {
 
 //    echo $_POST['url'];
@@ -372,7 +373,7 @@ if (isset($_GET['delete'])) {
 //                $role = "user";
 //                echo $role;
                 $videos = getAllVideos();
-                if (strcmp($role, "admin") == 0 || strcmp($role, "reporter") == 0) {
+                if (isAdmin() || isReporter()) {
                     foreach ($videos as $video) {
                         echo '<tr>';
                         echo '<td><a href="' . $video . '">' . $video . '</a></td>';
