@@ -67,7 +67,7 @@
             <ul class="nav navbar-nav">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
-                            "dropdown" data-toggle="dropdown" href="#">O nás<i class="fa fa-angle-down"></i>
+                    "dropdown" data-toggle="dropdown" href="#">O nás<i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
@@ -111,7 +111,7 @@
 
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
-                            "dropdown" data-toggle="dropdown" href="#">Štúdium<i class="fa fa-angle-down"></i>
+                    "dropdown" data-toggle="dropdown" href="#">Štúdium<i class="fa fa-angle-down"></i>
                     </a>
 
                     <ul class="dropdown-menu">
@@ -190,7 +190,7 @@
 
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
-                            "dropdown" data-toggle="dropdown" href="#">Výskum<i class="fa fa-angle-down"></i>
+                    "dropdown" data-toggle="dropdown" href="#">Výskum<i class="fa fa-angle-down"></i>
                     </a>
 
                     <ul class="dropdown-menu">
@@ -230,7 +230,7 @@
 
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
-                            "dropdown" data-toggle="dropdown" href="#">Aktivity<i class="fa fa-angle-down"></i>
+                    "dropdown" data-toggle="dropdown" href="#">Aktivity<i class="fa fa-angle-down"></i>
                     </a>
 
                     <ul class="dropdown-menu">
@@ -323,70 +323,114 @@
         <hr>
         <div class="row">
             <div class="col-md-12 wow fadeIn">
-                <p class="align-left">Prečo študovať na našom ústave?
-                    možnosť získať znalosti, ktoré sú implementovateľné v praxi,
-                    menšie skupiny študentov,
-                    možnosť dohodnúť si tému pre diplomovku s vybraným pedagógom na základe vlastných preferencií,
-                    možnosť riešiť diplomovú prácu a teda to, čo každého zaujíma, až 3 semestre,
-                    pre vynikajúcich študentov možnosť študovať dištančnou metódou,
-                    pre absolventov bakalárskeho štúdia na FEI STU odpustená prijímacia skúška,
-                    snaha o maximálnu informovanosť študentov prostredníctvom web stránky v dostatočnom predstihu.
-                    Nebudem mať problémy, keď som neštudoval mechatroniku aj na bakalárskom štúdiu?
-                    Mechatronika predstavuje medziodborové štúdium, takže každý by sa tu mal nájsť. Hneď v prvom
-                    semestri inžinierskeho štúdia je pre študentov, ktorí predtým neštudovali mechatroniku pripravený
-                    vyrovnávací predmet z oblasti automatizácie.
+                <p class="align-left">
+                <h2>Prečo študovať na našom ústave?</h2>
+                <ul>
+                    <li>možnosť získať znalosti, ktoré sú implementovateľné v praxi,</li>
+                    <li>menšie skupiny študentov,</li>
+                    <li>možnosť dohodnúť si tému pre diplomovku s vybraným pedagógom na základe vlastných preferencií,
+                    </li>
+                    <li>možnosť riešiť diplomovú prácu a teda to, čo každého zaujíma, až 3 semestre,</li>
+                    <li>pre vynikajúcich študentov možnosť študovať dištančnou metódou,</li>
+                    <li>pre absolventov bakalárskeho štúdia na FEI STU odpustená prijímacia skúška,</li>
+                    <li>snaha o maximálnu informovanosť študentov prostredníctvom web stránky v dostatočnom predstihu.
+                    </li>
+                </ul>
+                <h2>Nebudem mať problémy, keď som neštudoval mechatroniku aj na bakalárskom štúdiu?</h2>
+                <ul>
+                    <li>Mechatronika predstavuje medziodborové štúdium, takže každý by sa tu mal nájsť. Hneď v prvom
+                        semestri inžinierskeho štúdia je pre študentov, ktorí predtým neštudovali mechatroniku
+                        pripravený
+                        vyrovnávací predmet z oblasti automatizácie.
+                    </li>
+                </ul>
 
-                    Študijný program – 1. ročník
-                    Zimný semester
-                    CAE mechatronických systémov - tvorba virtuálnych dynamických modelov a ich simulácia
-                    Metóda konečných prvkov - modelovanie a analýza mechatronických prvkov a systémov
-                    Optimalizácia procesov v mechatronike – optimalizačné úlohy a metódy v inžinierskych aplikáciách
-                    Vývojové programové prostredia pre mechatronické systémy - programovanie mikroprocesorov
-                    Povinne voliteľný predmet
-                    Letný semester
-                    Diplomový projekt 1
-                    Metódy číslicového riadenia – návrh regulačných obvodov pre modely mechatronických systémov
-                    Multifyzikálne procesy v mechatronike - modelovanie tepelných, termoelastických, termoelektrických a
-                    piezoelektrických systémov
-                    Pokročilé informačné technológie - klient-server aplikácie, riadenie mechatronických systémov v
-                    prostredí internetu, Internet vecí (IoT), Industry 4.0
-                    Povinne voliteľný predmet
+                <h2>Študijný program – 1. ročník</h2>
+                <h3> Zimný semester</h3>
+                <ul>
+                    <li><b>CAE mechatronických systémov</b> - tvorba virtuálnych dynamických modelov a ich simulácia
+                    </li>
+                    <li><b>Metóda konečných prvkov</b> - modelovanie a analýza mechatronických prvkov a systémov</li>
+                    <li><b>Optimalizácia procesov v mechatronike</b> – optimalizačné úlohy a metódy v inžinierskych
+                        aplikáciách
+                    </li>
+                    <li><b>Vývojové programové prostredia pre mechatronické systémy</b> - programovanie mikroprocesorov
+                    </li>
+                    <li><b>Povinne voliteľný predmet</b></li>
+                </ul>
+                <h3>Letný semester</h3>
+                <ul>
+                    <li><b>Diplomový projekt 1</b></li>
+                    <li><b>Metódy číslicového riadenia</b> – návrh regulačných obvodov pre modely mechatronických
+                        systémov
+                    </li>
+                    <li><b>Multifyzikálne procesy v mechatronike</b> - modelovanie tepelných, termoelastických,
+                        termoelektrických a piezoelektrických systémov
+                    </li>
+                    <li><b>Pokročilé informačné technológie</b> - klient-server aplikácie, riadenie mechatronických
+                        systémov vprostredí internetu, Internet vecí (IoT), Industry 4.0
+                    </li>
+                    <li><b>Povinne voliteľný predmet</b></li>
+                </ul>
 
-                    Možné PVP pre záujemcov o elektroniku
-                    Inteligentné mechatronické systémy - implementácia metód výpočtovej a umelej inteligencie pre
-                    mechatronické systémy
-                    MEMS - inteligentné senzory a aktuátory - najmodernejšie senzory používané nielen v automobilovom
-                    priemysle (akcelerometre, gyroskopy, CCD senzory) a spracovanie signálov vnorenými mikropočítačmi
+                <h3>Možné PVP pre záujemcov o elektroniku</h3>
 
-                    Možné PVP pre záujemcov o automobily
-                    Transmisné systémy automobilov a elektromobilov - prevodové mechanizmy automobilov a elektromobilov
-                    Pohonné systémy a zdroje v elektromobiloch - modelovanie a simulovanie činnosti trakčného a
-                    energetického systému elektromobilu
+                <ul>
+                    <li><b>Inteligentné mechatronické systémy</b> - implementácia metód výpočtovej a umelej inteligencie
+                        pre mechatronické systémy
+                    </li>
+                    <li><b>MEMS - inteligentné senzory a aktuátory</b> - najmodernejšie senzory používané nielen v
+                        automobilovompriemysle (akcelerometre, gyroskopy, CCD senzory) a spracovanie signálov vnorenými
+                        mikropočítačmi
+                    </li>
+                </ul>
 
-                    Možné PVP pre záujemcov o informatiku
-                    Inteligentné mechatronické systémy - implementácia metód výpočtovej a umelej inteligencie pre
-                    mechatronické systémy
-                    Vybrané kapitoly z automatického riadenia pre mechatroniku - vyrovnávací predmet z automatizácie
-                    MEMS - inteligentné senzory a aktuátory - najmodernejšie senzory používané nielen v automobilovom
-                    priemysle (akcelerometre, gyroskopy, CCD senzory) a spracovanie signálov vnorenými mikropočítačmi
+                <h3>Možné PVP pre záujemcov o automobily</h3>
 
-                    Kompletný študijný plán pre akademický rok 2017-2018 (SP20172018i.pdf).
-                    Prijímacie skúšky na inžinierske štúdium 28.6.2017 o 10:00 v D124
-                    Prijímacia komisia prof. Ing. Mikuláš Huba, PhD. (predseda)
-                    prof. Ing. Justín Murín, DrSc. (predseda)
-                    prof. Ing. Viktor Ferencey, PhD.
-                    prof. Ing. Štefan Kozák, PhD.
-                    doc. Ing. Katarína Žáková, PhD.
-                    Ďalšie informácie na http://www.mechatronika.cool
-                </p>
-                <p class="align-left">Členovia oddelenia sa venujú formulácii nových matematických postupov a metód,
-                    ktoré sa používajú v multifyzikálnych analýzach napr. na opis funkcionálne gradovaných materiálov
-                    (FGM), v dynamických analýzach mechatronických a MEMS systémov, ako aj na opis piezoelektrických
-                    prvkov.
-                </p>
-                <p class="align-left">Členovia oddelenia využívajú moderné SW prostriedky, ako sú ANSYS, Catia a
-                    MSC.ADAMS na návrh, analýzu a optimalizáciu jednotlivých komponentov, ako aj celých subsystémov
-                    mechatronických prvkov.</p>
+                <ul>
+                    <li><b>Transmisné systémy automobilov a elektromobilov</b> - prevodové mechanizmy automobilov a
+                        elektromobilov
+                    </li>
+                    <li><b>Pohonné systémy a zdroje v elektromobiloch</b> - modelovanie a simulovanie činnosti
+                        trakčného a energetického systému elektromobilu
+                    </li>
+                </ul>
+
+                <h3>Možné PVP pre záujemcov o informatiku</h3>
+
+                <ul>
+                    <li><b>Inteligentné mechatronické systémy</b> - implementácia metód výpočtovej a umelej
+                        inteligencie pre mechatronické systémy
+                    </li>
+                    <li><b>Vybrané kapitoly z automatického riadenia pre mechatroniku</b> - vyrovnávací
+                        predmet z automatizácie
+                    </li>
+                    <li><b>MEMS - inteligentné senzory a aktuátory</b> - najmodernejšie senzory používané
+                        nielen v automobilovom priemysle (akcelerometre, gyroskopy, CCD senzory) a spracovanie signálov
+                        vnorenými mikropočítačmi
+                    </li>
+                </ul>
+
+                <h4>Prijímacie skúšky na inžinierske štúdium 28.6.2017 o 10:00 v D124</h4>
+                <h3>Prijímacia komisia</h3>
+                <ul>
+                    <li><b>prof. Ing. Mikuláš Huba, PhD. (predseda)</b></li>
+                    <li><b>prof. Ing. Justín Murín, DrSc. (predseda)</b></li>
+                    <li><b>prof. Ing. Viktor Ferencey, PhD.</b></li>
+                    <li><b>prof. Ing. Štefan Kozák, PhD.</b></li>
+                    <li><b>doc. Ing. Katarína Žáková, PhD.</b></li>
+                </ul>
+                <hr>
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4 career-contact">
+                        <p class="text-center wow pulse"><a href="./files/SP20172018i.pdf" download="SP20172018i.pdf">Kompletný
+                                študijný plán pre akademický rok 2017-2018</a></p>
+                    </div>
+                    <div class="col-md-4 col-md-offset-4 career-contact">
+                        <p class="text-center wow pulse"><a href="http://www.mechatronika.cool">Ďalšie informácie</a>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
         <hr>
@@ -482,10 +526,10 @@
             <div class="col-lg-6 col-sm-6 pull-right">
                 <ul class="social-link-footer list-unstyled">
                     <li class="wow flipInX" data-wow-duration="2s" data-wow-delay=".1s"><a
-                            href="https://www.facebook.com/UAMTFEISTU"><i class="fa fa-facebook"></i></a></li>
+                                href="https://www.facebook.com/UAMTFEISTU"><i class="fa fa-facebook"></i></a></li>
                     <li class="wow flipInX" data-wow-duration="2s" data-wow-delay=".2s"><a
-                            href="https://www.youtube.com/channel/UCo3WP2kC0AVpQMIiJR79TdA"><i
-                            class="fa fa-youtube"></i></a></li>
+                                href="https://www.youtube.com/channel/UCo3WP2kC0AVpQMIiJR79TdA"><i
+                                    class="fa fa-youtube"></i></a></li>
                 </ul>
             </div>
             <div class="col-md-4">

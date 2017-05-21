@@ -332,7 +332,7 @@
                     <thead>
                     <tr>
                         <th>
-                            Ǔloha
+                            Úloha
                         </th>
                         <th>
                             Riešiteľ
@@ -409,7 +409,7 @@
                             Výskum
                         </td>
                         <td>
-
+                            Andrej Dubeň
                         </td>
                     </tr>
                     <tr>
@@ -422,7 +422,7 @@
                     </tr>
                     <tr>
                         <td>
-                            Aktivity
+                            Aktivity - média, fotky, videá
                         </td>
                         <td>
                             Adam Maškulka
@@ -537,7 +537,7 @@
                             Intranet - rozdelenie úloh
                         </td>
                         <td>
-
+                            Adam Maškulka
                         </td>
                     </tr>
                     <tr>
@@ -545,7 +545,7 @@
                             Multilanguage
                         </td>
                         <td>
-
+                            Radoslav Škopek
                         </td>
                     </tr>
                     </tbody>
