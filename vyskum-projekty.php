@@ -302,10 +302,155 @@
         </div>
         <hr>
         <div class="row">
+        <?php
+		require('config.php');
+		$mysqli = new mysqli($CONF_DB_HOST, $CONF_DB_USER, $CONF_DB_PASS, $CONF_DB_NAME);
+		if($mysqli->connect_error){
+		die("Connect error" . $mysqli->connect_error);
+		}
+		mysqli_set_charset($mysqli,"utf8");
 
+		include('fetch_record');
+		
+		//medzinarodny
+		$sql="SELECT * FROM Projekty WHERE Type='Inter' ORDER BY EndDuration DESC";
+		$result = $mysqli->query($sql);
+		
+		//hlavicka
+		echo  "<h2>Medzinárodné projekty</h2>";
+		echo "<table class='table'><tr><th>Číslo projektu</th><th>Názov projektu</th><th>Doba riešenia</th><th>Zodpovedný riešiteľ</th></tr>";
+
+		if (mysqli_num_rows($result) > 0) {
+			while($row = mysqli_fetch_assoc($result)) {
+			
+			$od = date("Y", strtotime($row['StartDuration']));
+			$do = date("Y", strtotime($row['EndDuration']));
+
+			echo "<tr>";	
+			echo "<td>".$row['Number']."</td>";
+			echo "<td><a href='#myModal'  id='custId' data-toggle='modal' data-id='".$row['ID']."'>".$row['skTitle']."</td>";
+			echo "<td>".$od." - ".$do."</td>";
+			echo "<td>".$row['Coordinator']."</td>";
+			echo "</tr>";
+			}
+		}
+		echo "</table>";
+
+		//VEGA
+		$sql="SELECT * FROM Projekty WHERE Type='VEGA' ORDER BY EndDuration DESC";
+		$result = $mysqli->query($sql);
+		
+		//hlavicka
+		echo "<br><h2>VEGA projekty</h2>";
+		echo "<table class='table'><tr><th>Číslo projektu</th><th>Názov projektu</th><th>Doba riešenia</th><th>Zodpovedný riešiteľ</th></tr>";
+
+		if (mysqli_num_rows($result) > 0) {
+			while($row = mysqli_fetch_assoc($result)) {
+			
+			$od = date("Y", strtotime($row['StartDuration']));
+			$do = date("Y", strtotime($row['EndDuration']));
+
+			echo "<tr>";	
+			echo "<td>".$row['Number']."</td>";
+			echo "<td><a href='#myModal'  id='custId' data-toggle='modal' data-id='".$row['ID']."'>".$row['skTitle']."</td>";
+			echo "<td>".$od." - ".$do."</td>";
+			echo "<td>".$row['Coordinator']."</td>";
+			echo "</tr>";
+			}
+		}
+		echo "</table>";
+		
+		//APVV
+		$sql="SELECT * FROM Projekty WHERE Type='APVV' ORDER BY EndDuration DESC";
+		$result = $mysqli->query($sql);
+		
+		//hlavicka
+		echo "<br><h2>APVV projekty</h2>";
+		echo "<table class='table'><tr><th>Číslo projektu</th><th>Názov projektu</th><th>Doba riešenia</th><th>Zodpovedný riešiteľ</th></tr>";
+
+		if (mysqli_num_rows($result) > 0) {
+			while($row = mysqli_fetch_assoc($result)) {
+			
+			$od = date("Y", strtotime($row['StartDuration']));
+			$do = date("Y", strtotime($row['EndDuration']));
+
+			echo "<tr>";	
+			echo "<td>".$row['Number']."</td>";
+			echo "<td><a href='#myModal'  id='custId' data-toggle='modal' data-id='".$row['ID']."'>".$row['skTitle']."</td>";
+			echo "<td>".$od." - ".$do."</td>";
+			echo "<td>".$row['Coordinator']."</td>";
+			echo "</tr>";
+			}
+		}
+		echo "</table>";
+		
+		//KEGA
+		$sql="SELECT * FROM Projekty WHERE Type='KEGA' ORDER BY EndDuration DESC";
+		$result = $mysqli->query($sql);
+		
+		//hlavicka
+		echo  "<br><h2>KEGA projekty</h2>";
+		echo "<table class='table'><tr><th>Číslo projektu</th><th>Názov projektu</th><th>Doba riešenia</th><th>Zodpovedný riešiteľ</th></tr>";
+
+		if (mysqli_num_rows($result) > 0) {
+			while($row = mysqli_fetch_assoc($result)) {
+			
+			$od = date("Y", strtotime($row['StartDuration']));
+			$do = date("Y", strtotime($row['EndDuration']));
+
+			echo "<tr>";	
+			echo "<td>".$row['Number']."</td>";
+			echo "<td><a href='#myModal'  id='custId' data-toggle='modal' data-id='".$row['ID']."'>".$row['skTitle']."</td>";
+			echo "<td>".$od." - ".$do."</td>";
+			echo "<td>".$row['Coordinator']."</td>";
+			echo "</tr>";
+			}
+		}
+		echo "</table>";
+		
+		//iné
+		$sql="SELECT * FROM Projekty WHERE Type='INE' ORDER BY EndDuration DESC";
+		$result = $mysqli->query($sql);
+		
+		//hlavicka
+		echo  "<br><h2>Iné domáce projekty</h2>";
+		echo "<table class='table'><tr><th>Číslo projektu</th><th>Názov projektu</th><th>Doba riešenia</th><th>Zodpovedný riešiteľ</th></tr>";
+
+		if (mysqli_num_rows($result) > 0) {
+			while($row = mysqli_fetch_assoc($result)) {
+			
+			$od = date("Y", strtotime($row['StartDuration']));
+			$do = date("Y", strtotime($row['EndDuration']));
+			
+			echo "<tr>";	
+			echo "<td>".$row['Number']."</td>";
+			//echo "<td>".$row['skTitle']."</td>";
+			echo "<td><a href='#myModal'  id='custId' data-toggle='modal' data-id='".$row['ID']."'>".$row['skTitle']."</td>";
+			echo "<td>".$od." - ".$do."</td>";
+			echo "<td>".$row['Coordinator']."</td>";
+			echo "</tr>";
+			}
+		}
+		echo "</table>";	
+		?>
 
         </div>
-
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Podrobnosti</h4>
+            </div>
+            <div class="modal-body">
+                <div class="fetched-data"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Zatvoriť</button>
+            </div>
+        </div>
+    </div>
+</div>
     </div>
 </div>
 <!--container end-->
@@ -436,7 +581,7 @@
 <!-- Sequence Moder -slider js -->
 <script src="js/seq-slider/jquery.sequence-min.js"></script>
 <!--<script src="js/slider/sequencejs-options.modern-slide-in.js"></script>-->
-<script src="js/seq-slider/sequencejs-options.apple-style.js"></script>
+
 <!-- end of sequence slider js-->
 
 
@@ -469,6 +614,21 @@
     new WOW().init();
 
 
+</script>
+    <script>
+	$(document).ready(function(){
+    $('#myModal').on('show.bs.modal', function (e) {
+        var rowid = $(e.relatedTarget).data('id');
+        $.ajax({
+            type : 'POST',
+            url : 'fetch_record.php', //Here you will fetch records 
+            data :  'rowid='+ rowid, //Pass $id
+            success : function(data){
+            $('.fetched-data').html(data);//Show fetched data from database
+            }
+        });
+     });
+});
 </script>
 </body>
 </html>
