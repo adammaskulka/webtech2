@@ -14,7 +14,7 @@ http://elearn.elf.stuba.sk/moodle/pluginfile.php/54857/mod_resource/content/7/ZP
 | 5. titulna strana      | Adam      |   done |
 | 6. footer | Adam      |   done |
 | 7. pracovnici      | Martin | TBD |
-| 8. vyskum      | Andrej      |   TBD |
+| 8. vyskum      | Andrej      |   done |
 | 9. aktuality | Andrej      |    TBD |
 | 10. kontakt      | Adam | done |
 | 11. fotky      | Adam      |   done |
