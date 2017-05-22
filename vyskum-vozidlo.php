@@ -302,7 +302,17 @@
         </div>
         <hr>
         <div class="row">
-
+            <h2>Technické údaje</h2>
+			<ul class="star-list"><li>Hmot­nosť: 12,5kg</li>
+			<li>Rozmery (d x š x v): 614 x 495 x 269 mm</li>
+			<li>Spô­sob ovlá­da­nia: Diaľkové ovlá­danie, riadené mikroprocesorom</li>
+			<li>Pohon: 6×6, každé koleso samostatne riadené</li>
+			<li>BLDC elek­tro­mo­torom</li>
+			<li>Celkový výkon elek­tro­mo­torov: 6x 175W</li>
+			<li>Napá­janie motorov: 6x DC/​AC menič</li>
+			<li>Zdroj el. prúdu: 4x Li-​Pol akumulátory</li>
+			<li>Celková kapacita aku­mulá­torov: 13,2 Ah</li>
+			</ul>
 
         </div>
 
