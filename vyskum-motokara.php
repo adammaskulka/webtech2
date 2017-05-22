@@ -302,7 +302,7 @@
         </div>
         <hr>
         <div class="row">
-
+        <img src="img/media/motokara-projekty.jpg" alt="Motokara" style="width: 100%; height:auto;">
 
         </div>
 
