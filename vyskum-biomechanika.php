@@ -302,7 +302,7 @@
         </div>
         <hr>
         <div class="row">
-
+        <img src="img/media/biomechatronika-projekty.jpg" alt="Biomechatronika" style="width: 100%; height:auto;">
 
         </div>
 
