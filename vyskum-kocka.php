@@ -302,7 +302,10 @@
         </div>
         <hr>
         <div class="row">
-
+            <img src="kocka.jpg" alt="Kocka" style="width: 100%; height:auto;">
+		    <p>
+		    Zobrazená kocka bola vytvorená v rámci diplomovej práce. Bol k nej vytvorený vzdialený prístup cez Internet, čo umožňuje užívateľovi vkladať do kocky vlastný kód, ktorý ovplyvňuje jej správanie sa.
+		    </p>
 
         </div>
 
