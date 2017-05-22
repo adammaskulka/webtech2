@@ -317,9 +317,8 @@
 		$result = $mysqli->query($sql);
 		
 		//hlavicka
-		echo  "<h2>Medzinárodné projekty</h2>";
 		echo "<table class='table'><tr><th>Číslo projektu</th><th>Názov projektu</th><th>Doba riešenia</th><th>Zodpovedný riešiteľ</th></tr>";
-
+		echo "<tr><th colspan='4' style='text-align: center'>Medzinárodné projekty</th></tr>";
 		if (mysqli_num_rows($result) > 0) {
 			while($row = mysqli_fetch_assoc($result)) {
 			
@@ -334,16 +333,15 @@
 			echo "</tr>";
 			}
 		}
-		echo "</table>";
+
 
 		//VEGA
 		$sql="SELECT * FROM Projekty WHERE Type='VEGA' ORDER BY EndDuration DESC";
 		$result = $mysqli->query($sql);
 		
 		//hlavicka
-		echo "<br><h2>VEGA projekty</h2>";
-		echo "<table class='table'><tr><th>Číslo projektu</th><th>Názov projektu</th><th>Doba riešenia</th><th>Zodpovedný riešiteľ</th></tr>";
 
+		echo "<tr><th colspan='4' style='text-align: center'>VEGA projekty</th></tr>";
 		if (mysqli_num_rows($result) > 0) {
 			while($row = mysqli_fetch_assoc($result)) {
 			
@@ -358,16 +356,15 @@
 			echo "</tr>";
 			}
 		}
-		echo "</table>";
+
 		
 		//APVV
 		$sql="SELECT * FROM Projekty WHERE Type='APVV' ORDER BY EndDuration DESC";
 		$result = $mysqli->query($sql);
 		
 		//hlavicka
-		echo "<br><h2>APVV projekty</h2>";
-		echo "<table class='table'><tr><th>Číslo projektu</th><th>Názov projektu</th><th>Doba riešenia</th><th>Zodpovedný riešiteľ</th></tr>";
 
+		echo "<tr><th colspan='4' style='text-align: center'>APVV projekty</th></tr>";
 		if (mysqli_num_rows($result) > 0) {
 			while($row = mysqli_fetch_assoc($result)) {
 			
@@ -382,16 +379,14 @@
 			echo "</tr>";
 			}
 		}
-		echo "</table>";
 		
 		//KEGA
 		$sql="SELECT * FROM Projekty WHERE Type='KEGA' ORDER BY EndDuration DESC";
 		$result = $mysqli->query($sql);
 		
 		//hlavicka
-		echo  "<br><h2>KEGA projekty</h2>";
-		echo "<table class='table'><tr><th>Číslo projektu</th><th>Názov projektu</th><th>Doba riešenia</th><th>Zodpovedný riešiteľ</th></tr>";
 
+		echo "<tr><th colspan='4' style='text-align: center'>KEGA projekty</th></tr>";
 		if (mysqli_num_rows($result) > 0) {
 			while($row = mysqli_fetch_assoc($result)) {
 			
@@ -406,16 +401,14 @@
 			echo "</tr>";
 			}
 		}
-		echo "</table>";
+
 		
 		//iné
 		$sql="SELECT * FROM Projekty WHERE Type='INE' ORDER BY EndDuration DESC";
 		$result = $mysqli->query($sql);
 		
 		//hlavicka
-		echo  "<br><h2>Iné domáce projekty</h2>";
-		echo "<table class='table'><tr><th>Číslo projektu</th><th>Názov projektu</th><th>Doba riešenia</th><th>Zodpovedný riešiteľ</th></tr>";
-
+		echo "<tr><th colspan='4' style='text-align: center'>Iné domáce projekty</th></tr>";
 		if (mysqli_num_rows($result) > 0) {
 			while($row = mysqli_fetch_assoc($result)) {
 			
@@ -433,7 +426,6 @@
 		}
 		echo "</table>";	
 		?>
-
         </div>
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-lg">
