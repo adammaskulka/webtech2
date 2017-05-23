@@ -356,15 +356,20 @@
                     <form action="intranet-users.php" method="post">
                         <td><input type="text" name="name" value=<?php echo $user->name ?>></td>
                         <td><input type="text" name="surname" value=<?php echo $user->surname ?>></td>
+                        <?php if(isHR()){ ?>
                         <td>
                             <button type="submit" name="update" value=<?php echo $user->login ?>>UPDATE</button>
                         </td>
+                        <?php } ?>
                     </form>
+                    <?php if(isHR()){ ?>
                     <form action="intranet-users.php" method="post">
                         <td>
                             <button type="submit" name="delete" value=<?php echo $user->login ?>>DELETE</button>
                         </td>
                     </form>
+                    <?php } ?>
+                    <?php  if(isAdmin()){ ?>
                     <form action="intranet-users.php" method="post">
                         <td>
                             <select name="role">
@@ -375,6 +380,7 @@
                                 <option value="admin">Admin</option>
                             </select>
                         </td>
+
                         <td>
                             <button type="submit" name="add_role" value=<?php echo $user->login ?>>ADD ROLE</button>
                         </td>
@@ -382,19 +388,22 @@
                             <button type="submit" name="delete_role" value=<?php echo $user->login ?>>DELETE ROLE
                             </button>
                         </td>
+                        <?php } ?>
                     </form>
                 </tr>
             <?php } ?>
+            <?php if(isHR()){ ?>
             <tr>
                 <form action="intranet-users.php" method="post">
-                    <td><input type="text" name="login"></td>
-                    <td><input type="text" name="name"></td>
-                    <td><input type="text" name="surname"></td>
+                    <td><input type="text" name="login" placeholder="LDAP login"></td>
+                    <td><input type="text" name="name" placeholder="meno"></td>
+                    <td><input type="text" name="surname" placeholder="priezvisko"></td>
                     <td>
                         <button type="submit" name="create" value="create">CREATE</button>
                     </td>
                 </form>
             </tr>
+            <?php } ?>
             </tbody>
         </table>
     </div>

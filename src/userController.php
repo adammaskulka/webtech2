@@ -25,11 +25,11 @@ class User{
   }
 }
 
-function userIsAdmin(){return userFindRole("admin");}
-function userIsHR(){return userFindRole("hr");}
-function userIsReporter(){return userFindRole("reporter");}
-function userIsEditor(){return userFindRole("editor");}
-function userIsUser(){return userFindRole("user");}
+function IsAdmin(){return userFindRole("admin");}
+function IsHR(){return userFindRole("hr");}
+function IsReporter(){return userFindRole("reporter");}
+function IsEditor(){return userFindRole("editor");}
+function IsUser(){return userFindRole("user");}
 
 function userFindRole($find)
 {
@@ -240,60 +240,4 @@ function deleteUser($login)
 
   $conn->close();
 }
-
-function isAdmin()
-{
-    $roles = getRole();
-    foreach ($roles as $role) {
-        if (strcmp($role, "admin") == 0) {
-            return true;
-        }
-    }
-    return false;
-}
-
-function isReporter()
-{
-    $roles = getRole();
-    foreach ($roles as $role) {
-        if (strcmp($role, "reporter") == 0) {
-            return true;
-        }
-    }
-    return false;
-}
-
-function isUser()
-{
-    $roles = getRole();
-    foreach ($roles as $role) {
-        if (strcmp($role, "user") == 0) {
-            return true;
-        }
-    }
-    return false;
-}
-
-function isHr()
-{
-    $roles = getRole();
-    foreach ($roles as $role) {
-        if (strcmp($role, "hr") == 0) {
-            return true;
-        }
-    }
-    return false;
-}
-
-function isEditor()
-{
-    $roles = getRole();
-    foreach ($roles as $role) {
-        if (strcmp($role, "editor") == 0) {
-            return true;
-        }
-    }
-    return false;
-}
-
 ?>
