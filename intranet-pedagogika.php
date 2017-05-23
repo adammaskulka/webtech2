@@ -308,9 +308,25 @@
     <a href="intranet-tasks.php">Rozdelenie úloh</a>
 </div>
 <!-- left menu end -->
-
+<?php
+  require('src/intranetController.php');
+  if (isset($_POST["addC"])) {
+      addDocument($_POST["nameC"],$_POST["addC"]);
+  }
+?>
 <!--container start-->
-
+<form action="intranet-pedagogika.php" method="post">
+    <input type="text" name="nameC" value="pokus">
+    <button type="submit" name="addC" value="pedagogika">Pridaj kategoriu</button>
+</form>
+<form action="upload.php" method="post" enctype="multipart/form-data">
+    Select file to upload:
+    <input type="file" name="userfile" id="userfile">
+    name for show:
+    <input type="text" name="nameF">
+    <input type="hidden" name="Document_id" value="1">
+    <input type="submit" value="Upload" name="submit">
+</form>
 
 <!--container end-->
 
