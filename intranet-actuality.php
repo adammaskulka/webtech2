@@ -1,6 +1,6 @@
 <?php
 require_once "src/userController.php";
-require('config.php');
+require('cfg/config.php');
 session_start();
 function getRole() {
   return $_SESSION['user']->roles;
