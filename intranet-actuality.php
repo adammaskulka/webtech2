@@ -1,3 +1,25 @@
+<?php
+require_once "src/userController.php";
+require('config.php');
+session_start();
+function getRole() {
+  return $_SESSION['user']->roles;
+}
+
+if (isset($_POST['titleSK']) && isset($_POST['titleEN']) && isset($_POST['folder']) && isset($_POST['user']) && isset($_POST['date'])) {
+	
+	$mysqli = new mysqli($CONF_DB_HOST, $CONF_DB_USER, $CONF_DB_PASS, $CONF_DB_NAME);
+	if($mysqli->connect_error){
+		die("Connect error" . $mysqli->connect_error);
+	}
+	mysqli_set_charset($mysqli,"utf8");
+	
+	$sql = "INSERT INTO Aktuality VALUES (NULL, '".$_POST['typ']."', '".$_POST['titleSK']."', '".$_POST['titleEN']."', '".$_POST['folder']."', '".$_POST['popisSK']."', '".$_POST['popisEN']."', '".$_POST['date']."', '".$_POST['user']."')";
+	$result = $mysqli->query($sql);
+	
+}
+?>
+
 <!DOCTYPE html>
 <html lang="sk">
 <head>
@@ -310,7 +332,84 @@
 <!-- left menu end -->
 
 <!--container start-->
+<div class="white-bg">
 
+    <!-- career -->
+    <div class="container career-inner">
+        <div class="row">
+            <div class="col-md-12 career-head">
+                <h1 class="wow fadeIn">Pridávanie aktualít</h1>
+
+            </div>
+        </div>
+        <hr>
+		
+		<div class='row'>
+			<?php
+
+            if (getRole() != null) {
+				
+			$role = getRole()[0];
+			}
+            else  $role = "user";
+			if (isAdmin() || isReporter()) {
+				echo "<div class='bs-example'>";
+			}
+			else {
+				echo "<h1>Práva pridávať aktuality má len reportér a admin.</h1>";
+				echo "<div class='bs-example' style='visibility: hidden;'>";
+			}
+			?>
+                <form role="form" action="intranet-actuality.php" method="post" enctype="multipart/form-data">
+					<div class="form-group">
+                        <label for="titleSKInput">Vyber typ</label>
+						<br>
+                        <select name="typ" id="TypInput" class="form-control">
+							<option value='1' id='1'> Propagácia</option>
+							<option value='2' id='2'> Oznamy</option>
+							<option value='3' id='3'> Zo života ústavu</option>
+						</select>
+                    </div>
+                    <div class="form-group">
+                        <label for="titleSKInput">Titulok - slovensky</label>
+                        <input type="text" name="titleSK" class="form-control" id="titleSKInput"
+                               placeholder="Zadajte slovenský titulok" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="titleENInput">Titulok - anglicky</label>
+                        <input type="text" name="titleEN" class="form-control" id="titleENInput"
+                               placeholder="Zadajte anglický titulok" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dateInput">Dátum</label>
+                        <input type="date" name="date" class="form-control" id="dateInput" placeholder="Dátum" >
+                    </div>
+					<div class="form-group">
+                        <label for="titleENInput">Popis - slovenksy</label>
+                        <input type="text" name="popisSK" class="form-control" id="popisSKInput"
+                               placeholder="Zadajte slovenksý popis">
+                    </div>
+					<div class="form-group">
+                        <label for="titleENInput">Popis - anglicky</label>
+                        <input type="text" name="popisEN" class="form-control" id="popisENInput"
+                               placeholder="Zadajte anglický popis">
+                    </div>
+					<div class="form-group">
+                        <label for="dateInput">Pridal užívateľ</label>
+                        <input type="text" class="form-control" name="user" id="userInput" placeholder="Zadajte užívateľa" >
+                    </div>
+					<div class="form-group">
+                        <label for="folderInput">Názov zložky</label>
+                        <input type="text" name="folder" class="form-control" id="folderInput"
+                               placeholder="Zadajte zložku" >
+                    </div>
+                    
+                    <button type="submit" class="btn btn-default">Vložiť</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!--container end-->
 
@@ -440,8 +539,7 @@
 <!-- Sequence Moder -slider js -->
 <script src="js/seq-slider/jquery.sequence-min.js"></script>
 <!--<script src="js/slider/sequencejs-options.modern-slide-in.js"></script>-->
-<script src="js/seq-slider/sequencejs-options.apple-style.js"></script>
-<!-- end of sequence slider js-->
+
 
 
 <script>
