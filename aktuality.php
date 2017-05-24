@@ -301,146 +301,252 @@
 </div>
 <!--breadcrumbs end-->
 
+<?php
+require('config.php');
+$mysqli = new mysqli($CONF_DB_HOST, $CONF_DB_USER, $CONF_DB_PASS, $CONF_DB_NAME);
+if($mysqli->connect_error){
+die("Connect error" . $mysqli->connect_error);
+}
+mysqli_set_charset($mysqli,"utf8");
+
+if(isset($_GET['Typ']) and isset($_GET['Stare'])){
+	if($_GET['Typ']==123) $sql="SELECT * FROM Aktuality";
+	else $sql="SELECT * FROM Aktuality WHERE Typ='".$_GET['Typ']."'";
+}	
+else if(isset($_GET['Typ'])){
+	if($_GET['Typ']==123) $sql="SELECT * FROM Aktuality WHERE DATE > now()";
+	else $sql="SELECT * FROM Aktuality WHERE Typ='".$_GET['Typ']."' AND DATE > now()";
+}
+else {$sql="SELECT * FROM Aktuality WHERE DATE > now()"; $_GET['Typ'] = 123;}
+
+$result = $mysqli->query($sql);
+$num = $result->num_rows; // pocet aktualit
+
+$limit=2;
+$pocet_stran=ceil($num/$limit);
+
+
+
+?>
+
+
 <!--container start-->
 <div class="container">
     <div class="row">
         <!--blog start-->
-        <div class="col-lg-9 ">
-            <div class="blog-item">
-                <div class="row">
-                    <div class="col-lg-2 col-sm-2">
-                        <div class="date-wrap">
-                  <span class="date">
-                    11
+			<div class='col-lg-9'>
+			<?php 
+			session_start();
+			$rola = $_SESSION['user']->roles;
+			$i=0;
+if (mysqli_num_rows($result) > 0) {
+			while($row = mysqli_fetch_assoc($result)) {
+			$den = date("d", strtotime($row['Date']));
+			$mesiac = date("M", strtotime($row['Date']));
+			//strana 1
+			if($_GET['strana'] == 1) 
+			{
+			 echo "	<div class='blog-item'>
+                <div class='row'>
+                    <div class='col-lg-2 col-sm-2'>
+                        <div class='date-wrap'>
+                  <span class='date'>
+                    ".$den."
                   </span>
-                            <span class="month">
-                    January
+                            <span class='month'>
+                    ".$mesiac."
                   </span>
                         </div>
 
                     </div>
-                    <div class="col-lg-10 col-sm-10">
-                        <div class="blog-img">
-                            <img src="img/blog/img7.jpg" alt=""/>
+                    <div class='col-lg-10 col-sm-10'>
+                        <div class='blog-img'>
+                            <img src='".$row['Img']."' alt=''/>
                         </div>
 
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-2 col-sm-2 text-right">
-                        <div class="author">
+                <div class='row'>
+                    <div class='col-lg-2 col-sm-2 text-right'>
+                        <div class='author'>
                             By
-                            <a href="#">
-                                Admin
+                            <a href='#'>
+                                ".$row['Uploaded']."
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-10 col-sm-10">
+                    <div class='col-lg-10 col-sm-10'>
                         <h1>
-                            <a href="blog-detail.html">
-                                Suspendisse dignissim in sem eget pulvinar. Mauris aliquam nulla at libero pretium.
-                            </a>
+                            ".$row['skTitle']."
                         </h1>
                         <p>
-                            Lid est laborum dolo rumes fugats untras. Etharums ser quidem rerum facilis dolores nemis
-                            omnis fugats vitaes nemo minima rerums unsers sadips amets.. Sed ut perspiciatis unde omnis
-                            iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque
-                            ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-                            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit
+                            ".$row['skAnnotation']."
                         </p>
                     </div>
                 </div>
-            </div>
-            <div class="blog-item">
-                <div class="row">
-                    <div class="col-lg-2 col-sm-2">
-                        <div class="date-wrap">
-                  <span class="date">
-                    11
+            </div>"; //++++++++
+            
+			if($i == 1) break;
+			}
+			//ostatne strany
+			if($i == $_GET['strana'])	
+			echo "	<div class='blog-item'>
+                <div class='row'>
+                    <div class='col-lg-2 col-sm-2'>
+                        <div class='date-wrap'>
+                  <span class='date'>
+                    ".$den."
                   </span>
-                            <span class="month">
-                    January
+                            <span class='month'>
+                    ".$mesiac."
                   </span>
                         </div>
 
                     </div>
-                    <div class="col-lg-10 col-sm-10">
-                        <div class="blog-img">
-                            <img src="img/blog/img7.jpg" alt=""/>
+                    <div class='col-lg-10 col-sm-10'>
+                        <div class='blog-img'>
+                            <img src='".$row['Img']."' alt=''/>
                         </div>
 
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-2 col-sm-2 text-right">
-                        <div class="author">
+                <div class='row'>
+                    <div class='col-lg-2 col-sm-2 text-right'>
+                        <div class='author'>
                             By
-                            <a href="#">
-                                Admin
+                            <a href='#'>
+                                ".$row['Uploaded']."
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-10 col-sm-10">
+                    <div class='col-lg-10 col-sm-10'>
                         <h1>
-                            <a href="blog-detail.html">
-                                Suspendisse dignissim in sem eget pulvinar. Mauris aliquam nulla at libero pretium.
-                            </a>
+                            ".$row['skTitle']."
                         </h1>
                         <p>
-                            Lid est laborum dolo rumes fugats untras. Etharums ser quidem rerum facilis dolores nemis
-                            omnis fugats vitaes nemo minima rerums unsers sadips amets.. Sed ut perspiciatis unde omnis
-                            iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque
-                            ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-                            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit
+                            ".$row['skAnnotation']."
                         </p>
                     </div>
                 </div>
-            </div>
+            </div>";
+			
+			if($i == ($_GET['strana']+1))	
+			echo "	<div class='blog-item'>
+                <div class='row'>
+                    <div class='col-lg-2 col-sm-2'>
+                        <div class='date-wrap'>
+                  <span class='date'>
+                    ".$den."
+                  </span>
+                            <span class='month'>
+                    ".$mesiac."
+                  </span>
+                        </div>
+
+                    </div>
+                    <div class='col-lg-10 col-sm-10'>
+                        <div class='blog-img'>
+                            <img src='".$row['Img']."' alt=''/>
+                        </div>
+
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-lg-2 col-sm-2 text-right'>
+                        <div class='author'>
+                            By
+                            <a href='#'>
+                                ".$row['Uploaded']."
+                            </a>
+                        </div>
+                    </div>
+                    <div class='col-lg-10 col-sm-10'>
+                        <h1>
+                            ".$row['skTitle']."
+                        </h1>
+                        <p>
+                            ".$row['skAnnotation']."
+                        </p>
+                    </div>
+                </div>
+            </div>";
+			
+			$i++;
+			if($i == (2*$_GET['strana'])) break;
+			}
+}
+?>  
+
+<?php
+//strankovanie
+echo "<p style='position:absolute; left: 55%; font-size: 130%;'>";
+for ($i=1; $i<=$pocet_stran; $i++)
+{
+	if ($i<>$_GET['strana']) 
+	{
+		if(isset($_GET['Stare']))
+		echo "<a href=\"aktuality.php?ctrl=1&Typ=".$_GET['Typ']."&strana=".$i."&Stare=on\">".$i."</a> | ";
+		else
+		echo "<a href=\"aktuality.php?ctrl=1&Typ=".$_GET['Typ']."&strana=".$i."\">".$i."</a> | ";
+	}
+	else 
+	{
+		echo "<font color=\"#FF0000\">".$i."</font> | ";
+	}
+}
+echo "</p>";
+?>	
+		<br><br><br>
         </div>
+	
+		
+		<div class='col-lg-3'>
+           <div class='blog-side-item'>
+               <div class='category'> <h3>Kategórie</h3>
+ <?php 				
+                echo "<form method='get' action=''><ul class='list-unstyled'>
+						
+                         <li>
+                            <input class='w3-check' type='checkbox' name='Stare'> Zobraziť neaktívne aktuality
+                        </li>
+						<li>
+                             <a href='http://147.175.98.124/FINAL/aktuality.php?Typ=1&Stare='".$_GET['Typ']."''>
+                                <i class='fa fa-angle-right pr-10'>
+                                </i>
+								<button class='btn' style='background-color: white; color: black; border: 1px solid #FFF;' type='sumbit' name='Typ' value = '123'>
+                                Všetky
+								</button>
+                            </a>
+                        </li>
+						<li>
+                             <a href='http://147.175.98.124/FINAL/aktuality.php?Typ=1&Stare='".$_GET['Typ']."''>
+                                <i class='fa fa-angle-right pr-10'>
+                                </i>
+								<button style='background-color: white; color: black; border: 1px solid #FFF;' class='btn' type='sumbit' name='Typ' value = '1'>
+                                Propagácia
+								</button>
+                            </a>
+                        </li>
+						<li>
+                             <a href='http://147.175.98.124/FINAL/aktuality.php?Typ=1&Stare='".$_GET['Typ']."''>
+                                <i class='fa fa-angle-right pr-10'>
+                                </i>
+								<button class='btn' style='background-color: white; color: black; border: 1px solid #FFF;' type='sumbit' name='Typ' value = '2'>
+                                Oznamy
+								</button>
+                            </a>
+                        </li>
+						<li>
+                             <a href='http://147.175.98.124/FINAL/aktuality.php?Typ=1&Stare='".$_GET['Typ']."''>
+                                <i class='fa fa-angle-right pr-10'>
+                                </i>
+								<button class='btn' style='background-color: white; color: black; border: 1px solid #FFF;' type='sumbit' name='Typ' value = '3'>
+                                Zo života ústavu
+								</button>
+                            </a>
+                        </li>
 
-        <div class="col-lg-3">
-            <div class="blog-side-item">
-                <div class="category">
-                    <h3>
-                        Kategórie
-                    </h3>
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="javascript:;">
-                                <i class="fa fa-angle-right pr-10">
-                                </i>
-                                Animals
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <i class="fa fa-angle-right pr-10">
-                                </i>
-                                Landscape
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <i class="fa fa-angle-right pr-10">
-                                </i>
-                                Portait
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <i class="fa fa-angle-right pr-10">
-                                </i>
-                                Wild Life
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <i class="fa fa-angle-right pr-10">
-                                </i>
-                                Video
-                            </a>
-                        </li>
-                    </ul>
+                    </ul></form>";?>
                 </div>
             </div>
         </div>
@@ -580,8 +686,6 @@
 <!-- Sequence Moder -slider js -->
 <script src="js/seq-slider/jquery.sequence-min.js"></script>
 <!--<script src="js/slider/sequencejs-options.modern-slide-in.js"></script>-->
-<script src="js/seq-slider/sequencejs-options.apple-style.js"></script>
-<!-- end of sequence slider js-->
 
 
 <script>
@@ -611,8 +715,6 @@
     });
 
     new WOW().init();
-
-
 </script>
 </body>
 </html>
