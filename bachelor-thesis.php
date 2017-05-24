@@ -297,48 +297,42 @@
     <div class="container career-inner">
         <div class="row">
             <div class="col-md-12 career-head">
-                <h1 class="wow fadeIn">Bakalárske práce - Témy</h1>
+                <h1 class="wow fadeIn">Bakalárske práce - Voľné témy</h1>
 
             </div>
         </div>
         <hr>
-        <div class="row">
+        <div class="row" ng-app="myApp" ng-controller="myCtrl" ng-init="getBachelorThesis()">
 
-            <div class="col-lg-6 col-sm-6 about-hiring">
-                <div class="icon-wrap ico-bg round-five wow zoomIn" data-wow-duration="1s" data-wow-delay=".1s">
-                    <i class="fa fa-user">
-                    </i>
-                </div>
-                <div class="content">
-                    <h3 class="title wow flipInX">
-                        Oddelenie aplikovanej mechaniky a mechatroniky (OAMM)
-                    </h3>
-                    <p>
-                        Vedúci: prof. Ing. Justín Murín, DrSc.<br>
-                        Zástupca: doc. Ing. Vladimír Kutiš, PhD.
-                    </p>
-                </div>
-            </div>
+            <table class="table table-hover" ng-if="showBachelorThesis">
+                <label>Filter <input ng-model="searchBachelor"></label><br>
+                <thead>
+                    <th>
+                        <p class="text-center wow pulse"><a href="" ng-click="sortBachelorBy('name')">Názov</a></p>
+                    </th>
+                    <th>
+                        <p class="text-center wow pulse"><a href="" ng-click="sortBachelorBy('supervisor')">Vedúci</a></p>
+                    </th>
+                    <th>
+                        <p class="text-center wow pulse">Podrobnosti</p>
+                    </th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="bachThes in bachelorThesis | filter:searchBachelor | orderBy:bachelorPropertyName:bachelorReverse">
+                        <td>
+                            {{bachThes.name}}
+                        </td>
+                        <td>
+                            {{bachThes.supervisor}}
+                        </td>
+                        <td>
+                            <a href="{{bachThes.href}}"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
         </div>
-        <hr>
-        <div class="row">
-            <div class="col-md-12 wow fadeIn">
-                <p class="align-left">Oddelenie v rámci pedagogiky zabezpečuje v bakalárskom stupni ŠP výučbu predmetov
-                    s hlavným dôrazom na mechaniku a mechatronické prvky. V inžinierskom stupni ŠP zabezpečuje výučbu
-                    predmetov s dôrazom na simuláciu a modelovanie mechanických a mechatronických systémov tak z pohľadu
-                    mechaniky a dynamiky, ako aj z pohľadu multifyzikálneho previazania jednotlivých fyzikálnych domén.
-                </p>
-                <p class="align-left">Členovia oddelenia sa venujú formulácii nových matematických postupov a metód,
-                    ktoré sa používajú v multifyzikálnych analýzach napr. na opis funkcionálne gradovaných materiálov
-                    (FGM), v dynamických analýzach mechatronických a MEMS systémov, ako aj na opis piezoelektrických
-                    prvkov.
-                </p>
-                <p class="align-left">Členovia oddelenia využívajú moderné SW prostriedky, ako sú ANSYS, Catia a
-                    MSC.ADAMS na návrh, analýzu a optimalizáciu jednotlivých komponentov, ako aj celých subsystémov
-                    mechatronických prvkov.</p>
-            </div>
-        </div>
-        <hr>
 
         <!-- career -->
     </div>
@@ -462,6 +456,8 @@
 <script src="js/jquery.easing.min.js"></script>
 <script src="js/link-hover.js"></script>
 <script src="js/superfish.js"></script>
+<script src="node_modules/angular/angular.js"></script>
+<script src="js/myApp.js"></script>
 
 
 <!--common script for all pages-->

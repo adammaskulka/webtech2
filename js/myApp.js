@@ -24,6 +24,16 @@ app.controller("myCtrl", function ($scope, $http) {
         $scope.pubPropertyName = propertyName;
     };
 
+    $scope.sortBachelorBy = function(propertyName) {
+        $scope.bachelorReverse = ($scope.bachelorPropertyName === propertyName) ? !$scope.bachelorReverse : false;
+        $scope.bachelorPropertyName = propertyName;
+    };
+
+    $scope.sortDiplomaBy = function(propertyName) {
+        $scope.diplomaReverse = ($scope.diplomaPropertyName === propertyName) ? !$scope.diplomaReverse : false;
+        $scope.diplomaPropertyName = propertyName;
+    };
+
     $scope.person = {};
     $scope.person.photo = 'noface.jpg';
 
@@ -79,5 +89,74 @@ app.controller("myCtrl", function ($scope, $http) {
                 console.log('There was error: ' + err);
             })
         }
-    }
+    };
+
+    $scope.showBachelorThesis = false;
+
+    $scope.getBachelorThesis = function () {
+        $scope.bachelorThesis = [];
+        $http({
+            method: 'POST',
+            url: 'src/getThesis.php'
+        }).then(function (response) {
+            $scope.response = angular.fromJson(response.data);
+            $scope.results = $scope.response.children[1].children[1].children[0];
+            $scope.typeOfThesis = angular.copy($scope.response.children[1].children[1].children[0].children[0].children[3].children[1].children[0].children[0].children[1].children[0].children[0].children);
+            $scope.studyProgram = angular.copy($scope.response.children[1].children[1].children[0].children[0].children[3].children[1].children[0].children[1].children[1].children[0].children[0].children);
+            $scope.supervisor = angular.copy($scope.response.children[1].children[1].children[0].children[0].children[3].children[1].children[0].children[2].children[1].children[0].children[0].children);
+            $scope.work = angular.copy($scope.results.children[0].children[3].children[8].children[1].children);
+            angular.forEach($scope.work, function (thesis) {
+                var workThesis = {};
+                if (thesis.children[8].children[0].html.substring(0, 1) !== thesis.children[8].children[0].html.substring(4, 5)) {
+                    workThesis = {
+                        href: 'http://is.stuba.sk' + thesis.children[7].children[0].children[0].href,
+                        type: thesis.children[1].children[0].html,
+                        name: thesis.children[2].children[0].html,
+                        supervisor: thesis.children[3].children[0].children[0].html,
+                        program: thesis.children[5].children[0].html
+                    };
+                    if(workThesis.type === 'BP'){
+                        $scope.bachelorThesis.push(workThesis);
+                    }
+                }
+                $scope.backupTopics = angular.copy($scope.topics);
+            });
+            $scope.showBachelorThesis = true;
+        })
+    };
+
+    $scope.showDiplomaThesis = false;
+
+    $scope.getDiplomaThesis = function () {
+        $scope.diplomaThesis = [];
+        $http({
+            method: 'POST',
+            url: 'src/getThesis.php'
+        }).then(function (response) {
+            $scope.response = angular.fromJson(response.data);
+            $scope.results = $scope.response.children[1].children[1].children[0];
+            $scope.typeOfThesis = angular.copy($scope.response.children[1].children[1].children[0].children[0].children[3].children[1].children[0].children[0].children[1].children[0].children[0].children);
+            $scope.studyProgram = angular.copy($scope.response.children[1].children[1].children[0].children[0].children[3].children[1].children[0].children[1].children[1].children[0].children[0].children);
+            $scope.supervisor = angular.copy($scope.response.children[1].children[1].children[0].children[0].children[3].children[1].children[0].children[2].children[1].children[0].children[0].children);
+            $scope.work = angular.copy($scope.results.children[0].children[3].children[8].children[1].children);
+            angular.forEach($scope.work, function (thesis) {
+                var workThesis = {};
+                if (thesis.children[8].children[0].html.substring(0, 1) !== thesis.children[8].children[0].html.substring(4, 5)) {
+                    workThesis = {
+                        href: 'http://is.stuba.sk' + thesis.children[7].children[0].children[0].href,
+                        type: thesis.children[1].children[0].html,
+                        name: thesis.children[2].children[0].html,
+                        supervisor: thesis.children[3].children[0].children[0].html,
+                        program: thesis.children[5].children[0].html
+                    };
+                    if(workThesis.type === 'DP'){
+                        $scope.diplomaThesis.push(workThesis);
+                    }
+                }
+                $scope.backupDiplomaTopics = angular.copy($scope.topics);
+            });
+            $scope.showDiplomaThesis = true;
+        })
+    };
+
 });
