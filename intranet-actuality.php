@@ -399,9 +399,9 @@ if (isset($_POST['titleSK']) && isset($_POST['titleEN']) && isset($_POST['folder
                         <input type="text" class="form-control" name="user" id="userInput" placeholder="Zadajte užívateľa" >
                     </div>
 					<div class="form-group">
-                        <label for="folderInput">Názov zložky</label>
+                        <label for="folderInput">Cesta k obrázku</label>
                         <input type="text" name="folder" class="form-control" id="folderInput"
-                               placeholder="Zadajte zložku" >
+                               placeholder="Zadajte cestu k obrázku" >
                     </div>
                     
                     <button type="submit" class="btn btn-default">Vložiť</button>
