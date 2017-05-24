@@ -13,7 +13,7 @@ http://elearn.elf.stuba.sk/moodle/pluginfile.php/54857/mod_resource/content/7/ZP
 | 4. menu      | Adam | done |
 | 5. titulna strana      | Adam      |   done |
 | 6. footer | Adam      |   done |
-| 7. pracovnici      | Martin | TBD |
+| 7. pracovnici      | Martin | done |
 | 8. vyskum      | Andrej      |   done |
 | 9. aktuality | Andrej      |    TBD |
 | 10. kontakt      | Adam | done |
@@ -42,5 +42,3 @@ V ulohe 15. - Prvé štyri záložky budú umožňovať vytvárať obsah podobn�
 obrázku. T.j. treba vedieť v rámci stránky vytvárať určité kategórie, pod ktoré je možné
 ukladať rôzne dokumenty na stiahnutie. Na stránke by malo byť možné vytvárať aj odkazy na
 iné stránky. ----> v podstate staci urobit jednu zalozku a potom by to malo byt copy-paste
-
-

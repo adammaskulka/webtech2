@@ -7,7 +7,7 @@
     <meta name="description" content="Ústav automobilovej mechatroniky FEI STU">
 
     <title>
-        Ústav automobilovej mechatroniky FEI STU | Pracovnící
+        Ústav automobilovej mechatroniky FEI STU | Pracovníci
     </title>
 
     <!-- Bootstrap core CSS -->
@@ -277,12 +277,12 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-sm-4">
-                <h1>Pracovnící</h1>
+                <h1>Pracovníci</h1>
             </div>
             <div class="col-lg-8 col-sm-8">
                 <ol class="breadcrumb pull-right">
                     <li><a href="index.php">Domov</a></li>
-                    <li class="active">Pracovnící</li>
+                    <li class="active">Pracovníci</li>
                 </ol>
             </div>
         </div>
@@ -297,14 +297,122 @@
     <div class="container career-inner">
         <div class="row">
             <div class="col-md-12 career-head">
-                <h1 class="wow fadeIn">Pracovnící</h1>
+                <h1 class="wow fadeIn">Pracovníci</h1>
 
             </div>
         </div>
         <hr>
-        <div class="row">
+        <div class="row" ng-app="myApp" ng-controller="myCtrl" ng-init="getStaff()">
+            <table class="table table-hover" ng-if="showStaff">
+                <label>Filter <input ng-model="search"></label><br>
+                <thead>
+                    <tr>
+                        <th>
+                            <p class="text-center wow pulse"><a href="" ng-click="sortBy('name')">Meno</a></p>
+                        </th>
+                        <th>
+                            <p class="text-center wow pulse"><a href="" ng-click="sortBy('room')">Miestnosť</a></p>
+                        </th>
+                        <th>
+                            <p class="text-center wow pulse"><a href="" ng-click="sortBy('phone')"> Klapka</a></p>
+                        </th>
+                        <th>
+                            <p class="text-center wow pulse"><a href="" ng-click="sortBy('department')"> Oddelenie</a></p>
+                        </th>
+                        <th>
+                            <p class="text-center wow pulse"><a href="" ng-click="sortBy('staffRole')"> Zaradenie</a></p>
+                        </th>
+                        <th>
+                            <p class="text-center wow pulse"><a href="" ng-click="sortBy('function')"> Funkcia</a></p>
+                        </th>
+                        <th>
+                            <p class="text-center wow pulse">Podrobnosti</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="person in staff | orderBy:propertyName:reverse | filter:search">
+                        <td>
+                            {{person.title2}} {{ person.title1 }} {{ person.name }} {{person.surname}}
+                        </td>
+                        <td>
+                            {{person.room}}
+                        </td>
+                        <td>
+                            {{person.phone}}
+                        </td>
+                        <td>
+                            {{person.department}}
+                        </td>
+                        <td>
+                            {{person.staffRole}}
+                        </td>
+                        <td>
+                            {{person.function}}
+                        </td>
+                        <td align="center">
+                            <a href="" ng-click="openModalForStaff(person)"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
-
+            <div ng-if="!showStaff">
+                <a href="" ng-click="changeShowStaff()"> < Späť</a>
+                <h1>
+                    {{person.title2}} {{person.title1}} {{person.name}} {{person.surname}}
+                </h1>
+                <div style="display: block; width: 100%">
+                    <div style="display: block; position: relative; float: left;">
+                        <img src="img/staff_photo/{{person.photo}}" width="250px"> <br>
+                    </div>
+                    <div style="display: block; position: relative; float: left; margin-left: 5%">
+                        <p class="text-left wow pulse">
+                            Zaradenie: {{person.staffRole}} <br>
+                            Oddelenie: {{person.department}} <br>
+                            Telefónne číslo: +421 2 60291 {{person.phone}} <br>
+                            Miestnosť: {{person.room}} <br>
+                        </p>
+                    </div>
+                </div>
+                <div style="display: block; width: 100%; position: relative; float: left" ng-if="showPub">
+                    <h2>Publikacie</h2>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>
+                                <p class="text-center wow pulse"><a href="" ng-click="sortPubBy('name')">Názov</a></p>
+                            </th>
+                            <th>
+                                <p class="text-center wow pulse"><a href="" ng-click="sortPubBy('type')">Typ</a></p>
+                            </th>
+                            <th>
+                                <p class="text-center wow pulse"><a href="" ng-click="sortPubBy('year')">Rok</a></p>
+                            </th>
+                            <th>
+                                <p class="text-center wow pulse">Podrobnosti</p>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="pub in publication | orderBy:pubPropertyName:pubReverse">
+                            <td>
+                                {{pub.name}}
+                            </td>
+                            <td>
+                                {{pub.type}}
+                            </td>
+                            <td>
+                                {{pub.year}}
+                            </td>
+                            <td align="center">
+                                <a href="{{pub.href}}"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
         <hr>
 
@@ -430,6 +538,8 @@
 <script src="js/jquery.easing.min.js"></script>
 <script src="js/link-hover.js"></script>
 <script src="js/superfish.js"></script>
+<script src="node_modules/angular/angular.js"></script>
+<script src="js/myApp.js"></script>
 
 
 <!--common script for all pages-->
