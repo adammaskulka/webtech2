@@ -424,7 +424,8 @@
 			echo "</tr>";
 			}
 		}
-		echo "</table>";	
+		echo "</table>";
+		$mysqli->close();
 		?>
         </div>
 <div class="modal fade" id="myModal" role="dialog">
