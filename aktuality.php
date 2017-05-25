@@ -47,7 +47,7 @@ $mysqli->close();
     <meta name="description" content="Ústav automobilovej mechatroniky FEI STU">
 
     <title>
-       <?php if($_SESSION['lang'] == 'sk') echo "Ústav automobilovej mechatroniky FEI STU | Aktuality"; else echo "Institute of Automotive Mechatronics FEI STU"; ?> 
+       <?php if($_SESSION['lang'] == 'sk') echo "Ústav automobilovej mechatroniky FEI STU | Aktuality"; else echo "Institute of Automotive Mechatronics FEI STU | News"; ?> 
     </title>
 
     <!-- Bootstrap core CSS -->
