@@ -42,6 +42,10 @@ function login($login, $pass)
         header("Location: intranet-tasks.php");
         exit();
     }
+		else {
+			header("Location: login.php");
+			exit();
+		}
 }
 
 ?>
