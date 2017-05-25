@@ -106,7 +106,7 @@ session_start();
 		<!--container start--tu zacianuju tabulky-->
         <div class="row">
 		<?php
-		require('cfg/config.php');
+		require('config.php');
 		$mysqli = new mysqli($CONF_DB_HOST, $CONF_DB_USER, $CONF_DB_PASS, $CONF_DB_NAME);
 		if($mysqli->connect_error){
 		die("Connect error" . $mysqli->connect_error);
@@ -252,13 +252,13 @@ session_start();
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Podrobnosti</h4>
+                <h4 class="modal-title"><?php if($_SESSION['lang'] == 'sk') echo "Podrobnosti"; else echo "Specifics"; ?></h4>
             </div>
             <div class="modal-body">
                 <div class="fetched-data"></div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Zatvoriť</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><?php if($_SESSION['lang'] == 'sk') echo "Zatvoriť"; else echo "Close"; ?></button>
             </div>
         </div>
     </div>
