@@ -27,13 +27,13 @@ function login($login, $pass)
     ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
     $bind = ldap_bind($ldap, $ldaprdn, $pass);
 
-    $bind = 1; //TODO: test smazat
+    //$bind = 1; //TODO: test smazat
     if ($bind) {
         require('src/userController.php');
         $ldapFilter = array("uid", "userPassword", "employeetype", "uisid", "cn", "sn", "givenname");
         $ldapSearchResult = @ldap_search($ldap, $ldaprdn, 'uid=' . $login, $ldapFilter);
         $entries = ldap_get_entries($ldap, $ldapSearchResult);
-        $login = 'xvrabec'; //TODO: test smazat
+        //$login = 'xvrabec'; //TODO: test smazat
         $user = getUser($login);
         session_start();
         $_SESSION["user"] = $user;
