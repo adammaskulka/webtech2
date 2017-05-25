@@ -340,7 +340,7 @@
 				//echo $kategoria;
 				$pr = $_POST['nazovp'];
 				$file = $_FILES['subor']['name'];
-				$sql = "INSERT INTO intranet (Kategoria , Prilohy , subor) VALUES('$kategoria','$pr','$file')";
+				$sql = "INSERT INTO intranet (Kategoria , Prilohy , subor , stranka) VALUES('$kategoria','$pr','$file','doktorandi') ";
 				$conn->query($sql);
 				
 			}else {
@@ -352,8 +352,7 @@
 	
 		if(isset($_POST['idp'])){
 			define ('SITE_ROOT', realpath(dirname(__FILE__)));
-			
-		
+
 			$priloha = $_POST['idp'];
 			$priloha1 = $_POST['priloha'];
 			$src = $_POST['src'];
@@ -361,7 +360,7 @@
 			$uploadfile = SITE_ROOT . '/uploads/' .$src ;
 			//echo $uploadfile;
 			unlink($uploadfile);
-			$sql= "DELETE FROM intranet WHERE Prilohy = '$priloha1'";
+			$sql= "DELETE FROM intranet WHERE Prilohy = '$priloha1' AND stranka = 'doktorandi'";
 			$conn->query($sql);
 			
 		}else if(isset($_POST['id'])){
@@ -369,17 +368,26 @@
 			$kat = $_POST[$ID];
 			$kategoria = $_POST['kategoria'];
 			if(isset($_POST[$ID]) && strlen($_POST[$ID]) >2 && isset($_POST['edit'])){
-				$sql= "UPDATE intranet SET Kategoria='$kat' WHERE Kategoria = '$kategoria'";
+				$sql= "UPDATE intranet SET Kategoria='$kat' WHERE Kategoria = '$kategoria' AND stranka = 'doktorandi'";
 				$conn->query($sql);
 				
 			}else if(isset($_POST['del'])){
-				$sql= "DELETE FROM intranet WHERE Kategoria = '$kategoria'";
+				define ('SITE_ROOT', realpath(dirname(__FILE__)));
+				$sql= "SELECT * FROM intranet WHERE Kategoria = '$kategoria' AND stranka = 'doktorandi'";
+				$result = $conn->query($sql);
+				
+				while($row = $result->fetch_assoc()) {
+					$src = $row['subor'];
+					$uploadfile = SITE_ROOT . '/uploads/' .$src ;
+					unlink($uploadfile);
+				}
+				$sql= "DELETE FROM intranet WHERE Kategoria = '$kategoria' AND stranka = 'doktorandi'";
 				$conn->query($sql);
 			}
 		}else if(isset($_POST['newk']) && strlen($_POST['newk']) > 2){
 					//echo aaa;
 					$kateg = $_POST['newk'];
-					$sql = "INSERT INTO intranet (Kategoria) VALUES('$kateg')";
+					$sql = "INSERT INTO intranet (Kategoria , stranka) VALUES('$kateg','doktorandi')";
 					$conn->query($sql);
 				
 			}
@@ -424,7 +432,7 @@
 					<?php
 					
 					if($log == 1){
-						$sql = "SELECT * FROM intranet ORDER BY Kategoria , Prilohy";
+						$sql = "SELECT * FROM intranet WHERE stranka = 'doktorandi' ORDER BY Kategoria , Prilohy";
 						$result = $conn->query($sql);
 						$kategoria = "";
 						$tmp = 0;
@@ -485,9 +493,9 @@
 										$pid = "p".$Kid."_".$Ppoc;
 										$epid = "ep".$Kid."_".$Ppoc;
 										if(strlen($row['Prilohy']) > 2)
-											echo "<tr><td><form method='POST' action><input type='hidden' name='id' value='$id'><input type='hidden' name='kategoria' value='".$row['Kategoria']."'><span id='$id'><input type='text' name='$id' pattern='.{3,}' required title='3 or more characters' placeholder='".$row['Kategoria']."'></span><span id='$eid' style='float:right;cursor:pointer;' ><input type='submit' name='edit' value='Edit'><input type='submit' name='del' value='Delete'></span></form></td><td><a href ='download.php?file=".$row['subor']."'><span id='$pid'>".$row['Prilohy']."</span></a><span id='$epid' style='float:right;cursor:pointer;'><form method='POST' action><input type='hidden' name = 'priloha' value = '".$row['Prilohy']."'><input type='hidden' name = 'src' value = '".$row['subor']."'><input type='hidden' name = 'idp' value = '$pid'><input type='submit' name = 'del' value = 'Delete'></form></span><br><br>";
+											echo "<tr><td><form method='POST' action><input type='hidden' name='id' value='$id'><input type='hidden' name='kategoria' value='".$row['Kategoria']."'><span id='$id'><input type='text' name='$id' pattern='.{3,}'  title='3 or more characters' placeholder='".$row['Kategoria']."'></span><span id='$eid' style='float:right;cursor:pointer;' ><input type='submit' name='edit' value='Edit'><input type='submit' name='del' value='Delete'></span></form></td><td><a href ='download.php?file=".$row['subor']."'><span id='$pid'>".$row['Prilohy']."</span></a><span id='$epid' style='float:right;cursor:pointer;'><form method='POST' action><input type='hidden' name = 'priloha' value = '".$row['Prilohy']."'><input type='hidden' name = 'src' value = '".$row['subor']."'><input type='hidden' name = 'idp' value = '$pid'><input type='submit' name = 'del' value = 'Delete'></form></span><br><br>";
 										else
-											echo "<tr><td><form method='POST' action><input type='hidden' name='id' value='$id'><input type='hidden' name='kategoria' value='".$row['Kategoria']."'><span id='$id'><input type='text' name='$id' pattern='.{3,}' required title='3 or more characters' placeholder='".$row['Kategoria']."'></span><span id='$eid' style='float:right;cursor:pointer;' ><input type='submit' name='edit' value='Edit'><input type='submit' name='del' value='Delete'></span></form></td><td>";
+											echo "<tr><td><form method='POST' action><input type='hidden' name='id' value='$id'><input type='hidden' name='kategoria' value='".$row['Kategoria']."'><span id='$id'><input type='text' name='$id' pattern='.{3,}'  title='3 or more characters' placeholder='".$row['Kategoria']."'></span><span id='$eid' style='float:right;cursor:pointer;' ><input type='submit' name='edit' value='Edit'><input type='submit' name='del' value='Delete'></span></form></td><td>";
 											
 										$kategoria = $row['Kategoria'];
 										$tmp = 1;
@@ -509,6 +517,10 @@
 								//if(strlen($row['Prilohy']) > 0)
 									//echo "<br><br>";
 								echo "<form method='POST' action enctype='multipart/form-data'><input type='file' name='subor' required style='margin-bottom:6px; margin-top:6px;'><input type='text' name='nazovp' pattern='.{3,}' required title='3 or more characters' placeholder='Nazov prílohy'><input type='hidden' name='category' value = '".$lastkat['Kategoria']."'><span style='float:right;cursor:pointer;'><input type='submit' value='Pridať'></form></span></td></tr>";
+								echo "<tr><td><form method='POST' action><input type='text' name='newk' pattern='.{3,}' required title='3 or more characters' placeholder='Nazov kategórie'><span style='float:right;cursor:pointer;' ><input type='submit' name='add' value='Pridať'></form></td><td></td></tr>";
+							}else{
+							
+								//echo "<form method='POST' action enctype='multipart/form-data'><input type='file' name='subor' required style='margin-bottom:6px; margin-top:6px;'><input type='text' name='nazovp' pattern='.{3,}' required title='3 or more characters' placeholder='Nazov prílohy'><input type='hidden' name='category' value = '".$lastkat['Kategoria']."'><span style='float:right;cursor:pointer;'><input type='submit' value='Pridať'></form></span></td></tr>";
 								echo "<tr><td><form method='POST' action><input type='text' name='newk' pattern='.{3,}' required title='3 or more characters' placeholder='Nazov kategórie'><span style='float:right;cursor:pointer;' ><input type='submit' name='add' value='Pridať'></form></td><td></td></tr>";
 							}
 						}
