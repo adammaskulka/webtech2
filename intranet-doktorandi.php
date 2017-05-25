@@ -451,9 +451,9 @@
 						if(IsUser() || IsHR() || IsReporter()){
 							$_SESSION['edit']=0;
 						}
-				
-						if((IsEditor() || IsAdmin())&& $_SESSION['edit']==0){
-						//if($_SESSION['edit'] ==0){	
+						
+						//if((IsEditor() || IsAdmin())&& $_SESSION['edit']==0){
+						if($_SESSION['edit'] ==0){	
 							if ($result->num_rows > 0) {
 								while($row = $result->fetch_assoc()) {
 									if(strcmp($kategoria,$row['Kategoria']) != 0){
