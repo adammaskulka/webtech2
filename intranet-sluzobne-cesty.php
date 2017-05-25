@@ -10,7 +10,8 @@
 	
 
 	session_start();
-	$role = $_SESSION['role'];	
+	$user = $_SESSION['user'];	
+	//echo $user;
 ?>
 
 <!DOCTYPE html>
@@ -398,7 +399,7 @@
         <div class="row">
             <div class="col-md-12 career-head">
 				<?php
-					$log = 1;
+					$log = 0;
 					if(IsEditor() || IsAdmin() || IsUser() || IsHR() || IsReporter()){
 						$log = 1;
 					}
@@ -452,8 +453,8 @@
 							$_SESSION['edit']=$_POST['editmode'];
 						}
 				
-						//if((IsEditor() || IsAdmin())&& $_SESSION['edit']==0){
-						if($_SESSION['edit'] ==0){	
+						if((IsEditor() || IsAdmin())&& $_SESSION['edit']==0){
+						//if($_SESSION['edit'] ==0){	
 							if ($result->num_rows > 0) {
 								while($row = $result->fetch_assoc()) {
 									if(strcmp($kategoria,$row['Kategoria']) != 0){
@@ -475,8 +476,8 @@
 							}
 						}
 				
-						//if((IsEditor() || IsAdmin())&& $_SESSION['edit'] == 1){		
-						if($_SESSION['edit'] ==1){
+						if((IsEditor() || IsAdmin())&& $_SESSION['edit'] == 1){		
+						//if($_SESSION['edit'] ==1){
 							if ($result->num_rows > 0) {
 								while($row = $result->fetch_assoc()) {
 									if(strcmp($kategoria,$row['Kategoria']) != 0){
@@ -547,12 +548,14 @@
                     </tbody>
                 </table>
 				<?php
-					//if((IsEditor() || IsAdmin())&& $_SESSION['edit'] == 0){
-					if($_SESSION['edit'] == 0)
+					if((IsEditor() || IsAdmin())&& $_SESSION['edit'] == 0){
+					//if($_SESSION['edit'] == 0)
 						echo "<form method='POST' action><input type='hidden' name='editmode' value = 1><input type='submit' value='Edit mode'></form>";
-					if($_SESSION['edit'] == 1)
+					}
+					if((IsEditor() || IsAdmin())&& $_SESSION['edit'] == 1){
+					//if($_SESSION['edit'] == 1)
 						echo "<form method='POST' action><input type='hidden' name='editmode' value = 0><input type='submit' value='Normal mode'></form>";
-					//}
+					}
 				?>
             </div>
         </div>

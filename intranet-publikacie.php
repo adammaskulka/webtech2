@@ -10,7 +10,7 @@
 	
 
 	session_start();
-	$role = $_SESSION['role'];	
+	$user = $_SESSION['user'];	
 ?>
 <!DOCTYPE html>
 <html lang="sk">

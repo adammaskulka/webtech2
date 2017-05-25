@@ -1,7 +1,9 @@
 <?php
-if ($_POST["login"] && $_POST["password"]) {
-    login($_POST["login"], $_POST["password"]);
-    exit();
+if (isset($_POST["login"]) && isset($_POST["password"])) {
+	$log = $_POST["login"];
+	$pas = $_POST["password"];
+    login($log, $pas);
+    //exit();
 }
 ini_set('display_errors', 'On');
 ini_set("log_errors", 1);
@@ -11,19 +13,20 @@ function login($login, $pass)
     $port = "389";
     $ldap = ldap_connect($adServer, $port);
     $ldaprdn = 'uid=' . $login . ',ou=People,DC=stuba,DC=sk';
-
     ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
     $bind = ldap_bind($ldap, $ldaprdn, $pass);
+
     //$bind = 1; //TODO: test smazat
     if ($bind) {
         require('src/userController.php');
-        $ldapFilter = array("uid", "userPassword", "employeetype", "uisid", "cn", "sn", "givenname");
+        /*$ldapFilter = array("uid", "userPassword", "employeetype", "uisid", "cn", "sn", "givenname");
         $ldapSearchResult = @ldap_search($ldap, $ldaprdn, 'uid=' . $login, $ldapFilter);
         $entries = ldap_get_entries($ldap, $ldapSearchResult);
         //$login = 'xvrabec'; //TODO: test smazat
-        $user = getUser($login);
+        $user = getUser($login);*/
         session_start();
-        $_SESSION["user"] = $user;
+        $_SESSION["user"] = $login;
+		
         require('cfg/config.php');
         header("Location: intranet-tasks.php");
         exit();
