@@ -310,7 +310,58 @@
 <!-- left menu end -->
 
 <!--container start-->
+<?php
+  require('src/shopController.php');
+    require('src/userController.php');
 
+  if (isset($_POST["delete"])) {
+      removeShop($_POST["delete"]);
+  }
+  if (isset($_POST["create"])) {
+      addShop($_POST["text"],$_POST["header"]);
+  }
+  if (isset($_POST["delete"])) {
+      removeShop($_POST["delete"]);
+  }
+  if (isset($_POST["update"])) {
+      $shop = new Shop();
+      $shop->create($_POST["update"], $_POST["text"], $_POST["header"]);
+      updateShop($shop);
+  }
+
+  $shops = getAllShop();
+?>
+
+<table>
+<?php foreach ($shops as $shop) { ?>
+<?php if(isAdmin() || isHR()){  ?>
+<form action="intranet-nakupy.php" method="post">
+  <tr><td><input type="text" name="header" value="<?php echo $shop->header ?>"></td> </tr>
+  <tr><td><input type="text" name="text" value="<?php echo $shop->text ?>"></td></tr>
+  <tr>
+    <td><button type="submit" name="update" value=<?php echo $shop->id ?>>UPDATE</button></td>
+</form>
+<form action="intranet-nakupy.php" method="post">
+    <td>
+        <button type="submit" name="delete" value=<?php echo $shop->id ?>>DELETE</button>
+    </td>
+</form>
+<<?php }else{ ?>
+  <tr><td><b><?php echo $shop->header ?></b></td> </tr>
+  <tr><td><?php echo $shop->text ?></td></tr>
+<?php }} ?>
+<?php if(isAdmin() || isHR()){  ?>
+<tr>
+    <form action="intranet-nakupy.php" method="post">
+        <td><input type="text" name="header" placeholder="nadpis"></td>
+        <td><input type="text" name="text" placeholder="text"></td>
+        <td>
+            <button type="submit" name="create" value="create">CREATE</button>
+        </td>
+    </form>
+</tr>
+<?php } ?>
+</table>
 
 <!--container end-->
 
