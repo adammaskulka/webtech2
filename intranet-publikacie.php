@@ -397,7 +397,7 @@
         <div class="row">
             <div class="col-md-12 career-head">
 				<?php
-					$log = 1;
+					$log = 0;
 					if(IsEditor() || IsAdmin() || IsUser() || IsHR() || IsReporter()){
 						$log = 1;
 					}
@@ -438,10 +438,7 @@
 						$Kid = 0;
 						$Ppoc = 1;
 						
-						if(IsUser() || IsHR() || IsReporter()){
-							$_SESSION['edit']=0;
-						}
-						
+
 						
 						if(!isset($_SESSION['edit'])){
 							$_SESSION['edit']=0;
@@ -451,8 +448,11 @@
 							$_SESSION['edit']=$_POST['editmode'];
 						}
 				
-						//if((IsEditor() || IsAdmin())&& $_SESSION['edit']==0){
-						if($_SESSION['edit'] ==0){	
+						if(IsUser() || IsHR() || IsReporter()){
+							$_SESSION['edit']=0;
+						}
+						if((IsEditor() || IsAdmin())&& $_SESSION['edit']==0){
+						//if($_SESSION['edit'] ==0){	
 							if ($result->num_rows > 0) {
 								while($row = $result->fetch_assoc()) {
 									if(strcmp($kategoria,$row['Kategoria']) != 0){
@@ -474,8 +474,8 @@
 							}
 						}
 				
-						//if((IsEditor() || IsAdmin())&& $_SESSION['edit'] == 1){		
-						if($_SESSION['edit'] ==1){
+						if((IsEditor() || IsAdmin())&& $_SESSION['edit'] == 1){			
+						//if($_SESSION['edit'] ==1){
 							if ($result->num_rows > 0) {
 								while($row = $result->fetch_assoc()) {
 									if(strcmp($kategoria,$row['Kategoria']) != 0){
@@ -523,7 +523,7 @@
 								echo "<tr><td><form method='POST' action><input type='text' name='newk' pattern='.{3,}' required title='3 or more characters' placeholder='Nazov kategórie'><span style='float:right;cursor:pointer;' ><input type='submit' name='add' value='Pridať'></form></td><td></td></tr>";
 							}
 						}
-						if(IsUser() || IsHR() || IsReporter()){
+						/*if(IsUser() || IsHR() || IsReporter()){
 							if ($result->num_rows > 0) {
 								while($row = $result->fetch_assoc()) {
 									if(strcmp($kategoria,$row['Kategoria']) != 0){
@@ -540,18 +540,20 @@
 								}
 								echo "</tr>";
 							}
-						}
+						}*/
 					}									
                     ?>
                     </tbody>
                 </table>
 				<?php
-					//if((IsEditor() || IsAdmin())&& $_SESSION['edit'] == 0){
-					if($_SESSION['edit'] == 0)
+					if((IsEditor() || IsAdmin())&& $_SESSION['edit'] == 0){
+					//if($_SESSION['edit'] == 0)
 						echo "<form method='POST' action><input type='hidden' name='editmode' value = 1><input type='submit' value='Edit mode'></form>";
-					if($_SESSION['edit'] == 1)
+					}
+					if((IsEditor() || IsAdmin())&& $_SESSION['edit'] == 1){
+					//if($_SESSION['edit'] == 1)
 						echo "<form method='POST' action><input type='hidden' name='editmode' value = 0><input type='submit' value='Normal mode'></form>";
-					//}
+					}
 				?>
             </div>
         </div>

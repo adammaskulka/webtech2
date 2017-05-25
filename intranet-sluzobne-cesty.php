@@ -440,9 +440,6 @@
 						$Kid = 0;
 						$Ppoc = 1;
 						
-						if(IsUser() || IsHR() || IsReporter()){
-							$_SESSION['edit']=0;
-						}
 						
 						
 						if(!isset($_SESSION['edit'])){
@@ -451,6 +448,10 @@
 
 						if(isset($_POST['editmode'])){
 							$_SESSION['edit']=$_POST['editmode'];
+						}
+						
+						if(IsUser() || IsHR() || IsReporter()){
+							$_SESSION['edit']=0;
 						}
 				
 						if((IsEditor() || IsAdmin())&& $_SESSION['edit']==0){
@@ -525,7 +526,7 @@
 								echo "<tr><td><form method='POST' action><input type='text' name='newk' pattern='.{3,}' required title='3 or more characters' placeholder='Nazov kategórie'><span style='float:right;cursor:pointer;' ><input type='submit' name='add' value='Pridať'></form></td><td></td></tr>";
 							}
 						}
-						if(IsUser() || IsHR() || IsReporter()){
+						/*if(IsUser() || IsHR() || IsReporter()){
 							if ($result->num_rows > 0) {
 								while($row = $result->fetch_assoc()) {
 									if(strcmp($kategoria,$row['Kategoria']) != 0){
@@ -542,7 +543,7 @@
 								}
 								echo "</tr>";
 							}
-						}
+						}*/
 					}									
                     ?>
                     </tbody>
