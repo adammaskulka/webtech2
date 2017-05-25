@@ -17,7 +17,7 @@ if (isset($_POST['titleSK']) && isset($_POST['titleEN']) && isset($_POST['folder
 	$sql = "INSERT INTO Aktuality VALUES (NULL, '".$_POST['typ']."', '".$_POST['titleSK']."', '".$_POST['titleEN']."', '".$_POST['folder']."', '".$_POST['popisSK']."', '".$_POST['popisEN']."', '".$_POST['date']."', '".$_POST['user']."')";
 	$result = $mysqli->query($sql);
 	
-}
+
 
 //-----------newsletter------------//
 	
@@ -48,7 +48,8 @@ if (isset($_POST['titleSK']) && isset($_POST['titleEN']) && isset($_POST['folder
 			}
 	}
 	
-	$mysqli->close();	
+	$mysqli->close();
+}
 ?>
 
 <!DOCTYPE html>
