@@ -1,11 +1,11 @@
-<?php 
+<?php
 	session_start();
-	
+
 	if(isset($_GET['lang'])){
 		$_SESSION['lang'] = $_GET['lang'];
 	}
-	
-	if(!isset($_SESSION['lang']))  
+
+	if(!isset($_SESSION['lang']))
 		$_SESSION['lang'] = 'sk';
 
 ?>
@@ -27,17 +27,17 @@ function login($login, $pass)
     ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
     $bind = ldap_bind($ldap, $ldaprdn, $pass);
 
-    //$bind = 1; //TODO: test smazat
+    $bind = 1; //TODO: test smazat
     if ($bind) {
         require('src/userController.php');
         $ldapFilter = array("uid", "userPassword", "employeetype", "uisid", "cn", "sn", "givenname");
         $ldapSearchResult = @ldap_search($ldap, $ldaprdn, 'uid=' . $login, $ldapFilter);
         $entries = ldap_get_entries($ldap, $ldapSearchResult);
-        //$login = 'xvrabec'; //TODO: test smazat
+        $login = 'xvrabec'; //TODO: test smazat
         $user = getUser($login);
         session_start();
         $_SESSION["user"] = $user;
-		
+
         require('cfg/config.php');
         header("Location: intranet-tasks.php");
         exit();
@@ -103,9 +103,9 @@ function login($login, $pass)
 <!--header start-->
 <?php
 	if(strcmp($_SESSION['lang'],'en') == 0)
-		include('header-en.php'); 
+		include('header-en.php');
 	if(strcmp($_SESSION['lang'],'sk') == 0)
-		include('header-sk.php'); 
+		include('header-sk.php');
 ?>
 <!--header end-->
 
@@ -149,11 +149,11 @@ function login($login, $pass)
 <!--container end-->
 
 <!--footer start-->
-<?php 
+<?php
 	if(strcmp($_SESSION['lang'],'en') == 0)
-		include('footer-en.php'); 
+		include('footer-en.php');
 	if(strcmp($_SESSION['lang'],'sk') == 0)
-		include('footer-sk.php'); 
+		include('footer-sk.php');
 ?>
 <!--small footer end-->
 

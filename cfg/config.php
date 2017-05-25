@@ -1,8 +1,8 @@
 <?php
 $CONF_DB_NAME='zadanie_10';
 //$CONF_DB_NAME='zaverecne_zadanie';
-//$CONF_DB_HOST='localhost';
-$CONF_DB_HOST='147.175.98.233';
+$CONF_DB_HOST='localhost';
+//$CONF_DB_HOST='147.175.98.233';
 //$CONF_DB_USER='phpmyadmin';
 $CONF_DB_USER='xvrabec';
 $CONF_DB_PASS='123';

@@ -129,7 +129,7 @@ function getUser($login)
     die("Connection failed: " . $conn->connect_error);
   }
 
-  $sql = "SELECT * FROM users INNER JOIN roles ON users.id = roles.users_id  WHERE login=? LIMIT 1";
+  $sql = "SELECT * FROM users INNER JOIN roles ON users.id = roles.users_id  WHERE login=?";
   $stmt = $conn->prepare($sql);
   $stmt->bind_param("s", $login);
   $stmt->execute();
