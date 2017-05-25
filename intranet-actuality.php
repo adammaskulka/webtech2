@@ -18,6 +18,37 @@ if (isset($_POST['titleSK']) && isset($_POST['titleEN']) && isset($_POST['folder
 	$result = $mysqli->query($sql);
 	
 }
+
+//-----------newsletter------------//
+	
+	$sql = "SELECT * FROM Newsletter WHERE skOdber = '1'";
+	$result = $mysqli->query($sql);
+	
+	if (mysqli_num_rows($result) > 0) {
+		//$to = "ndrj13@gmail.com";
+		$subject = "Aktualita ".$_POST['titleSK'];
+		$message = "Bola pridaná nová aktualita ".$_POST['titleSK']." na Ústav automobilovej mechatroniky STU. Viete si ju pozrieť na: http://147.175.98.124/FINAL/aktuality.php .";
+		$from = 'FEIM@email.com';
+			while($row = mysqli_fetch_assoc($result)) {
+				$to = $row["Email"];
+				mail($to,$subject,$message);
+			}
+	}
+	
+	$sql = "SELECT * FROM Newsletter WHERE enOdber = '1'";
+	$result = $mysqli->query($sql);
+	
+	if (mysqli_num_rows($result) > 0) {
+		$subject = "Actuality ".$_POST['titleEN'];
+		$message = "New actuality ".$_POST['titleEN']." was added to Ústav automobilovej mechatroniky STU. You can view it on: http://147.175.98.124/FINAL/aktuality.php .";
+		$from = 'FEIM@email.com';
+			while($row = mysqli_fetch_assoc($result)) {
+				$to = $row["Email"];
+				mail($to,$subject,$message);
+			}
+	}
+	
+	$mysqli->close();	
 ?>
 
 <!DOCTYPE html>
