@@ -15,14 +15,14 @@ http://elearn.elf.stuba.sk/moodle/pluginfile.php/54857/mod_resource/content/7/ZP
 | 6. footer | Adam      |   done |
 | 7. pracovnici      | Martin | done |
 | 8. vyskum      | Andrej      |   done |
-| 9. aktuality | Andrej      |    TBD |
+| 9. aktuality | Andrej      |    done |
 | 10. kontakt      | Adam | done |
 | 11. fotky      | Adam      |   done |
 | 12. videa | Adam      |    done |
 | 13. media      | Adam | done |
 | 14. login      | Juraj      |  done |
 | 14. panel uzivatelia      | Juraj      |  done |
-| 14. panel aktuality      | Andrej      |  TBD |
+| 14. panel aktuality      | Andrej      |  done |
 | 14. panel fotky      | Adam      |  done |
 | 14. panel videa      | Adam      |  done |
 | 15. dochadzka | Martin      |    TBD |
