@@ -404,12 +404,12 @@ if (isset($_POST['titleSK']) && isset($_POST['titleEN']) && isset($_POST['folder
                     <div class="form-group">
                         <label for="titleSKInput">Titulok - slovensky</label>
                         <input type="text" name="titleSK" class="form-control" id="titleSKInput"
-                               placeholder="Zadajte slovenský titulok" required>
+                               placeholder="Zadajte slovenský titulok">
                     </div>
                     <div class="form-group">
                         <label for="titleENInput">Titulok - anglicky</label>
                         <input type="text" name="titleEN" class="form-control" id="titleENInput"
-                               placeholder="Zadajte anglický titulok" required>
+                               placeholder="Zadajte anglický titulok">
                     </div>
                     <div class="form-group">
                         <label for="dateInput">Dátum</label>
