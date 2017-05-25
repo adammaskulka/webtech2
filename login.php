@@ -3,7 +3,7 @@ if (isset($_POST["login"]) && isset($_POST["password"])) {
 	$log = $_POST["login"];
 	$pas = $_POST["password"];
     login($log, $pas);
-    //exit();
+    exit();
 }
 ini_set('display_errors', 'On');
 ini_set("log_errors", 1);
@@ -19,13 +19,13 @@ function login($login, $pass)
     //$bind = 1; //TODO: test smazat
     if ($bind) {
         require('src/userController.php');
-        /*$ldapFilter = array("uid", "userPassword", "employeetype", "uisid", "cn", "sn", "givenname");
+        $ldapFilter = array("uid", "userPassword", "employeetype", "uisid", "cn", "sn", "givenname");
         $ldapSearchResult = @ldap_search($ldap, $ldaprdn, 'uid=' . $login, $ldapFilter);
         $entries = ldap_get_entries($ldap, $ldapSearchResult);
         //$login = 'xvrabec'; //TODO: test smazat
-        $user = getUser($login);*/
+        $user = getUser($login);
         session_start();
-        $_SESSION["user"] = $login;
+        $_SESSION["user"] = $user;
 		
         require('cfg/config.php');
         header("Location: intranet-tasks.php");
