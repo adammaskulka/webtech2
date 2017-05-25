@@ -328,23 +328,39 @@
 <div class="white-bg">
 
 	<?php
-	
-		if(isset($_POST['nazovp']) && isset($_POST['subor'])){
-			$kategoria = $_POST['category'];
-			echo $kategoria;
-			$pr = $_POST['nazovp'];
-			$file = $_POST['subor'];
-			$sql = "INSERT INTO intranet (Kategoria , Prilohy , subor) VALUES('$kategoria','$pr','$file')";
-			$conn->query($sql);
+			
+		if(isset($_POST['nazovp']) && isset($_FILES['subor'])){
+			define ('SITE_ROOT', realpath(dirname(__FILE__)));
+			$uploadfile = SITE_ROOT . '/uploads/' . basename($_FILES['subor']['name']);
+			//echo $uploadfile;
+			if (move_uploaded_file($_FILES['subor']['tmp_name'], $uploadfile)) {
+				chmod($uploadfile, 0766);
+				//echo "File is valid, and was successfully uploaded.\n";
+				$kategoria = $_POST['category'];
+				//echo $kategoria;
+				$pr = $_POST['nazovp'];
+				$file = $_FILES['subor']['name'];
+				$sql = "INSERT INTO intranet (Kategoria , Prilohy , subor) VALUES('$kategoria','$pr','$file')";
+				$conn->query($sql);
+				
+			}else {
+				echo "Upload failed";
+			}
+			
 		}
 	
 	
 		if(isset($_POST['idp'])){
+			define ('SITE_ROOT', realpath(dirname(__FILE__)));
+			
+		
 			$priloha = $_POST['idp'];
 			$priloha1 = $_POST['priloha'];
 			$src = $_POST['src'];
-			$src = 'uploads/'.$src;
-			unlink($src);
+			//print_r ($src);
+			$uploadfile = SITE_ROOT . '/uploads/' .$src ;
+			//echo $uploadfile;
+			unlink($uploadfile);
 			$sql= "DELETE FROM intranet WHERE Prilohy = '$priloha1'";
 			$conn->query($sql);
 			
@@ -361,7 +377,7 @@
 				$conn->query($sql);
 			}
 		}else if(isset($_POST['newk']) && strlen($_POST['newk']) > 2){
-					echo aaa;
+					//echo aaa;
 					$kateg = $_POST['newk'];
 					$sql = "INSERT INTO intranet (Kategoria) VALUES('$kateg')";
 					$conn->query($sql);
@@ -370,8 +386,18 @@
 	?>
     <!-- career -->
     <div class="container career-inner">
+		
         <div class="row">
             <div class="col-md-12 career-head">
+				<?php
+					$log = 1;
+					if(IsEditor() || IsAdmin() || IsUser() || IsHR() || IsReporter()){
+						$log = 1;
+					}
+					if($log == 0){
+						echo "Pre zobrazenie obsahu je nutné sa prihlásiť";
+					}
+				?>	
                 <h1 class="wow fadeIn">Dokumenty</h1>
 
             </div>
@@ -396,12 +422,20 @@
                     </thead>
                     <tbody>
 					<?php
+					
+					if($log == 1){
 						$sql = "SELECT * FROM intranet ORDER BY Kategoria , Prilohy";
 						$result = $conn->query($sql);
 						$kategoria = "";
 						$tmp = 0;
 						$Kid = 0;
 						$Ppoc = 1;
+						
+						if(IsUser() || IsHR() || IsReporter()){
+							$_SESSION['edit']=0;
+						}
+						
+						
 						if(!isset($_SESSION['edit'])){
 							$_SESSION['edit']=0;
 						}
@@ -410,7 +444,7 @@
 							$_SESSION['edit']=$_POST['editmode'];
 						}
 				
-						//if((IsEditor() || IsAdmin())&&edit==0){
+						//if((IsEditor() || IsAdmin())&& $_SESSION['edit']==0){
 						if($_SESSION['edit'] ==0){	
 							if ($result->num_rows > 0) {
 								while($row = $result->fetch_assoc()) {
@@ -433,7 +467,7 @@
 							}
 						}
 				
-						//if((IsEditor() || IsAdmin())&&edit == 1){		
+						//if((IsEditor() || IsAdmin())&& $_SESSION['edit'] == 1){		
 						if($_SESSION['edit'] ==1){
 							if ($result->num_rows > 0) {
 								while($row = $result->fetch_assoc()) {
@@ -441,7 +475,7 @@
 										if($tmp == 1){
 											//if(strlen($row['Prilohy']) > 0)
 												//echo "<br><br>";
-											echo "<form method='POST' action='upload.php' enctype='multipart/form-data'><input type='file' name='subor' required style='margin-bottom:6px;'><input type='text' name='nazovp' pattern='.{3,}' title='3 or more characters' placeholder='Nazov prílohy' required><input type='hidden' name='category' value = '".$last['Kategoria']."'><span style='float:right;cursor:pointer;'><input type='submit' value='Pridať'></form></span></td></tr>";
+											echo "<form method='POST' action enctype='multipart/form-data'><input type='file' name='subor' required style='margin-bottom:6px;'><input type='text' name='nazovp' pattern='.{3,}' title='3 or more characters' placeholder='Nazov prílohy' required><input type='hidden' name='category' value = '".$last['Kategoria']."'><span style='float:right;cursor:pointer;'><input type='submit' value='Pridať'></form></span></td></tr>";
 										}
 										$Kid++;
 										$id = "k".$Kid;
@@ -451,7 +485,7 @@
 										$pid = "p".$Kid."_".$Ppoc;
 										$epid = "ep".$Kid."_".$Ppoc;
 										if(strlen($row['Prilohy']) > 2)
-											echo "<tr><td><form method='POST' action><input type='hidden' name='id' value='$id'><input type='hidden' name='kategoria' value='".$row['Kategoria']."'><span id='$id'><input type='text' name='$id' pattern='.{3,}' required title='3 or more characters' placeholder='".$row['Kategoria']."'></span><span id='$eid' style='float:right;cursor:pointer;' ><input type='submit' name='edit' value='Edit'><input type='submit' name='del' value='Delete'></span></form></td><td><a href ='download.php?file=".$row['subor']."'><span id='$pid'>".$row['Prilohy']."</span></a><span id='$epid' style='float:right;cursor:pointer;'><form method='POST' action><input type='hidden' name = 'priloha' value = '".$row['Prilohy']."'><input type='hidden' name = 'src' value = '".$row['subor']."'><input type='hidden' name = 'idp' value = '$pid'><input type='submit' name = 'del' value = 'Delete'></form></span>";
+											echo "<tr><td><form method='POST' action><input type='hidden' name='id' value='$id'><input type='hidden' name='kategoria' value='".$row['Kategoria']."'><span id='$id'><input type='text' name='$id' pattern='.{3,}' required title='3 or more characters' placeholder='".$row['Kategoria']."'></span><span id='$eid' style='float:right;cursor:pointer;' ><input type='submit' name='edit' value='Edit'><input type='submit' name='del' value='Delete'></span></form></td><td><a href ='download.php?file=".$row['subor']."'><span id='$pid'>".$row['Prilohy']."</span></a><span id='$epid' style='float:right;cursor:pointer;'><form method='POST' action><input type='hidden' name = 'priloha' value = '".$row['Prilohy']."'><input type='hidden' name = 'src' value = '".$row['subor']."'><input type='hidden' name = 'idp' value = '$pid'><input type='submit' name = 'del' value = 'Delete'></form></span><br><br>";
 										else
 											echo "<tr><td><form method='POST' action><input type='hidden' name='id' value='$id'><input type='hidden' name='kategoria' value='".$row['Kategoria']."'><span id='$id'><input type='text' name='$id' pattern='.{3,}' required title='3 or more characters' placeholder='".$row['Kategoria']."'></span><span id='$eid' style='float:right;cursor:pointer;' ><input type='submit' name='edit' value='Edit'><input type='submit' name='del' value='Delete'></span></form></td><td>";
 											
@@ -474,7 +508,7 @@
 								}
 								//if(strlen($row['Prilohy']) > 0)
 									//echo "<br><br>";
-								echo "<form method='POST' action='upload.php' enctype='multipart/form-data'><input type='file' name='subor' required style='margin-bottom:6px; margin-top:6px;'><input type='text' name='nazovp' pattern='.{3,}' required title='3 or more characters' placeholder='Nazov prílohy'><input type='hidden' name='category' value = '".$lastkat['Kategoria']."'><span style='float:right;cursor:pointer;'><input type='submit' value='Pridať'></form></span></td></tr>";
+								echo "<form method='POST' action enctype='multipart/form-data'><input type='file' name='subor' required style='margin-bottom:6px; margin-top:6px;'><input type='text' name='nazovp' pattern='.{3,}' required title='3 or more characters' placeholder='Nazov prílohy'><input type='hidden' name='category' value = '".$lastkat['Kategoria']."'><span style='float:right;cursor:pointer;'><input type='submit' value='Pridať'></form></span></td></tr>";
 								echo "<tr><td><form method='POST' action><input type='text' name='newk' pattern='.{3,}' required title='3 or more characters' placeholder='Nazov kategórie'><span style='float:right;cursor:pointer;' ><input type='submit' name='add' value='Pridať'></form></td><td></td></tr>";
 							}
 						}
@@ -496,12 +530,12 @@
 								echo "</tr>";
 							}
 						}
-														
+					}									
                     ?>
                     </tbody>
                 </table>
 				<?php
-					//if((IsEditor() || IsAdmin())&& $edit == 0){
+					//if((IsEditor() || IsAdmin())&& $_SESSION['edit'] == 0){
 					if($_SESSION['edit'] == 0)
 						echo "<form method='POST' action><input type='hidden' name='editmode' value = 1><input type='submit' value='Edit mode'></form>";
 					if($_SESSION['edit'] == 1)
