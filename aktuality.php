@@ -121,7 +121,7 @@ $mysqli->close();
 <!--breadcrumbs end-->
 
 <?php
-require('config.php');
+require('cfg/config.php');
 $mysqli = new mysqli($CONF_DB_HOST, $CONF_DB_USER, $CONF_DB_PASS, $CONF_DB_NAME);
 if($mysqli->connect_error){
 die("Connect error" . $mysqli->connect_error);
