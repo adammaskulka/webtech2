@@ -1,3 +1,17 @@
+<?php
+	require_once "src/userController.php";
+	require_once "cfg/config.php";
+	$conn = new mysqli($CONF_DB_HOST, $CONF_DB_USER, $CONF_DB_PASS , $CONF_DB_NAME);
+	mysqli_set_charset($conn,"utf8");
+	if ($conn->connect_error) {
+		die("Connection failed: " . $conn->connect_error);
+	} 
+	
+	
+
+	session_start();
+	$user = $_SESSION['user'];	
+?>
 <!DOCTYPE html>
 <html lang="sk">
 <head>
@@ -279,7 +293,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-sm-4">
-                <h1>Intranet</h1>
+                <h1>Intranet-Publikácie</h1>
             </div>
             <div class="col-lg-8 col-sm-8">
                 <ol class="breadcrumb pull-right">
@@ -310,7 +324,244 @@
 <!-- left menu end -->
 
 <!--container start-->
+<div class="white-bg">
 
+	<?php
+			
+		if(isset($_POST['nazovp']) && isset($_FILES['subor'])){
+			define ('SITE_ROOT', realpath(dirname(__FILE__)));
+			$uploadfile = SITE_ROOT . '/uploads/' . basename($_FILES['subor']['name']);
+			//echo $uploadfile;
+			if (move_uploaded_file($_FILES['subor']['tmp_name'], $uploadfile)) {
+				chmod($uploadfile, 0766);
+				//echo "File is valid, and was successfully uploaded.\n";
+				$kategoria = $_POST['category'];
+				//echo $kategoria;
+				$pr = $_POST['nazovp'];
+				$file = $_FILES['subor']['name'];
+				$sql = "INSERT INTO intranet (Kategoria , Prilohy , subor , stranka) VALUES('$kategoria','$pr','$file','publikaie') ";
+				$conn->query($sql);
+				
+			}else {
+				echo "Upload failed";
+			}
+			
+		}
+	
+	
+		if(isset($_POST['idp'])){
+			define ('SITE_ROOT', realpath(dirname(__FILE__)));
+
+			$priloha = $_POST['idp'];
+			$priloha1 = $_POST['priloha'];
+			$src = $_POST['src'];
+			//print_r ($src);
+			$uploadfile = SITE_ROOT . '/uploads/' .$src ;
+			//echo $uploadfile;
+			unlink($uploadfile);
+			$sql= "DELETE FROM intranet WHERE Prilohy = '$priloha1' AND stranka = 'publikacie'";
+			$conn->query($sql);
+			
+		}else if(isset($_POST['id'])){
+			$ID = $_POST['id'];
+			$kat = $_POST[$ID];
+			$kategoria = $_POST['kategoria'];
+			if(isset($_POST[$ID]) && strlen($_POST[$ID]) >2 && isset($_POST['edit'])){
+				$sql= "UPDATE intranet SET Kategoria='$kat' WHERE Kategoria = '$kategoria' AND stranka = 'publikacie'";
+				$conn->query($sql);
+				
+			}else if(isset($_POST['del'])){
+				define ('SITE_ROOT', realpath(dirname(__FILE__)));
+				$sql= "SELECT * FROM intranet WHERE Kategoria = '$kategoria' AND stranka = 'publikacie'";
+				$result = $conn->query($sql);
+				
+				while($row = $result->fetch_assoc()) {
+					$src = $row['subor'];
+					$uploadfile = SITE_ROOT . '/uploads/' .$src ;
+					unlink($uploadfile);
+				}
+				$sql= "DELETE FROM intranet WHERE Kategoria = '$kategoria' AND stranka = 'publikacie'";
+				$conn->query($sql);
+			}
+		}else if(isset($_POST['newk']) && strlen($_POST['newk']) > 2){
+					//echo aaa;
+					$kateg = $_POST['newk'];
+					$sql = "INSERT INTO intranet (Kategoria , stranka) VALUES('$kateg','publikacie')";
+					$conn->query($sql);
+				
+			}
+	?>
+    <!-- career -->
+    <div class="container career-inner">
+		
+        <div class="row">
+            <div class="col-md-12 career-head">
+				<?php
+					$log = 0;
+					if(IsEditor() || IsAdmin() || IsUser() || IsHR() || IsReporter()){
+						$log = 1;
+					}
+					if($log == 0){
+						echo "Pre zobrazenie obsahu je nutné sa prihlásiť";
+					}
+				?>	
+                <h1 class="wow fadeIn">Dokumenty</h1>
+
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-12 wow fadeIn">
+                <table class="table table-bordered table-striped">
+                    <colgroup>
+                        <col class="col-xs-4">
+                        <col class="col-xs-4">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>
+                            Dokument
+                        </th>
+                        <th>
+                            Príloha
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+					<?php
+					
+					if($log == 1){
+						$sql = "SELECT * FROM intranet WHERE stranka = 'publikacie' ORDER BY Kategoria , Prilohy";
+						$result = $conn->query($sql);
+						$kategoria = "";
+						$tmp = 0;
+						$Kid = 0;
+						$Ppoc = 1;
+						
+
+						
+						if(!isset($_SESSION['edit'])){
+							$_SESSION['edit']=0;
+						}
+
+						if(isset($_POST['editmode'])){
+							$_SESSION['edit']=$_POST['editmode'];
+						}
+				
+						if(IsUser() || IsHR() || IsReporter()){
+							$_SESSION['edit']=0;
+						}
+						if((IsEditor() || IsAdmin())&& $_SESSION['edit']==0){
+						//if($_SESSION['edit'] ==0){	
+							if ($result->num_rows > 0) {
+								while($row = $result->fetch_assoc()) {
+									if(strcmp($kategoria,$row['Kategoria']) != 0){
+										if($tmp == 1)
+											echo "</tr>";
+										echo "<tr><td>".$row['Kategoria']."</td><td>";
+										if(strlen($row['Prilohy']) > 2)
+											echo "<a href ='download.php?file=".$row['subor']."'>".$row['Prilohy']."</a><br>";
+										$kategoria = $row['Kategoria'];
+										$tmp = 1;
+									}else{
+										if(strlen($row['Prilohy']) > 2)
+											echo "<a href ='download.php?file=".$row['subor']."'>".$row['Prilohy']."</a><br>";
+									}
+										
+									
+								}
+								echo "</tr>";
+							}
+						}
+				
+						if((IsEditor() || IsAdmin())&& $_SESSION['edit'] == 1){			
+						//if($_SESSION['edit'] ==1){
+							if ($result->num_rows > 0) {
+								while($row = $result->fetch_assoc()) {
+									if(strcmp($kategoria,$row['Kategoria']) != 0){
+										if($tmp == 1){
+											//if(strlen($row['Prilohy']) > 0)
+												//echo "<br><br>";
+											echo "<form method='POST' action enctype='multipart/form-data'><input type='file' name='subor' required style='margin-bottom:6px;'><input type='text' name='nazovp' pattern='.{3,}' title='3 or more characters' placeholder='Nazov prílohy' required><input type='hidden' name='category' value = '".$last['Kategoria']."'><span style='float:right;cursor:pointer;'><input type='submit' value='Pridať'></form></span></td></tr>";
+										}
+										$Kid++;
+										$id = "k".$Kid;
+										$eid = "ek".$Kid;
+										$Ppoc=1;
+										
+										$pid = "p".$Kid."_".$Ppoc;
+										$epid = "ep".$Kid."_".$Ppoc;
+										if(strlen($row['Prilohy']) > 2)
+											echo "<tr><td><form method='POST' action><input type='hidden' name='id' value='$id'><input type='hidden' name='kategoria' value='".$row['Kategoria']."'><span id='$id'><input type='text' name='$id' pattern='.{3,}'  title='3 or more characters' placeholder='".$row['Kategoria']."'></span><span id='$eid' style='float:right;cursor:pointer;' ><input type='submit' name='edit' value='Edit'><input type='submit' name='del' value='Delete'></span></form></td><td><a href ='download.php?file=".$row['subor']."'><span id='$pid'>".$row['Prilohy']."</span></a><span id='$epid' style='float:right;cursor:pointer;'><form method='POST' action><input type='hidden' name = 'priloha' value = '".$row['Prilohy']."'><input type='hidden' name = 'src' value = '".$row['subor']."'><input type='hidden' name = 'idp' value = '$pid'><input type='submit' name = 'del' value = 'Delete'></form></span><br><br>";
+										else
+											echo "<tr><td><form method='POST' action><input type='hidden' name='id' value='$id'><input type='hidden' name='kategoria' value='".$row['Kategoria']."'><span id='$id'><input type='text' name='$id' pattern='.{3,}'  title='3 or more characters' placeholder='".$row['Kategoria']."'></span><span id='$eid' style='float:right;cursor:pointer;' ><input type='submit' name='edit' value='Edit'><input type='submit' name='del' value='Delete'></span></form></td><td>";
+											
+										$kategoria = $row['Kategoria'];
+										$tmp = 1;
+									}else{
+										$Ppoc++;
+										$pid = "p".$Kid."_".$Ppoc;
+										$epid = "ep".$Kid."_".$Ppoc;
+										if(strlen($row['Prilohy']) > 2)
+											echo "<a href ='download.php?file=".$row['subor']."'><span id='$pid'>".$row['Prilohy']."</span></a><span id='$epid' style='float:right;cursor:pointer;'><form method='POST' action><input type='hidden' name = 'priloha' value = '".$row['Prilohy']."'><input type='hidden' name = 'src' value = '".$row['subor']."'><input type='hidden' name = 'idp' value = '$pid'><input type='submit' name = 'del' value = 'Delete'></form></span><br><br>";
+										
+										
+										
+									}
+										
+									$last = $row;
+									if(strlen($last['Kategoria'])>1)
+										$lastkat = $last;
+								}
+								//if(strlen($row['Prilohy']) > 0)
+									//echo "<br><br>";
+								echo "<form method='POST' action enctype='multipart/form-data'><input type='file' name='subor' required style='margin-bottom:6px; margin-top:6px;'><input type='text' name='nazovp' pattern='.{3,}' required title='3 or more characters' placeholder='Nazov prílohy'><input type='hidden' name='category' value = '".$lastkat['Kategoria']."'><span style='float:right;cursor:pointer;'><input type='submit' value='Pridať'></form></span></td></tr>";
+								echo "<tr><td><form method='POST' action><input type='text' name='newk' pattern='.{3,}' required title='3 or more characters' placeholder='Nazov kategórie'><span style='float:right;cursor:pointer;' ><input type='submit' name='add' value='Pridať'></form></td><td></td></tr>";
+							}else{
+							
+								//echo "<form method='POST' action enctype='multipart/form-data'><input type='file' name='subor' required style='margin-bottom:6px; margin-top:6px;'><input type='text' name='nazovp' pattern='.{3,}' required title='3 or more characters' placeholder='Nazov prílohy'><input type='hidden' name='category' value = '".$lastkat['Kategoria']."'><span style='float:right;cursor:pointer;'><input type='submit' value='Pridať'></form></span></td></tr>";
+								echo "<tr><td><form method='POST' action><input type='text' name='newk' pattern='.{3,}' required title='3 or more characters' placeholder='Nazov kategórie'><span style='float:right;cursor:pointer;' ><input type='submit' name='add' value='Pridať'></form></td><td></td></tr>";
+							}
+						}
+						/*if(IsUser() || IsHR() || IsReporter()){
+							if ($result->num_rows > 0) {
+								while($row = $result->fetch_assoc()) {
+									if(strcmp($kategoria,$row['Kategoria']) != 0){
+										if($tmp == 1)
+											echo "</tr>";
+										echo "<tr><td>".$row['Kategoria']."</td><td><a href ='download.php?file=".$row['subor']."'>".$row['Prilohy']."</a>";
+										$kategoria = $row['Kategoria'];
+										$tmp = 1;
+									}else{
+										echo "<br><a href ='download.php?file=".$row['subor']."'>".$row['Prilohy']."</a>";
+									}
+										
+									
+								}
+								echo "</tr>";
+							}
+						}*/
+					}									
+                    ?>
+                    </tbody>
+                </table>
+				<?php
+					if((IsEditor() || IsAdmin())&& $_SESSION['edit'] == 0){
+					//if($_SESSION['edit'] == 0)
+						echo "<form method='POST' action><input type='hidden' name='editmode' value = 1><input type='submit' value='Edit mode'></form>";
+					}
+					if((IsEditor() || IsAdmin())&& $_SESSION['edit'] == 1){
+					//if($_SESSION['edit'] == 1)
+						echo "<form method='POST' action><input type='hidden' name='editmode' value = 0><input type='submit' value='Normal mode'></form>";
+					}
+				?>
+            </div>
+        </div>
+        <hr>
+
+        <!-- career -->
+    </div>
+</div>
 
 <!--container end-->
 
