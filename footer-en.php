@@ -88,10 +88,10 @@ echo '<!--footer start-->
             <div class="col-lg-6 col-sm-6 pull-right">
                 <ul class="social-link-footer list-unstyled">
                 <li class="wow flipInX" data-wow-duration="2s" data-wow-delay=".4s"><a
-                            href="#"><i
+                            href="?lang=en"><i
                             class="fa"></i>EN</a></li>
                 <li class="wow flipInX" data-wow-duration="2s" data-wow-delay=".3s"><a
-                            href="#"><i
+                            href="?lang=sk"><i
                             class="fa"></i>SK</a></li>
                     
                     <li class="wow flipInX" data-wow-duration="2s" data-wow-delay=".1s"><a

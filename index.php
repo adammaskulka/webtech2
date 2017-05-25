@@ -1,3 +1,14 @@
+<?php 
+	session_start();
+	
+	if(isset($_GET['lang'])){
+		$_SESSION['lang'] = $_GET['lang'];
+	}
+	
+	if(!isset($_SESSION['lang']))  
+		$_SESSION['lang'] = 'sk';
+
+?>
 <!DOCTYPE html>
 <html lang="sk">
 <head>
@@ -54,7 +65,12 @@
 
 <body>
 
-<?php include('header-en.php'); ?>
+<?php
+	if(strcmp($_SESSION['lang'],'en') == 0)
+		include('header-en.php'); 
+	if(strcmp($_SESSION['lang'],'sk') == 0)
+		include('header-sk.php'); 
+?>
 
 <div id="sequence-theme">
     <div id="sequence">
@@ -410,7 +426,12 @@
 
 <!--container end-->
 
-<?php include('footer-en.php'); ?>
+<?php 
+	if(strcmp($_SESSION['lang'],'en') == 0)
+		include('footer-en.php'); 
+	if(strcmp($_SESSION['lang'],'sk') == 0)
+		include('footer-sk.php'); 
+?>
 
 
 <!-- js placed at the end of the document so the pages load faster
