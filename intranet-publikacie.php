@@ -448,7 +448,7 @@
 							$_SESSION['edit']=$_POST['editmode'];
 						}
 				
-						if(IsUser() || IsHR() || IsReporter()){
+						if(!IsAdmin() && !IsEditor()){
 							$_SESSION['edit']=0;
 						}
 						//if((IsEditor() || IsAdmin())&& $_SESSION['edit']==0){
