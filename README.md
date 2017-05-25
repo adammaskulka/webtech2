@@ -26,10 +26,10 @@ http://elearn.elf.stuba.sk/moodle/pluginfile.php/54857/mod_resource/content/7/ZP
 | 14. panel fotky      | Adam      |  done |
 | 14. panel videa      | Adam      |  done |
 | 15. dochadzka | Martin      |    TBD |
-| 15. pedagogika  | Juraj | in progress |
-| 15. doktorandi  | Radoslav | TBD |
-| 15. publikacie  | Radoslav | TBD |
-| 15. sluzobne cesty  | Radoslav | TBD |
+| 15. pedagogika  | Juraj | Done |
+| 15. doktorandi  | Radoslav | Done |
+| 15. publikacie  | Radoslav | Done |
+| 15. sluzobne cesty  | Radoslav | Done |
 | 15. nakupy  | Martin + Andrej | TBD |
 | 15. rozdelenie uloh  | Adam | done |
 | O nas  | Adam | done |
