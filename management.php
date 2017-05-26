@@ -2,7 +2,14 @@
 	session_start();
 	
 	if(isset($_GET['lang'])){
-		$_SESSION['lang'] = $_GET['lang'];
+		if(strcmp($_GET['lang'] , "sk") == 0 || strcmp($_GET['lang'] , "en") == 0)
+			$_SESSION['lang'] = $_GET['lang'];
+		else
+			$_SESSION['lang'] = "sk";
+		
+
+		header("Location: management.php");
+		exit();
 	}
 	
 	if(!isset($_SESSION['lang']))  
@@ -74,6 +81,41 @@
 <!--header end-->
 
 <!--breadcrumbs start-->
+<?php
+	if(strcmp($_SESSION['lang'],'en') == 0)
+		echo '
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-sm-4">
+                <h1>Head of the Institute</h1>
+            </div>
+            <div class="col-lg-8 col-sm-8">
+                <ol class="breadcrumb pull-right">
+                    <li><a href="index.php">Home</a></li>
+                    <li class="active">Head of the Institute</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs end-->
+
+<div class="container" id="tourpackages-carousel">
+
+    <div class="row">
+        Some english text
+        <!-- End row -->
+
+    </div>
+
+    <!-- End container -->
+</div>';
+
+else echo '
+
+
+
 <div class="breadcrumbs">
     <div class="container">
         <div class="row">
@@ -246,7 +288,7 @@
         </div>
 
     </div>
-</div>
+</div>';?>
 <!--container end-->
 
 <!--footer start-->

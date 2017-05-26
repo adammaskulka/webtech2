@@ -2,7 +2,14 @@
 	session_start();
 	
 	if(isset($_GET['lang'])){
-		$_SESSION['lang'] = $_GET['lang'];
+		if(strcmp($_GET['lang'] , "sk") == 0 || strcmp($_GET['lang'] , "en") == 0)
+			$_SESSION['lang'] = $_GET['lang'];
+		else
+			$_SESSION['lang'] = "sk";
+		
+
+		header("Location: pracovnici.php");
+		exit();
 	}
 	
 	if(!isset($_SESSION['lang']))  
@@ -75,6 +82,52 @@
 <!--header end-->
 
 <!--breadcrumbs start-->
+<?php
+	if(strcmp($_SESSION['lang'],'en') == 0)
+		echo '
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-sm-4">
+                <h1>Employees</h1>
+            </div>
+            <div class="col-lg-8 col-sm-8">
+                <ol class="breadcrumb pull-right">
+                    <li><a href="index.php">Home</a></li>
+                    <li class="active">Employees</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs end-->
+
+<!--container start-->
+<div class="white-bg">
+
+    <!-- career -->
+    <div class="container career-inner">
+        <div class="row">
+            <div class="col-md-12 career-head">
+                <h1 class="wow fadeIn">Employees</h1>
+
+            </div>
+        </div>
+        <hr>
+		<div class="row">
+            Some english text
+        </div>
+        
+
+        <!-- career -->
+    </div>
+</div>';
+
+
+
+else echo '
+
+
 <div class="breadcrumbs">
     <div class="container">
         <div class="row">
@@ -104,28 +157,29 @@
             </div>
         </div>
         <hr>
+
         <div class="row" ng-app="myApp" ng-controller="myCtrl" ng-init="getStaff()">
             <table class="table table-hover" ng-if="showStaff">
                 <label>Filter <input ng-model="search"></label><br>
                 <thead>
                     <tr>
                         <th>
-                            <p class="text-center wow pulse"><a href="" ng-click="sortBy('name')">Meno</a></p>
+                            <p class="text-center wow pulse"><a href="" ng-click="sortBy(name)">Meno</a></p>
                         </th>
                         <th>
-                            <p class="text-center wow pulse"><a href="" ng-click="sortBy('room')">Miestnosť</a></p>
+                            <p class="text-center wow pulse"><a href="" ng-click="sortBy(room)">Miestnosť</a></p>
                         </th>
                         <th>
-                            <p class="text-center wow pulse"><a href="" ng-click="sortBy('phone')"> Klapka</a></p>
+                            <p class="text-center wow pulse"><a href="" ng-click="sortBy(phone)"> Klapka</a></p>
                         </th>
                         <th>
-                            <p class="text-center wow pulse"><a href="" ng-click="sortBy('department')"> Oddelenie</a></p>
+                            <p class="text-center wow pulse"><a href="" ng-click="sortBy(department)"> Oddelenie</a></p>
                         </th>
                         <th>
-                            <p class="text-center wow pulse"><a href="" ng-click="sortBy('staffRole')"> Zaradenie</a></p>
+                            <p class="text-center wow pulse"><a href="" ng-click="sortBy(staffRole)"> Zaradenie</a></p>
                         </th>
                         <th>
-                            <p class="text-center wow pulse"><a href="" ng-click="sortBy('function')"> Funkcia</a></p>
+                            <p class="text-center wow pulse"><a href="" ng-click="sortBy(function)"> Funkcia</a></p>
                         </th>
                         <th>
                             <p class="text-center wow pulse">Podrobnosti</p>
@@ -183,13 +237,13 @@
                         <thead>
                         <tr>
                             <th>
-                                <p class="text-center wow pulse"><a href="" ng-click="sortPubBy('name')">Názov</a></p>
+                                <p class="text-center wow pulse"><a href="" ng-click="sortPubBy(name)">Názov</a></p>
                             </th>
                             <th>
-                                <p class="text-center wow pulse"><a href="" ng-click="sortPubBy('type')">Typ</a></p>
+                                <p class="text-center wow pulse"><a href="" ng-click="sortPubBy(type)">Typ</a></p>
                             </th>
                             <th>
-                                <p class="text-center wow pulse"><a href="" ng-click="sortPubBy('year')">Rok</a></p>
+                                <p class="text-center wow pulse"><a href="" ng-click="sortPubBy(year)">Rok</a></p>
                             </th>
                             <th>
                                 <p class="text-center wow pulse">Podrobnosti</p>
@@ -220,7 +274,7 @@
 
         <!-- career -->
     </div>
-</div>
+</div>';?>
 <!--container end-->
 
 <!--footer start-->

@@ -385,7 +385,7 @@
                             Pracovníci
                         </td>
                         <td>
-
+                            Martin Meľuch
                         </td>
                     </tr>
                     <tr>
@@ -401,7 +401,7 @@
                             Štúdium - voľné témy
                         </td>
                         <td>
-
+                            Martin Meľuch
                         </td>
                     </tr>
                     <tr>
@@ -497,7 +497,7 @@
                             Intranet - pedagogika
                         </td>
                         <td>
-
+							Radoslav Škopek
                         </td>
                     </tr>
                     <tr>
@@ -505,7 +505,7 @@
                             Intranet - doktorandi
                         </td>
                         <td>
-
+							Radoslav Škopek
                         </td>
                     </tr>
                     <tr>
@@ -513,7 +513,7 @@
                             Intranet - publikácie
                         </td>
                         <td>
-
+							Radoslav Škopek
                         </td>
                     </tr>
                     <tr>
@@ -521,7 +521,7 @@
                             Intranet - služobné cesty
                         </td>
                         <td>
-
+							Radoslav Škopek
                         </td>
                     </tr>
                     <tr>

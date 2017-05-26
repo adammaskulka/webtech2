@@ -1,9 +1,15 @@
-<?php
-//----------jazyk--------------
-session_start();
+<?php 
+	session_start();
 	
 	if(isset($_GET['lang'])){
-		$_SESSION['lang'] = $_GET['lang'];
+		if(strcmp($_GET['lang'] , "sk") == 0 || strcmp($_GET['lang'] , "en") == 0)
+			$_SESSION['lang'] = $_GET['lang'];
+		else
+			$_SESSION['lang'] = "sk";
+		
+
+		header("Location: aktuality.php");
+		exit();
 	}
 	
 	if(!isset($_SESSION['lang']))  
@@ -16,7 +22,6 @@ if($mysqli->connect_error){
 die("Connect error" . $mysqli->connect_error);
 }
 mysqli_set_charset($mysqli,"utf8");	
-
 //nastavenie odberu
 if(isset($_POST['email']) && isset($_POST['odber']))
 {
@@ -29,13 +34,11 @@ $sql = "INSERT INTO Newsletter VALUES (NULL, '".$_POST['email']."', '".$skodber.
 $result = $mysqli->query($sql);
 $mysqli->close();
 }
-
 if(isset($_POST['email']) && isset($_POST['zrusodber']))
 {	
 $sql = "DELETE FROM Newsletter WHERE Email ='".$_POST['email']."'";
 $result = $mysqli->query($sql);
 }
-
 $mysqli->close();
 ?>
 <!DOCTYPE html>
@@ -121,31 +124,39 @@ $mysqli->close();
 <!--breadcrumbs end-->
 
 <?php
-require('config.php');
+require('cfg/config.php');
 $mysqli = new mysqli($CONF_DB_HOST, $CONF_DB_USER, $CONF_DB_PASS, $CONF_DB_NAME);
 if($mysqli->connect_error){
 die("Connect error" . $mysqli->connect_error);
 }
 mysqli_set_charset($mysqli,"utf8");
-
+if($_SESSION['lang'] == 'sk'){
 if(isset($_GET['Typ']) and isset($_GET['Stare'])){
-	if($_GET['Typ']==123) $sql="SELECT * FROM Aktuality";
-	else $sql="SELECT * FROM Aktuality WHERE Typ='".$_GET['Typ']."'";
+	if($_GET['Typ']==123) $sql="SELECT * FROM Aktuality WHERE skTitle <> ''";
+	else $sql="SELECT * FROM Aktuality WHERE Typ='".$_GET['Typ']."' AND skTitle <> ''";
 }	
 else if(isset($_GET['Typ'])){
-	if($_GET['Typ']==123) $sql="SELECT * FROM Aktuality WHERE DATE > now()";
-	else $sql="SELECT * FROM Aktuality WHERE Typ='".$_GET['Typ']."' AND DATE > now()";
+	if($_GET['Typ']==123) $sql="SELECT * FROM Aktuality WHERE skTitle <> '' AND DATE > now()";
+	else $sql="SELECT * FROM Aktuality WHERE Typ='".$_GET['Typ']."' AND skTitle <> '' AND DATE > now()";
 }
-else {$sql="SELECT * FROM Aktuality WHERE DATE > now()"; $_GET['Typ'] = 123;}
-
+else {$sql="SELECT * FROM Aktuality WHERE skTitle <> '' AND DATE > now()"; $_GET['Typ'] = 123;}
+}
+else
+{
+if(isset($_GET['Typ']) and isset($_GET['Stare'])){
+	if($_GET['Typ']==123) $sql="SELECT * FROM Aktuality WHERE enTitle <> ''";
+	else $sql="SELECT * FROM Aktuality WHERE Typ='".$_GET['Typ']."' AND enTitle <> ''";
+}	
+else if(isset($_GET['Typ'])){
+	if($_GET['Typ']==123) $sql="SELECT * FROM Aktuality WHERE enTitle <> '' AND DATE > now()";
+	else $sql="SELECT * FROM Aktuality WHERE Typ='".$_GET['Typ']."' AND enTitle <> '' AND DATE > now()";
+}
+else {$sql="SELECT * FROM Aktuality WHERE enTitle <> '' AND DATE > now()"; $_GET['Typ'] = 123;}
+}
 $result = $mysqli->query($sql);
 $num = $result->num_rows; // pocet aktualit
-
 $limit=2;
 $pocet_stran=ceil($num/$limit);
-
-
-
 ?>
 
 
@@ -157,16 +168,13 @@ $pocet_stran=ceil($num/$limit);
 			<?php 
 			$i=0;
 			
-
 			$titleJ = $_SESSION['lang']."Title";
 			$annotationJ = $_SESSION['lang']."Annotation";
-
 			
 if (mysqli_num_rows($result) > 0) {
 			while($row = mysqli_fetch_assoc($result)) {
 			$den = date("d", strtotime($row['Date']));
 			$mesiac = date("M", strtotime($row['Date']));
-
 			//ostatne strany
 			if($i == $_GET['strana']){	
 			echo "	<div class='blog-item'>
@@ -180,13 +188,11 @@ if (mysqli_num_rows($result) > 0) {
                     ".$mesiac."
                   </span>
                         </div>
-
                     </div>
                     <div class='col-lg-10 col-sm-10'>
                         <div class='blog-img'>
                             <img src='".$row['Img']."' alt=''/>
                         </div>
-
                     </div>
                 </div>
                 <div class='row'>
@@ -221,13 +227,11 @@ if (mysqli_num_rows($result) > 0) {
                     ".$mesiac."
                   </span>
                         </div>
-
                     </div>
                     <div class='col-lg-10 col-sm-10'>
                         <div class='blog-img'>
                             <img src='".$row['Img']."' alt=''/>
                         </div>
-
                     </div>
                 </div>
                 <div class='row'>
@@ -327,7 +331,6 @@ echo "</p>";
 								</button>
                             </a>
                         </li>
-
 				</ul></form>";}
 				else{
 				echo "<div class='category'> <h3>Category</h3>";	
@@ -372,7 +375,6 @@ echo "</p>";
 								</button>
                             </a>
                         </li>
-
 				</ul></form>";}
 				
 				?>
@@ -449,22 +451,14 @@ echo "</p>";
             }
         });
     });
-
-
     $(document).ready(function () {
-
         $("#owl-demo").owlCarousel({
-
             items: 4
-
         });
-
     });
-
     jQuery(document).ready(function () {
         jQuery('ul.superfish').superfish();
     });
-
     new WOW().init();
 </script>
 </body>

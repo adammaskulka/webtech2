@@ -2,7 +2,14 @@
 	session_start();
 	
 	if(isset($_GET['lang'])){
-		$_SESSION['lang'] = $_GET['lang'];
+		if(strcmp($_GET['lang'] , "sk") == 0 || strcmp($_GET['lang'] , "en") == 0)
+			$_SESSION['lang'] = $_GET['lang'];
+		else
+			$_SESSION['lang'] = "sk";
+		
+
+		header("Location: bachelor-thesis.php");
+		exit();
 	}
 	
 	if(!isset($_SESSION['lang']))  
@@ -74,6 +81,46 @@
 <!--header end-->
 
 <!--breadcrumbs start-->
+<?php
+if(strcmp($_SESSION['lang'],'en') == 0){
+	echo '
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-sm-4">
+                <h1>Bachelor Thesis - Themes</h1>
+            </div>
+            <div class="col-lg-8 col-sm-8">
+                <ol class="breadcrumb pull-right">
+                    <li><a href="index.php">Home</a></li>
+                    <li class="active">Bachelor Thesis - Themes</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs end-->
+
+<!--container start-->
+<div class="white-bg">
+
+    <!-- career -->
+    <div class="container career-inner">
+        <div class="row">
+            <div class="col-md-12 career-head">
+                <h1 class="wow fadeIn">Bachelor Thesis - Free Themes</h1>
+
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+		Some english text
+		</div>
+		<hr>
+
+        <!-- career -->
+    </div>
+</div>';}else{ echo '
 <div class="breadcrumbs">
     <div class="container">
         <div class="row">
@@ -109,10 +156,10 @@
                 <label>Filter <input ng-model="searchBachelor"></label><br>
                 <thead>
                     <th>
-                        <p class="text-center wow pulse"><a href="" ng-click="sortBachelorBy('name')">Názov</a></p>
+                        <p class="text-center wow pulse"><a href="" ng-click="sortBachelorBy(name)">Názov</a></p>
                     </th>
                     <th>
-                        <p class="text-center wow pulse"><a href="" ng-click="sortBachelorBy('supervisor')">Vedúci</a></p>
+                        <p class="text-center wow pulse"><a href="" ng-click="sortBachelorBy(supervisor)">Vedúci</a></p>
                     </th>
                     <th>
                         <p class="text-center wow pulse">Podrobnosti</p>
@@ -137,7 +184,7 @@
 
         <!-- career -->
     </div>
-</div>
+</div>';}?>
 <!--container end-->
 
 <!--footer start-->

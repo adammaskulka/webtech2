@@ -1,12 +1,32 @@
-<?php 
-	session_start();
-	
-	if(isset($_GET['lang'])){
-		$_SESSION['lang'] = $_GET['lang'];
-	}
-	
-	if(!isset($_SESSION['lang']))  
-		$_SESSION['lang'] = 'sk';
+<?php
+session_start();
+header('Cache-control: private'); // IE 6 FIX
+
+if (isset($_GET['lang'])) {
+    $language = $_GET['lang'];
+    $_SESSION['lang'] = $language;
+    setcookie('lang', $language, time() + (3600 * 24 * 30));
+} else if (isSet($_SESSION['lang'])) {
+    $language = $_SESSION['lang'];
+} else if (isSet($_COOKIE['lang'])) {
+    $language = $_COOKIE['lang'];
+} else {
+    $language = 'sk';
+    $_SESSION['lang'] = 'sk';
+    setcookie('lang', $language, time() + (3600 * 24 * 30));
+}
+switch ($language) {
+    case 'en':
+        $lang_file = 'lang-en.php';
+        break;
+    case 'sk':
+        $lang_file = 'lang-sk.php';
+        break;
+    default:
+        $lang_file = 'lang-sk.php';
+}
+
+include_once 'languages/' . $lang_file;
 
 ?>
 <!DOCTYPE html>
@@ -18,7 +38,7 @@
     <meta name="description" content="Ústav automobilovej mechatroniky FEI STU">
 
     <title>
-        Ústav automobilovej mechatroniky FEI STU | Média
+        <?php echo $lang['INSTITUTE_UAMM']; ?> | <?php echo $lang['MEDIA']; ?>
     </title>
 
     <!-- Bootstrap core CSS -->
@@ -66,10 +86,19 @@
 <body>
 <!--header start-->
 <?php
-	if(strcmp($_SESSION['lang'],'en') == 0)
-		include('header-en.php'); 
-	if(strcmp($_SESSION['lang'],'sk') == 0)
-		include('header-sk.php'); 
+
+switch ($language) {
+    case 'en':
+        include('header-en.php');
+        break;
+    case 'sk':
+        include('header-sk.php');
+        break;
+    default:
+        include('header-sk.php');
+
+}
+
 ?>
     
 <!--header end-->
@@ -80,18 +109,18 @@
         <div class="row">
             <div class="col-lg-4 col-sm-4">
                 <h1>
-                    Média
+                    <?php echo $lang['MEDIA']; ?>
                 </h1>
             </div>
             <div class="col-lg-8 col-sm-8">
                 <ol class="breadcrumb pull-right">
                     <li>
                         <a href="#">
-                            Domov
+                            <?php echo $lang['HOME']; ?>
                         </a>
                     </li>
                     <li class="active">
-                        Média
+                        <?php echo $lang['MEDIA']; ?>
                     </li>
                 </ol>
             </div>
@@ -133,7 +162,7 @@
                     </h3>
                 </div>
                 <a href="http://dennik.hnonline.sk/ekonomika-a-firmy/591621-studenti-z-bratislavy-vyvinuli-u-nas-prvu-elektricku-motokaru#.VETnmBjntpk.facebook"
-                   class="btn btn-primary">Viac</a>
+                   class="btn btn-primary"><?php echo $lang['MORE']; ?></a>
             </div>
 
             <div class="blog-left wow fadeInLeft">
@@ -163,7 +192,7 @@
                     </h3>
                 </div>
                 <a href="https://spravy.pravda.sk/ekonomika/clanok/333718-prva-elektricka-motokara-na-slovensku-vznikla-v-skole/"
-                   class="btn btn-primary">Viac</a>
+                   class="btn btn-primary"><?php echo $lang['MORE']; ?></a>
             </div>
 
             <div class="blog-left wow fadeInLeft">
@@ -193,7 +222,7 @@
                     </h3>
                 </div>
                 <a href="http://reginazapad.rtvs.sk/clanky/deti/98134/mladi-vedci-navrhli-snimac-akupunkturnych-bodov"
-                   class="btn btn-primary">Viac</a>
+                   class="btn btn-primary"><?php echo $lang['MORE']; ?></a>
             </div>
 
             <div class="blog-left wow fadeInLeft">
@@ -223,7 +252,7 @@
                     </h3>
                 </div>
                 <a href="./files/sarm201546.pdf" download="sarm201546.pdf"
-                   class="btn btn-primary">Stiahnúť</a>
+                   class="btn btn-primary"><?php echo $lang['DOWNLOAD']; ?></a>
             </div>
 
         </div>
@@ -256,9 +285,9 @@
                     </h3>
                 </div>
                 <a href="http://science.dennikn.sk/clanky-a-rozhovory/neziva-priroda/technika/6196-vdaka-slovenskym-biomechatronikom-sa-uz-akupunkturne-body-neskryju"
-                   class="btn btn-primary">Viac</a>
+                   class="btn btn-primary"><?php echo $lang['MORE']; ?></a>
                 <a href="./files/science20162903.pdf" download="science20162903.pdf"
-                   class="btn btn-primary">Stiahnúť</a>
+                   class="btn btn-primary"><?php echo $lang['DOWNLOAD']; ?></a>
 
             </div>
 
@@ -290,7 +319,7 @@
                     </h3>
                 </div>
                 <a href="https://www.rtvs.sk/televizia/archiv/11767/115433"
-                   class="btn btn-primary">Viac</a>
+                   class="btn btn-primary"><?php echo $lang['MORE']; ?></a>
 
             </div>
 
@@ -322,7 +351,7 @@
                     </h3>
                 </div>
                 <a href="https://www.rtvs.sk/televizia/archiv/11767/117377"
-                   class="btn btn-primary">Viac</a>
+                   class="btn btn-primary"><?php echo $lang['MORE']; ?></a>
 
             </div>
 
@@ -336,11 +365,18 @@
 <!--container end-->
 
 <!--footer start-->
-<?php 
-	if(strcmp($_SESSION['lang'],'en') == 0)
-		include('footer-en.php'); 
-	if(strcmp($_SESSION['lang'],'sk') == 0)
-		include('footer-sk.php'); 
+<?php
+switch ($language) {
+    case 'en':
+        include('footer-en.php');
+        break;
+    case 'sk':
+        include('footer-sk.php');
+        break;
+    default:
+        include('footer-sk.php');
+
+}
 ?>
 <!--small footer end-->
 

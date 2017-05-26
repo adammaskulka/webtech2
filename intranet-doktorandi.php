@@ -439,7 +439,6 @@
 						$Kid = 0;
 						$Ppoc = 1;
 						
-						
 						if(!isset($_SESSION['edit'])){
 							$_SESSION['edit']=0;
 						}
@@ -448,10 +447,9 @@
 							$_SESSION['edit']=$_POST['editmode'];
 						}
 						
-						if(IsUser() || IsHR() || IsReporter()){
+						if(!IsAdmin() && !IsEditor()){
 							$_SESSION['edit']=0;
 						}
-						
 						//if((IsEditor() || IsAdmin())&& $_SESSION['edit']==0){
 						if($_SESSION['edit'] ==0){	
 							if ($result->num_rows > 0) {
