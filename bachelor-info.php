@@ -81,6 +81,49 @@
 <!--header end-->
 
 <!--breadcrumbs start-->
+<?php
+if(strcmp($_SESSION['lang'],'en') == 0){
+echo '
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-sm-4">
+                <h1>Bachelor study - General information</h1>
+            </div>
+            <div class="col-lg-8 col-sm-8">
+                <ol class="breadcrumb pull-right">
+                    <li><a href="index.php">Home</a></li>
+                    <li class="active">Bachelor study - General information</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs end-->
+
+<!--container start-->
+<div class="white-bg">
+
+    <!-- career -->
+    <div class="container career-inner">
+        <div class="row">
+            <div class="col-md-12 career-head">
+                <h1 class="wow fadeIn">Bachelor study - General information</h1>
+
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+		Some english text
+            
+        </div>
+        <hr>
+        
+        
+    </div>
+</div>';}
+
+else{ echo '
 <div class="breadcrumbs">
     <div class="container">
         <div class="row">
@@ -167,7 +210,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>';}?>
 <!--container end-->
 
 <!--footer start-->

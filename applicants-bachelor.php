@@ -72,14 +72,72 @@
 
 <body>
 <?php
+
 	if(strcmp($_SESSION['lang'],'en') == 0)
 		include('header-en.php'); 
 	if(strcmp($_SESSION['lang'],'sk') == 0)
 		include('header-sk.php'); 
+	
 ?>
 
 <!--breadcrumbs start-->
-<div class="breadcrumbs">
+<?php
+
+if(strcmp($_SESSION['lang'],'en') == 0){
+echo '<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-sm-4">
+                <h1>For applicants for study - Bachelor study</h1>
+            </div>
+            <div class="col-lg-8 col-sm-8">
+                <ol class="breadcrumb pull-right">
+                    <li><a href="index.php">Home</a></li>
+                    <li class="active">For applicants for study - Bachelor study</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs end-->
+
+<!--container start-->
+ <div class="white-bg">
+
+    <!-- career -->
+    <div class="container career-inner">
+        <div class="row">
+            <div class="col-md-12 career-head">
+                <h1 class="wow fadeIn">For applicants for study - Bachelor study</h1>
+
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-12 wow fadeIn">
+                <p class="align-left">Information will be added later.
+                </p>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 career-contact">
+                <p class="text-center wow pulse"><a href="./files/SP20172018b.pdf" download="SP20172018b.pdf">Study plan for the academic year 2017-2018</a></p>
+            </div>
+            <div class="col-md-4 col-md-offset-4 career-contact">
+                <p class="text-center wow pulse"><a href="http://www.mechatronika.cool">More details</a></p>
+            </div>
+        </div>
+
+
+        <!-- career -->
+    </div>
+</div>';}else{
+
+
+
+
+echo '<div class="breadcrumbs">
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-sm-4">
@@ -97,7 +155,7 @@
 <!--breadcrumbs end-->
 
 <!--container start-->
-<div class="white-bg">
+ <div class="white-bg">
 
     <!-- career -->
     <div class="container career-inner">
@@ -128,7 +186,8 @@
 
         <!-- career -->
     </div>
-</div>
+</div>';}
+?>
 <!--container end-->
 
 <!--footer start-->
