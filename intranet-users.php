@@ -392,7 +392,7 @@
                     </form>
                 </tr>
             <?php } ?>
-            <?php if(isHR()){ ?>
+            <?php if(isHR() || isAdmin()){ ?>
             <tr>
                 <form action="intranet-users.php" method="post">
                     <td><input type="text" name="login" placeholder="LDAP login"></td>

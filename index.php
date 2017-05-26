@@ -2,7 +2,14 @@
 	session_start();
 	
 	if(isset($_GET['lang'])){
-		$_SESSION['lang'] = $_GET['lang'];
+		if(strcmp($_GET['lang'] , "sk") == 0 || strcmp($_GET['lang'] , "en") == 0)
+			$_SESSION['lang'] = $_GET['lang'];
+		else
+			$_SESSION['lang'] = "sk";
+		
+
+		header("Location: index.php");
+		exit();
 	}
 	
 	if(!isset($_SESSION['lang']))  

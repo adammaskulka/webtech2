@@ -1,11 +1,18 @@
-<?php
+<?php 
 	session_start();
-
+	
 	if(isset($_GET['lang'])){
-		$_SESSION['lang'] = $_GET['lang'];
-	}
+		if(strcmp($_GET['lang'] , "sk") == 0 || strcmp($_GET['lang'] , "en") == 0)
+			$_SESSION['lang'] = $_GET['lang'];
+		else
+			$_SESSION['lang'] = "sk";
+		
 
-	if(!isset($_SESSION['lang']))
+		header("Location: login.php");
+		exit();
+	}
+	
+	if(!isset($_SESSION['lang']))  
 		$_SESSION['lang'] = 'sk';
 
 ?>
@@ -27,13 +34,13 @@ function login($login, $pass)
     ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
     $bind = ldap_bind($ldap, $ldaprdn, $pass);
 
-    $bind = 1; //TODO: test smazat
+    //$bind = 1; //TODO: test smazat
     if ($bind) {
         require('src/userController.php');
         $ldapFilter = array("uid", "userPassword", "employeetype", "uisid", "cn", "sn", "givenname");
         $ldapSearchResult = @ldap_search($ldap, $ldaprdn, 'uid=' . $login, $ldapFilter);
         $entries = ldap_get_entries($ldap, $ldapSearchResult);
-        $login = 'xvrabec'; //TODO: test smazat
+        //$login = 'xvrabec'; //TODO: test smazat
         $user = getUser($login);
         session_start();
         $_SESSION["user"] = $user;
@@ -42,6 +49,10 @@ function login($login, $pass)
         header("Location: intranet-tasks.php");
         exit();
     }
+		else {
+			header("Location: login.php");
+			exit();
+		}
 }
 
 ?>

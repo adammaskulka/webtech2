@@ -5,7 +5,6 @@ session_start();
 function getRole() {
   return $_SESSION['user']->roles;
 }
-
 if (isset($_POST['date'])) {
 	if(empty($_POST['folder'])) $_POST['folder'] = "img/blog/img7.jpg"; //default obrazok
 	
@@ -18,8 +17,6 @@ if (isset($_POST['date'])) {
 	$sql = "INSERT INTO Aktuality VALUES (NULL, '".$_POST['typ']."', '".$_POST['titleSK']."', '".$_POST['titleEN']."', '".$_POST['folder']."', '".$_POST['popisSK']."', '".$_POST['popisEN']."', '".$_POST['date']."', '".$_POST['user']."')";
 	$result = $mysqli->query($sql);
 	
-
-
 //-----------newsletter------------//
 	
 	
@@ -39,7 +36,6 @@ if (isset($_POST['titleSK'])) //ak je zadany SK titulok tak posle newsletter slo
 			}
 	}
 }
-
 if (isset($_POST['titleEN'])) //ak je zadany EN titulok tak posle newsletter EN odoberatelom
 {
 	$sql = "SELECT * FROM Newsletter WHERE enOdber = '1'";
@@ -178,7 +174,7 @@ if (isset($_POST['titleEN'])) //ak je zadany EN titulok tak posle newsletter EN 
 
                     <ul class="dropdown-menu">
                         <li class="dropdown-submenu">
-                            <a href="#" tabindex="-1">Pre uchádzačov o štúdium</a>
+                            <a href="#" tabindex="-1">Pre uchádzačov o štúdium</a>
 
                             <ul class="dropdown-menu">
                                 <li class="dropdown-submenu"></li>
@@ -385,7 +381,6 @@ if (isset($_POST['titleEN'])) //ak je zadany EN titulok tak posle newsletter EN 
 		
 		<div class='row'>
 			<?php
-
             if (getRole() != null) {
 				
 			$role = getRole()[0];
@@ -591,37 +586,25 @@ if (isset($_POST['titleEN'])) //ak je zadany EN titulok tak posle newsletter EN 
             }
         });
     });
-
     function openNav() {
         document.getElementById("mySidenav").style.width = "250px";
         document.getElementById("main").style.marginLeft = "250px";
         document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
     }
-
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
         document.getElementById("main").style.marginLeft = "0";
         document.body.style.backgroundColor = "white";
     }
-
-
     $(document).ready(function () {
-
         $("#owl-demo").owlCarousel({
-
             items: 4
-
         });
-
     });
-
     jQuery(document).ready(function () {
         jQuery('ul.superfish').superfish();
     });
-
     new WOW().init();
-
-
 </script>
 </body>
 </html>
