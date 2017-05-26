@@ -1,3 +1,41 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+require_once "src/userController.php";
+
+if (isset($_POST['content'])) {
+
+    //This is what you want - HTML content from tinyMCE
+    //just treat this a string
+//    $fh = fopen('/files/textarea.html', 'w') or die("Can't create file");
+    if (file_put_contents('files/textarea.html', $_POST['content'])) {
+        die(1);
+    } else {
+        die('Couldnt write to stream');
+    }
+//    if ( save_html_to_file($_POST['content'], '/files/textarea.html') ){
+//        //Print 1 and exit script
+//        die(1);
+//    } else {
+//        die('Couldnt write to stream');
+//    }
+}
+
+/**
+ *
+ * @param string $content HTML content from TinyMCE editor
+ * @param string $path File you want to write into
+ * @return boolean TRUE on success
+ */
+function save_html_to_file($content, $path)
+{
+    return (bool)file_put_contents($path, $content);
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="sk">
 <head>
@@ -274,7 +312,7 @@
 <!--header end-->
 
 <!--breadcrumbs start-->
-<div class="breadcrumbs">
+<div class="breadcrumbs" style="margin-bottom: 0px;">
     <span style="font-size:30px;cursor:pointer; margin-left: 20px" onclick="openNav()">&#9776; Menu</span>
     <div class="container">
         <div class="row">
@@ -311,9 +349,18 @@
 
 <!--container start-->
 
-<form method="post">
-    <textarea name="textarea" id="textarea"></textarea>
-    <button name="submitbtn"></button>
+<form>
+    <textarea name="textarea" id="textarea">
+        <?php
+
+        $fh = fopen('files/textarea.html', 'r');
+        while ($line = fgets($fh)) {
+            // <... Do your work with the line ...>
+            echo($line);
+        }
+        fclose($fh);
+        ?>
+    </textarea>
 </form>
 
 
@@ -450,15 +497,113 @@
 
 
 <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=5ktqvn3aj7dgh0f6fljbyxd8ay6dawknt2m7ngaujkox4xvs"></script>
-<script>tinymce.init({
+<?php
+
+if (isAdmin() || isEditor()) {
+    echo '
+        <script>
+    tinymce.init({
+        selector: \'textarea\',
+        height: 700,
+        theme: \'modern\',
+        save_oncancelcallback: function () {
+            console.log(\'Save canceled\');
+        },
+        save_onsavecallback: function () {
+            $.post("intranet-nakupy.php", { "content" : tinyMCE.activeEditor.getContent() }, function(respond){
+                console.log(respond);
+
+                if ( respond == ""){
+                    alert(\'Content saved\');
+                    return;
+                } else {
+                    //Error message assumed
+                    alert(respond);
+                }
+            });
+            console.log(\'Saved\');
+        },
+        plugins: [
+            "advlist autolink lists link image charmap print preview anchor",
+            "searchreplace visualblocks code fullscreen",
+            "save",
+            "insertdatetime media table contextmenu paste imagetools",
+            "image imagetools"
+
+        ],
+        toolbar: \'save | insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons\',
+        imagetools_cors_hosts: [\'www.tinymce.com\', \'codepen.io\'],
+        content_css: [
+//            \'fonts.googleapis.com/css?family=Lato:300,300i,400,400i\',
+//            \'www.tinymce.com/css/codepen.min.css\'
+        ]
+    });
+</script>
+        ';
+} else {
+    echo '
+        <script>
+    tinymce.init({
+        selector: \'textarea\',
+        height: 700,
+        readonly: 1,
+        theme: \'modern\',
+        save_oncancelcallback: function () {
+            console.log(\'Save canceled\');
+        },
+        save_onsavecallback: function () {
+            $.post("intranet-nakupy.php", { "content" : tinyMCE.activeEditor.getContent() }, function(respond){
+                console.log(respond);
+
+                if ( respond == ""){
+                    alert(\'Content saved\');
+                    return;
+                } else {
+                    //Error message assumed
+                    alert(respond);
+                }
+            });
+            console.log(\'Saved\');
+        },
+        plugins: [
+            "advlist autolink lists link image charmap print preview anchor",
+            "searchreplace visualblocks code fullscreen",
+            "save",
+            "insertdatetime media table contextmenu paste imagetools",
+            "image imagetools"
+
+        ],
+        toolbar: \'save | insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons\',
+        imagetools_cors_hosts: [\'www.tinymce.com\', \'codepen.io\'],
+        content_css: [
+//            \'fonts.googleapis.com/css?family=Lato:300,300i,400,400i\',
+//            \'www.tinymce.com/css/codepen.min.css\'
+        ]
+    });
+</script>';
+}
+?>
+<script>
+    tinymce.init({
         selector: 'textarea',
         height: 700,
+        readonly: 1,
         theme: 'modern',
-        save_enablewhendirty: true,
         save_oncancelcallback: function () {
             console.log('Save canceled');
         },
         save_onsavecallback: function () {
+            $.post("intranet-nakupy.php", {"content": tinyMCE.activeEditor.getContent()}, function (respond) {
+                console.log(respond);
+
+                if (respond == "") {
+                    alert('Content saved');
+                    return;
+                } else {
+                    //Error message assumed
+                    alert(respond);
+                }
+            });
             console.log('Saved');
         },
         plugins: [
@@ -476,6 +621,30 @@
 //            'www.tinymce.com/css/codepen.min.css'
         ]
     });
+</script>
+<script type="text/javascript">
+    $(function () {
+
+        var url = "intranet-nakupy.php";
+
+        $("#submitbtn").click(function () {
+            //"content" will PHP variable
+            $.post(url, {"content": tinyMCE.activeEditor.getContent()}, function (respond) {
+                console.log(respond);
+
+                if (respond == "") {
+                    alert('Content saved to file');
+                    location.reload();
+                    return;
+                } else {
+                    //Error message assumed
+                    alert(respond);
+                }
+            });
+        });
+
+    });
+
 </script>
 
 
