@@ -1,3 +1,18 @@
+<?php
+require_once "src/userController.php";
+require_once "cfg/config.php";
+$conn = new mysqli($CONF_DB_HOST, $CONF_DB_USER, $CONF_DB_PASS , $CONF_DB_NAME);
+mysqli_set_charset($conn,"utf8");
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+
+
+session_start();
+$user = $_SESSION['user'];
+?>
+
 <!DOCTYPE html>
 <html lang="sk">
 <head>
@@ -311,6 +326,84 @@
 
 <!--container start-->
 
+<div class="white-bg">
+
+    <!-- career -->
+    <div class="container career-inner">
+        <div class="row">
+            <div class="col-md-12 career-head">
+                <h1 class="wow fadeIn">Dochádzka</h1>
+
+            </div>
+        </div>
+        <hr>
+        <div class="row" ng-app="myApp" ng-controller="myCtrl" ng-init="getCurrentMonth()">
+            <form class="form-group">
+                <label for="month">Mesiac:</label>
+                <select id="month" ng-model="attendanceMonth">
+                    <option value="01">Január</option>
+                    <option value="02">Február</option>
+                    <option value="03" selected="selected">Marec</option>
+                    <option value="04">Apríl</option>
+                    <option value="05">Máj</option>
+                    <option value="06">Jún</option>
+                    <option value="07">Júl</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">Október</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+                <label for="year">Rok:</label>
+                <input id="year" class="form-control-inline" type="number" ng-model="attendanceYear" min="2010" value=2017>
+                <a href="" ng-click="printTable(attendanceMonth, attendanceYear)">Vypis</a>
+
+                <label for="type">Typ absencie:</label>
+                <select id="type" ng-model="type" class="selectpicker">
+                    <option value="PD">Plán Dovolenky</option>
+                    <option value="D" >Dovolenka</option>
+                    <option value="SC" >Služobná Cesta</option>
+                    <option value="OCR" >Ošetrenie Člena Rodiny</option>
+                    <option value="PN" >Práce Neschopný</option>
+                    <option value="" >Zrušiť</option>
+                </select>
+
+                <a href="" ng-click="editAttendance()">Zmeniť</a>
+            </form>
+            Zobrazujem {{attendanceMonth}}.{{attendanceYear}}
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered export-table" id="printTable">
+                    <thead>
+                        <th>Meno</th>
+                        <th ng-repeat="nameDay in dates">
+                            <p class="text-center wow pulse">{{nameDay.numb + 1}}<br>{{nameDay.name}}</p>
+                        </th>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="person in staff">
+                        <td>
+                            {{person.name}} {{person.surname}}
+                        </td>
+                        <?php
+                        if(IsAdmin() || IsHR()) {
+                            echo '<td ng-repeat="staffDay in person.days track by $index" ng-click="allowEditing(person.id)" ng-mouseover="editCell(person.id, $index)">';
+                        } else {
+                            echo '<td ng-repeat="staffDay in person.days track by $index">';
+                        }
+
+                        ?>
+<!--                        <td ng-repeat="staffDay in dates" ng-click="editCell(person.id, staffDay.day)">-->
+                            {{staffDay}}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+<!--            <a href="" ng-click="exportAction()"> Export Pdf </a>-->
+        </div>
+    </div>
+</div>
+
 
 <!--container end-->
 
@@ -431,6 +524,8 @@
 <script src="js/jquery.easing.min.js"></script>
 <script src="js/link-hover.js"></script>
 <script src="js/superfish.js"></script>
+<script src="node_modules/angular/angular.js"></script>
+<script src="js/myApp.js"></script>
 
 
 <!--common script for all pages-->
