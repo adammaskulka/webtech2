@@ -128,15 +128,30 @@ die("Connect error" . $mysqli->connect_error);
 }
 mysqli_set_charset($mysqli,"utf8");
 
+
+if($_SESSION['lang'] == 'sk'){
 if(isset($_GET['Typ']) and isset($_GET['Stare'])){
-	if($_GET['Typ']==123) $sql="SELECT * FROM Aktuality";
-	else $sql="SELECT * FROM Aktuality WHERE Typ='".$_GET['Typ']."'";
+	if($_GET['Typ']==123) $sql="SELECT * FROM Aktuality WHERE skTitle <> ''";
+	else $sql="SELECT * FROM Aktuality WHERE Typ='".$_GET['Typ']."' AND skTitle <> ''";
 }	
 else if(isset($_GET['Typ'])){
-	if($_GET['Typ']==123) $sql="SELECT * FROM Aktuality WHERE DATE > now()";
-	else $sql="SELECT * FROM Aktuality WHERE Typ='".$_GET['Typ']."' AND DATE > now()";
+	if($_GET['Typ']==123) $sql="SELECT * FROM Aktuality WHERE skTitle <> '' AND DATE > now()";
+	else $sql="SELECT * FROM Aktuality WHERE Typ='".$_GET['Typ']."' AND skTitle <> '' AND DATE > now()";
 }
-else {$sql="SELECT * FROM Aktuality WHERE DATE > now()"; $_GET['Typ'] = 123;}
+else {$sql="SELECT * FROM Aktuality WHERE skTitle <> '' AND DATE > now()"; $_GET['Typ'] = 123;}
+}
+else
+{
+if(isset($_GET['Typ']) and isset($_GET['Stare'])){
+	if($_GET['Typ']==123) $sql="SELECT * FROM Aktuality WHERE enTitle <> ''";
+	else $sql="SELECT * FROM Aktuality WHERE Typ='".$_GET['Typ']."' AND enTitle <> ''";
+}	
+else if(isset($_GET['Typ'])){
+	if($_GET['Typ']==123) $sql="SELECT * FROM Aktuality WHERE enTitle <> '' AND DATE > now()";
+	else $sql="SELECT * FROM Aktuality WHERE Typ='".$_GET['Typ']."' AND enTitle <> '' AND DATE > now()";
+}
+else {$sql="SELECT * FROM Aktuality WHERE enTitle <> '' AND DATE > now()"; $_GET['Typ'] = 123;}
+}
 
 $result = $mysqli->query($sql);
 $num = $result->num_rows; // pocet aktualit
