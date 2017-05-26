@@ -6,7 +6,8 @@ function getRole() {
   return $_SESSION['user']->roles;
 }
 
-if (isset($_POST['titleSK']) && isset($_POST['titleEN']) && isset($_POST['folder']) && isset($_POST['user']) && isset($_POST['date'])) {
+if (isset($_POST['date'])) {
+	if(empty($_POST['folder'])) $_POST['folder'] = "img/blog/img7.jpg"; //default obrazok
 	
 	$mysqli = new mysqli($CONF_DB_HOST, $CONF_DB_USER, $CONF_DB_PASS, $CONF_DB_NAME);
 	if($mysqli->connect_error){
@@ -21,6 +22,9 @@ if (isset($_POST['titleSK']) && isset($_POST['titleEN']) && isset($_POST['folder
 
 //-----------newsletter------------//
 	
+	
+if (isset($_POST['titleSK'])) //ak je zadany SK titulok tak posle newsletter slovenskym odoberatelom
+{
 	$sql = "SELECT * FROM Newsletter WHERE skOdber = '1'";
 	$result = $mysqli->query($sql);
 	
@@ -34,7 +38,10 @@ if (isset($_POST['titleSK']) && isset($_POST['titleEN']) && isset($_POST['folder
 				mail($to,$subject,$message);
 			}
 	}
-	
+}
+
+if (isset($_POST['titleEN'])) //ak je zadany EN titulok tak posle newsletter EN odoberatelom
+{
 	$sql = "SELECT * FROM Newsletter WHERE enOdber = '1'";
 	$result = $mysqli->query($sql);
 	
@@ -47,7 +54,7 @@ if (isset($_POST['titleSK']) && isset($_POST['titleEN']) && isset($_POST['folder
 				mail($to,$subject,$message);
 			}
 	}
-	
+}
 	$mysqli->close();
 }
 ?>
@@ -433,7 +440,7 @@ if (isset($_POST['titleSK']) && isset($_POST['titleEN']) && isset($_POST['folder
 					<div class="form-group">
                         <label for="folderInput">Cesta k obrázku</label>
                         <input type="text" name="folder" class="form-control" id="folderInput"
-                               placeholder="Zadajte cestu k obrázku" >
+                               placeholder="Nechajte prázdne pre default obrázok" >
                     </div>
                     
                     <button type="submit" class="btn btn-default">Vložiť</button>
