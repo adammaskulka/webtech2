@@ -385,7 +385,7 @@
                             Pracovníci
                         </td>
                         <td>
-
+                            Martin Meľuch
                         </td>
                     </tr>
                     <tr>
@@ -401,7 +401,7 @@
                             Štúdium - voľné témy
                         </td>
                         <td>
-
+                            Martin Meľuch
                         </td>
                     </tr>
                     <tr>

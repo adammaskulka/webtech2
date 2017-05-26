@@ -311,6 +311,76 @@
 
 <!--container start-->
 
+<div class="white-bg">
+
+    <!-- career -->
+    <div class="container career-inner">
+        <div class="row">
+            <div class="col-md-12 career-head">
+                <h1 class="wow fadeIn">Dochádzka</h1>
+
+            </div>
+        </div>
+        <hr>
+        <div class="row" ng-app="myApp" ng-controller="myCtrl" ng-init="getCurrentMonth()">
+            <form class="form-group">
+                <label for="month">Mesiac:</label>
+                <select id="month" ng-model="attendanceMonth">
+                    <option value="01">Január</option>
+                    <option value="02">Február</option>
+                    <option value="03" selected="selected">Marec</option>
+                    <option value="04">Apríl</option>
+                    <option value="05">Máj</option>
+                    <option value="06">Jún</option>
+                    <option value="07">Júl</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">Október</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+                <label for="year">Rok:</label>
+                <input id="year" class="form-control-inline" type="number" ng-model="attendanceYear" min="2010" value=2017>
+                <a href="" ng-click="printTable(attendanceMonth, attendanceYear)">Vypis</a>
+
+                <label for="type">Typ absencie:</label>
+                <select id="type" ng-model="calendar.type" class="selectpicker">
+                    <option value="PD">Plán Dovolenky</option>
+                    <option value="D" /*ng-if="userIsAdmin"*/>Dovolenka</option>
+                    <option value="SC" /*ng-if="userIsAdmin"*/>Služobná Cesta</option>
+                    <option value="OCR" /*ng-if="userIsAdmin"*/>Ošetrenie Člena Rodiny</option>
+                    <option value="PN" /*ng-if="userIsAdmin"*/>Práce Neschopný</option>
+                    <option value="" /*ng-if="userIsAdmin"*/>Zrušiť</option>
+                </select>
+
+                <a href="" ng-click="editAttendance()">Zmeniť</a>
+            </form>
+            Zobrazujem {{attendanceMonth}}.{{attendanceYear}}
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <th>Meno</th>
+                        <th ng-repeat="nameDay in dates">
+                            <p class="text-center wow pulse">{{nameDay.numb + 1}}<br>{{nameDay.name}}</p>
+                        </th>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="person in staff">
+                        <td>
+                            {{person.name}} {{person.surname}}
+                        </td>
+                        <td ng-repeat="staffDay in person.days track by $index">
+<!--                        <td ng-repeat="staffDay in dates" ng-click="editCell(person.id, staffDay.day)">-->
+                            {{staffDay}}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!--container end-->
 
@@ -431,6 +501,8 @@
 <script src="js/jquery.easing.min.js"></script>
 <script src="js/link-hover.js"></script>
 <script src="js/superfish.js"></script>
+<script src="node_modules/angular/angular.js"></script>
+<script src="js/myApp.js"></script>
 
 
 <!--common script for all pages-->

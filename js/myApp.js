@@ -1,6 +1,8 @@
 var app = angular.module("myApp", []);
 
 app.controller("myCtrl", function ($scope, $http) {
+    $scope.nameOfDays = ['Ned', 'Pon', 'Uto', 'Str', 'Štv', 'Pia', 'Sob' ];
+
     $scope.staff = [];
 
     $scope.getStaff = function () {
@@ -158,5 +160,149 @@ app.controller("myCtrl", function ($scope, $http) {
             $scope.showDiplomaThesis = true;
         })
     };
+
+    $scope.getCurrentMonth = function () {
+        $scope.getStaff();
+        $scope.attendanceYear = 2017;
+        $scope.attendanceMonth = '05';
+        $scope.dates = [];
+        $scope.weekDays($scope.daysOfMonth());
+        $scope.printTable($scope.attendanceMonth, $scope.attendanceYear);
+
+    };
+
+    $scope.daysOfMonth = function () {
+        return new Date($scope.attendanceYear, $scope.attendanceMonth, 0).getDate();
+    };
+
+    $scope.weekDays = function (days) {
+        $scope.dates = [];
+        for (var i = 0; i<days; i++){
+            $scope.dates[i] = {
+                numb: i,
+                name: $scope.nameOfDays[new Date($scope.attendanceYear, $scope.attendanceMonth-1, i+1).getDay()]
+            };
+        }
+    };
+
+    $scope.printTable = function (month, year) {
+        $scope.persons = [];
+        $scope.attendanceYear = year;
+        $scope.attendanceMonth = month;
+        $http({
+            method: 'POST',
+            url: 'src/attendance.php',
+            data: {month: month, year: year, todo: 1}
+        }).then(function (response) {
+            console.log(response);
+            var calendarJson = angular.copy(angular.fromJson(response.data));
+            var index = 0;
+            var days = $scope.daysOfMonth();
+            var dates = [];
+            $scope.weekDays(days);
+            console.log(calendarJson);
+            console.log(dates);
+            console.log($scope.staff.length);
+            $scope.staff.forEach(function (staff) {
+                staff.days = [];
+                staff.days = Array(days).join('.').split('.');
+                console.log(staff.surname +' : '+staff.days.length);
+            });
+            calendarJson.forEach(function (atDay) {
+                // console.log(atDay);
+                // console.log($scope.staff[atDay.userId]);
+                // console.log(parseInt(atDay.date.substr(8)));
+                // console.log($scope.staff[atDay.userId].days[parseInt(atDay.date.substr(8))]);
+                $scope.staff[atDay.userId].days[parseInt(atDay.date.substr(8))] = atDay.typeOfDay;
+                // console.log($scope.staff[atDay.userId].days[parseInt(atDay.date.substr(8))]);
+            })
+
+            // console.log(calendar.persons)
+            // calendar.table = $sce.trustAsHtml(response.data);
+        }, function (response) {
+            console.log(response.data, response.status);
+        })
+
+    };
+
+    $scope.editCell = function (id, day) {
+        // if(calendar.edit){
+            console.log('in editing mode');
+            var d = day + 1;
+            d = d < 10 ? '0'+d : d;
+            console.log('editCell');
+            console.log(id, day+1, $scope.type);
+            if($scope.type !== undefined){
+                var dateToInsert = attendanceYear + '-' + attendanceMonth + '-' + d;
+                console.log(dateToInsert);
+                $scope.persons.forEach(function (person) {
+                    if(person.id === id){
+                        if(person.dates[day].state === ""){
+                            person.dates[day].state = $scope.type;
+                            $http({
+                                method: 'POST',
+                                url: 'src/attendance.php',
+                                data: {state: $scope.type, date: dateToInsert, id: id, todo: 0}
+                            }).then(function (response) {
+                                console.log(response);
+                            })
+                        } else if ($scope.type === ""){
+                            person.dates[day].state = $scope.type;
+                            $http({
+                                method: 'POST',
+                                url: 'src/attendance.php',
+                                data: {state: $scope.type, date: dateToInsert, id: id, todo: 2}
+                            }).then(function (response) {
+                                console.log(response);
+                            })
+                        } else{
+                            person.dates[day].state = $scope.type;
+                            $http({
+                                method: 'POST',
+                                url: 'src/attendance.php',
+                                data: {state: $scope.type, date: dateToInsert, id: id, todo: 3}
+                            }).then(function (response) {
+                                console.log(response);
+                            })
+                        }
+
+
+                    }
+                })
+                // if(calendar.type === 'X'){
+                //
+                // } else {
+                //     calendar.persons
+                // }
+            }
+        // } else {
+            $scope.persons.forEach(function (person) {
+                if(person.id === id){
+                    console.log(person);
+                    $scope.modalName= person.name;
+                    switch (person.dates[day].state){
+                        case 'D' : $scope.modalState= 'Dovolenka';
+                            break;
+                        case 'PD': $scope.modalState= 'Plánovaná Dovolenka';
+                            break;
+                        case 'SC': $scope.modalState= 'Službná Cesta';
+                            break;
+                        case 'OCR': $scope.modalState= 'Ošetrenie Člena Rodiny';
+                            break;
+                        case 'PN': $scope.modalState= 'Práce Neschopný';
+                            break;
+                        default: $scope.modalState= 'Pracuje';
+                            break;
+                    }
+                    day += 1;
+                    day = day < 10 ? '0'+day : day;
+                    $scope.modalDate= day+'.'+ $scope.attendanceMonth + '.' + $scope.attendanceYear;
+
+                    $scope.open();
+                }
+            })
+        // }
+
+    }
 
 });

@@ -104,6 +104,7 @@
             </div>
         </div>
         <hr>
+
         <div class="row" ng-app="myApp" ng-controller="myCtrl" ng-init="getStaff()">
             <table class="table table-hover" ng-if="showStaff">
                 <label>Filter <input ng-model="search"></label><br>
