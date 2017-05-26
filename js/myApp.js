@@ -1,12 +1,12 @@
 var app = angular.module("myApp", []);
 
 app.controller("myCtrl", function ($scope, $http) {
-    $scope.nameOfDays = ['Ned', 'Pon', 'Uto', 'Str', 'Štv', 'Pia', 'Sob' ];
+    $scope.nameOfDays = ['Ned', 'Pon', 'Uto', 'Str', 'Štv', 'Pia', 'Sob'];
 
     $scope.staff = [];
 
     $scope.getStaff = function () {
-        $http.get('json/staff.json').then(function(data) {
+        $http.get('json/staff.json').then(function (data) {
             // console.log('data from staff json');
             // console.log(data);
             $scope.staff = angular.copy(data.data);
@@ -16,22 +16,22 @@ app.controller("myCtrl", function ($scope, $http) {
 
     $scope.propertyName = 'name';
 
-    $scope.sortBy = function(propertyName) {
+    $scope.sortBy = function (propertyName) {
         $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
         $scope.propertyName = propertyName;
     };
 
-    $scope.sortPubBy = function(propertyName) {
+    $scope.sortPubBy = function (propertyName) {
         $scope.pubReverse = ($scope.pubPropertyName === propertyName) ? !$scope.pubReverse : false;
         $scope.pubPropertyName = propertyName;
     };
 
-    $scope.sortBachelorBy = function(propertyName) {
+    $scope.sortBachelorBy = function (propertyName) {
         $scope.bachelorReverse = ($scope.bachelorPropertyName === propertyName) ? !$scope.bachelorReverse : false;
         $scope.bachelorPropertyName = propertyName;
     };
 
-    $scope.sortDiplomaBy = function(propertyName) {
+    $scope.sortDiplomaBy = function (propertyName) {
         $scope.diplomaReverse = ($scope.diplomaPropertyName === propertyName) ? !$scope.diplomaReverse : false;
         $scope.diplomaPropertyName = propertyName;
     };
@@ -50,11 +50,11 @@ app.controller("myCtrl", function ($scope, $http) {
         // console.log(person);
 
         $scope.person = angular.copy(person);
-        if($scope.person.photo === ""){
+        if ($scope.person.photo === "") {
             $scope.person.photo = "noface.jpg";
         }
         $scope.showPub = false;
-        if($scope.person.ldapLogin !== ""){
+        if ($scope.person.ldapLogin !== "") {
             $scope.getPublication();
         }
         $scope.showStaff = false;
@@ -66,7 +66,7 @@ app.controller("myCtrl", function ($scope, $http) {
         // console.log('getting publication');
         // console.log($scope.person.ldapLogin);
         $scope.publication = [];
-        for(var year = 2017; year >= 2013; year--){
+        for (var year = 2017; year >= 2013; year--) {
             $http({
                 method: 'POST',
                 url: 'src/getPublication.php',
@@ -74,7 +74,7 @@ app.controller("myCtrl", function ($scope, $http) {
             }).then(function (response) {
                 // console.log(response.data);
 
-                if(angular.isDefined(response.data)){
+                if (angular.isDefined(response.data)) {
                     $scope.workPub = angular.copy(response.data.children[1].children[1].children[0].children[0].children[12].children[1].children);
                     angular.forEach($scope.workPub, function (pub) {
                         var workPub = {
@@ -117,7 +117,7 @@ app.controller("myCtrl", function ($scope, $http) {
                         supervisor: thesis.children[3].children[0].children[0].html,
                         program: thesis.children[5].children[0].html
                     };
-                    if(workThesis.type === 'BP'){
+                    if (workThesis.type === 'BP') {
                         $scope.bachelorThesis.push(workThesis);
                     }
                 }
@@ -151,7 +151,7 @@ app.controller("myCtrl", function ($scope, $http) {
                         supervisor: thesis.children[3].children[0].children[0].html,
                         program: thesis.children[5].children[0].html
                     };
-                    if(workThesis.type === 'DP'){
+                    if (workThesis.type === 'DP') {
                         $scope.diplomaThesis.push(workThesis);
                     }
                 }
@@ -177,13 +177,31 @@ app.controller("myCtrl", function ($scope, $http) {
 
     $scope.weekDays = function (days) {
         $scope.dates = [];
-        for (var i = 0; i<days; i++){
+        for (var i = 0; i < days; i++) {
             $scope.dates[i] = {
                 numb: i,
-                name: $scope.nameOfDays[new Date($scope.attendanceYear, $scope.attendanceMonth-1, i+1).getDay()]
+                name: $scope.nameOfDays[new Date($scope.attendanceYear, $scope.attendanceMonth - 1, i + 1).getDay()]
             };
         }
     };
+
+    $scope.exportAction = function () {
+        // console.log('gonna export table to pdf');
+        // html2canvas(document.getElementById('printTable'), {
+        //     onrendered: function (canvas) {
+        //         var data = canvas.toDataURL();
+        //         var docDefinition = {
+        //             content: [{
+        //                 image: data,
+        //                 width: 500,
+        //             }]
+        //         };
+        //         pdfMake.createPdf(docDefinition).download("dochadzka.pdf");
+        //     }
+        // });
+    };
+
+    $scope.type = '';
 
     $scope.printTable = function (month, year) {
         $scope.persons = [];
@@ -200,109 +218,79 @@ app.controller("myCtrl", function ($scope, $http) {
             var days = $scope.daysOfMonth();
             var dates = [];
             $scope.weekDays(days);
-            console.log(calendarJson);
-            console.log(dates);
-            console.log($scope.staff.length);
             $scope.staff.forEach(function (staff) {
                 staff.days = [];
                 staff.days = Array(days).join('.').split('.');
-                console.log(staff.surname +' : '+staff.days.length);
             });
             calendarJson.forEach(function (atDay) {
-                // console.log(atDay);
-                // console.log($scope.staff[atDay.userId]);
-                // console.log(parseInt(atDay.date.substr(8)));
-                // console.log($scope.staff[atDay.userId].days[parseInt(atDay.date.substr(8))]);
-                $scope.staff[atDay.userId].days[parseInt(atDay.date.substr(8))] = atDay.typeOfDay;
-                // console.log($scope.staff[atDay.userId].days[parseInt(atDay.date.substr(8))]);
+                $scope.staff[atDay.userId].days[parseInt(atDay.date.substr(8)) - 1] = atDay.typeOfDay;
             })
 
-            // console.log(calendar.persons)
-            // calendar.table = $sce.trustAsHtml(response.data);
         }, function (response) {
             console.log(response.data, response.status);
         })
 
     };
+    $scope.editing = false;
+    $scope.allowEditing = function(id){
+        // console.log('row ' + id);
+        $scope.editingRow = id;
+
+        if(!$scope.editing){
+            // console.log('allowing edit for row ' + id);
+            $scope.editing = true;
+        } else if (id === $scope.editingRow && $scope.editing){
+            // console.log('finished editing row '+ id);
+            $scope.editing = false;
+        }
+        // console.log($scope.editing);
+
+    };
+
 
     $scope.editCell = function (id, day) {
-        // if(calendar.edit){
-            console.log('in editing mode');
+        if($scope.editing && id === $scope.editingRow){
+            // console.log('editCell: ' + id + ' ' + day);
+
+            // console.log('in editing mode');
             var d = day + 1;
-            d = d < 10 ? '0'+d : d;
-            console.log('editCell');
-            console.log(id, day+1, $scope.type);
-            if($scope.type !== undefined){
-                var dateToInsert = attendanceYear + '-' + attendanceMonth + '-' + d;
-                console.log(dateToInsert);
-                $scope.persons.forEach(function (person) {
-                    if(person.id === id){
-                        if(person.dates[day].state === ""){
-                            person.dates[day].state = $scope.type;
-                            $http({
-                                method: 'POST',
-                                url: 'src/attendance.php',
-                                data: {state: $scope.type, date: dateToInsert, id: id, todo: 0}
-                            }).then(function (response) {
-                                console.log(response);
-                            })
-                        } else if ($scope.type === ""){
-                            person.dates[day].state = $scope.type;
-                            $http({
-                                method: 'POST',
-                                url: 'src/attendance.php',
-                                data: {state: $scope.type, date: dateToInsert, id: id, todo: 2}
-                            }).then(function (response) {
-                                console.log(response);
-                            })
-                        } else{
-                            person.dates[day].state = $scope.type;
-                            $http({
-                                method: 'POST',
-                                url: 'src/attendance.php',
-                                data: {state: $scope.type, date: dateToInsert, id: id, todo: 3}
-                            }).then(function (response) {
-                                console.log(response);
-                            })
-                        }
-
-
-                    }
-                })
-                // if(calendar.type === 'X'){
-                //
-                // } else {
-                //     calendar.persons
-                // }
-            }
-        // } else {
-            $scope.persons.forEach(function (person) {
-                if(person.id === id){
-                    console.log(person);
-                    $scope.modalName= person.name;
-                    switch (person.dates[day].state){
-                        case 'D' : $scope.modalState= 'Dovolenka';
-                            break;
-                        case 'PD': $scope.modalState= 'Plánovaná Dovolenka';
-                            break;
-                        case 'SC': $scope.modalState= 'Službná Cesta';
-                            break;
-                        case 'OCR': $scope.modalState= 'Ošetrenie Člena Rodiny';
-                            break;
-                        case 'PN': $scope.modalState= 'Práce Neschopný';
-                            break;
-                        default: $scope.modalState= 'Pracuje';
-                            break;
-                    }
-                    day += 1;
-                    day = day < 10 ? '0'+day : day;
-                    $scope.modalDate= day+'.'+ $scope.attendanceMonth + '.' + $scope.attendanceYear;
-
-                    $scope.open();
+            d = d < 10 ? '0' + d : d;
+            // console.log('editCell');
+            // console.log(id, day + 1, $scope.type);
+            if ($scope.type !== undefined) {
+                var dateToInsert = $scope.attendanceYear + '-' + $scope.attendanceMonth + '-' + d;
+                // console.log(dateToInsert);
+                if ($scope.staff[id].days[day] === "") {
+                    $scope.staff[id].days[day] = $scope.type;
+                    $http({
+                        method: 'POST',
+                        url: 'src/attendance.php',
+                        data: {state: $scope.type, date: dateToInsert, id: id, todo: 0}
+                    }).then(function (response) {
+                        // console.log(response);
+                    })
+                } else if ($scope.type === "") {
+                    $scope.staff[id].days[day] = $scope.type;
+                    $http({
+                        method: 'POST',
+                        url: 'src/attendance.php',
+                        data: {state: $scope.type, date: dateToInsert, id: id, todo: 2}
+                    }).then(function (response) {
+                        // console.log(response);
+                    })
+                } else {
+                    $scope.staff[id].days[day] = $scope.type;
+                    $http({
+                        method: 'POST',
+                        url: 'src/attendance.php',
+                        data: {state: $scope.type, date: dateToInsert, id: id, todo: 3}
+                    }).then(function (response) {
+                        // console.log(response);
+                    })
                 }
-            })
-        // }
-
+            }
+        } else {
+            // console.log('not allowed to edit row ' + id);
+        }
     }
-
 });

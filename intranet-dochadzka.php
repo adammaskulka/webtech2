@@ -1,3 +1,18 @@
+<?php
+require_once "src/userController.php";
+require_once "cfg/config.php";
+$conn = new mysqli($CONF_DB_HOST, $CONF_DB_USER, $CONF_DB_PASS , $CONF_DB_NAME);
+mysqli_set_charset($conn,"utf8");
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+
+
+session_start();
+$user = $_SESSION['user'];
+?>
+
 <!DOCTYPE html>
 <html lang="sk">
 <head>
@@ -344,20 +359,20 @@
                 <a href="" ng-click="printTable(attendanceMonth, attendanceYear)">Vypis</a>
 
                 <label for="type">Typ absencie:</label>
-                <select id="type" ng-model="calendar.type" class="selectpicker">
+                <select id="type" ng-model="type" class="selectpicker">
                     <option value="PD">Plán Dovolenky</option>
-                    <option value="D" /*ng-if="userIsAdmin"*/>Dovolenka</option>
-                    <option value="SC" /*ng-if="userIsAdmin"*/>Služobná Cesta</option>
-                    <option value="OCR" /*ng-if="userIsAdmin"*/>Ošetrenie Člena Rodiny</option>
-                    <option value="PN" /*ng-if="userIsAdmin"*/>Práce Neschopný</option>
-                    <option value="" /*ng-if="userIsAdmin"*/>Zrušiť</option>
+                    <option value="D" >Dovolenka</option>
+                    <option value="SC" >Služobná Cesta</option>
+                    <option value="OCR" >Ošetrenie Člena Rodiny</option>
+                    <option value="PN" >Práce Neschopný</option>
+                    <option value="" >Zrušiť</option>
                 </select>
 
                 <a href="" ng-click="editAttendance()">Zmeniť</a>
             </form>
             Zobrazujem {{attendanceMonth}}.{{attendanceYear}}
             <div class="table-responsive">
-                <table class="table table-hover table-bordered">
+                <table class="table table-hover table-bordered export-table" id="printTable">
                     <thead>
                         <th>Meno</th>
                         <th ng-repeat="nameDay in dates">
@@ -369,7 +384,14 @@
                         <td>
                             {{person.name}} {{person.surname}}
                         </td>
-                        <td ng-repeat="staffDay in person.days track by $index">
+                        <?php
+                        if(IsAdmin() || IsHR()) {
+                            echo '<td ng-repeat="staffDay in person.days track by $index" ng-click="allowEditing(person.id)" ng-mouseover="editCell(person.id, $index)">';
+                        } else {
+                            echo '<td ng-repeat="staffDay in person.days track by $index">';
+                        }
+
+                        ?>
 <!--                        <td ng-repeat="staffDay in dates" ng-click="editCell(person.id, staffDay.day)">-->
                             {{staffDay}}
                         </td>
@@ -377,6 +399,7 @@
                     </tbody>
                 </table>
             </div>
+<!--            <a href="" ng-click="exportAction()"> Export Pdf </a>-->
         </div>
     </div>
 </div>
