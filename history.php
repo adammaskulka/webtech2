@@ -25,7 +25,7 @@
     <meta name="description" content="Ústav automobilovej mechatroniky FEI STU">
 
     <title>
-        Ústav automobilovej mechatroniky FEI STU | Domov
+        Ústav automobilovej mechatroniky FEI STU | História
     </title>
 
     <!-- Bootstrap core CSS -->
@@ -79,8 +79,29 @@
 		include('header-sk.php'); 
 ?>
 <!--header end-->
-
-<!--breadcrumbs start-->
+<?php if (strcmp($_SESSION['lang'], 'en') == 0) {
+    echo '
+    <!--breadcrumbs start-->
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-sm-4">
+                <h1>History</h1>
+            </div>
+            <div class="col-lg-8 col-sm-8">
+                <ol class="breadcrumb pull-right">
+                    <li><a href="index.php">Home</a></li>
+                    <li class="active">History</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs end-->
+    ';
+} else {
+    echo '
+    <!--breadcrumbs start-->
 <div class="breadcrumbs">
     <div class="container">
         <div class="row">
@@ -89,7 +110,7 @@
             </div>
             <div class="col-lg-8 col-sm-8">
                 <ol class="breadcrumb pull-right">
-                    <li><a href="index.php">Domov</a></li>
+                    <li><a href="index.php">Home</a></li>
                     <li class="active">História</li>
                 </ol>
             </div>
@@ -97,7 +118,10 @@
     </div>
 </div>
 <!--breadcrumbs end-->
+    ';
+}
 
+?>
 <!--container start-->
 <div class="white-bg">
 

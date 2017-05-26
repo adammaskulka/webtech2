@@ -417,7 +417,7 @@
                             Aktuality
                         </td>
                         <td>
-
+                            Andrej Dubeň
                         </td>
                     </tr>
                     <tr>
@@ -481,7 +481,7 @@
                             Intranet - aktuality
                         </td>
                         <td>
-
+                            Andrej Dubeň
                         </td>
                     </tr>
                     <tr>
@@ -489,7 +489,7 @@
                             Intranet - dochádzka
                         </td>
                         <td>
-
+                            Martin Meľuch
                         </td>
                     </tr>
                     <tr>
@@ -529,7 +529,7 @@
                             Intranet - nákupy
                         </td>
                         <td>
-
+                            Adam Maškulka
                         </td>
                     </tr>
                     <tr>

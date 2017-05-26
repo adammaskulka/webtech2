@@ -119,8 +119,54 @@ function login($login, $pass)
 		include('header-sk.php');
 ?>
 <!--header end-->
+<?php
+if (strcmp($_SESSION['lang'], 'en') == 0) {
+    echo '
+    <!--breadcrumbs start-->
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-sm-4">
+                <h1>Login</h1>
+            </div>
+            <div class="col-lg-8 col-sm-8">
+                <ol class="breadcrumb pull-right">
+                    <li><a href="index.php">Home</a></li>
+                    <li class="active">Login</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs end-->
 
-<!--breadcrumbs start-->
+<!--container start-->
+<div class="login-bg">
+    <div class="container">
+        <div class="form-wrapper">
+            <form class="form-signin wow fadeInUp" method="post" action="login.php">
+                <h2 class="form-signin-heading">Login</h2>
+                <div class="login-wrap">
+                    <input name="login" type="text" class="form-control" placeholder="AIS ID" autofocus>
+                    <input name="password" type="password" class="form-control" placeholder="Heslo">
+
+                    <button class="btn btn-lg btn-login btn-block" type="submit">Log in</button>
+
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--container end-->
+    ';
+
+} else {
+
+    echo '
+    <!--breadcrumbs start-->
 <div class="breadcrumbs">
     <div class="container">
         <div class="row">
@@ -158,6 +204,13 @@ function login($login, $pass)
     </div>
 </div>
 <!--container end-->
+    
+    ';
+
+}
+?>
+
+
 
 <!--footer start-->
 <?php
