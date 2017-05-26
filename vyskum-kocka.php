@@ -105,7 +105,7 @@
     <div class="container career-inner">
         <div class="row">
             <div class="col-md-12 career-head">
-                <h1 class="wow fadeIn">Výskum - 3D LED Kocka</h1>
+                <h1 class="wow fadeIn"><?php if($_SESSION['lang'] == 'sk') echo "Výskum - 3D LED Kocka"; else echo "Research - 3D LED Cube"; ?></h1>
 
             </div>
         </div>
