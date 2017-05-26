@@ -9,7 +9,7 @@ http://elearn.elf.stuba.sk/moodle/pluginfile.php/54857/mod_resource/content/7/ZP
 | ------------- |:-------------:| -----:|
 | 1. github      | Adam | done |
 | 2. responzivita      | Adam      |   done |
-| 3. multilanguage | Radoslav      |    TBD |
+| 3. multilanguage | Radoslav      |    done |
 | 4. menu      | Adam | done |
 | 5. titulna strana      | Adam      |   done |
 | 6. footer | Adam      |   done |
@@ -30,7 +30,7 @@ http://elearn.elf.stuba.sk/moodle/pluginfile.php/54857/mod_resource/content/7/ZP
 | 15. doktorandi  | Radoslav | Done |
 | 15. publikacie  | Radoslav | Done |
 | 15. sluzobne cesty  | Radoslav | Done |
-| 15. nakupy  | Martin + Andrej | TBD |
+| 15. nakupy  | Adam | done |
 | 15. rozdelenie uloh  | Adam | done |
 | O nas  | Adam | done |
 | Studium - texty  | Adam | done |
