@@ -1,19 +1,33 @@
-<?php 
-	session_start();
-	
-	if(isset($_GET['lang'])){
-		if(strcmp($_GET['lang'] , "sk") == 0 || strcmp($_GET['lang'] , "en") == 0)
-			$_SESSION['lang'] = $_GET['lang'];
-		else
-			$_SESSION['lang'] = "sk";
-		
+<?php
+session_start();
+header('Cache-control: private'); // IE 6 FIX
 
-		header("Location: contact.php");
-		exit();
-	}
-	
-	if(!isset($_SESSION['lang']))  
-		$_SESSION['lang'] = 'sk';
+if (isset($_GET['lang'])) {
+    $language = $_GET['lang'];
+    $_SESSION['lang'] = $language;
+    setcookie('lang', $language, time() + (3600 * 24 * 30));
+} else if (isSet($_SESSION['lang'])) {
+    $language = $_SESSION['lang'];
+} else if (isSet($_COOKIE['lang'])) {
+    $language = $_COOKIE['lang'];
+} else {
+    $language = 'sk';
+    $_SESSION['lang'] = 'sk';
+    setcookie('lang', $language, time() + (3600 * 24 * 30));
+}
+switch ($language) {
+    case 'en':
+        $lang_file = 'lang-en.php';
+        break;
+    case 'sk':
+        $lang_file = 'lang-sk.php';
+        break;
+    default:
+        $lang_file = 'lang-sk.php';
+}
+
+include_once 'languages/' . $lang_file;
+
 
 ?>
 <!DOCTYPE html>
@@ -25,7 +39,7 @@
     <meta name="description" content="Ústav automobilovej mechatroniky FEI STU">
 
     <title>
-        Ústav automobilovej mechatroniky FEI STU | Kontakt
+        <?php echo $lang['INSTITUTE_UAMM']; ?> | <?php echo $lang['CONTACT']; ?>
     </title>
 
     <!-- Bootstrap core CSS -->
@@ -73,10 +87,19 @@
 <body>
 <!--header start-->
 <?php
-	if(strcmp($_SESSION['lang'],'en') == 0)
-		include('header-en.php'); 
-	if(strcmp($_SESSION['lang'],'sk') == 0)
-		include('header-sk.php'); 
+
+switch ($language) {
+    case 'en':
+        include('header-en.php');
+        break;
+    case 'sk':
+        include('header-sk.php');
+        break;
+    default:
+        include('header-sk.php');
+
+}
+
 ?>
 <!--header end-->
 
@@ -86,18 +109,18 @@
         <div class="row">
             <div class="col-lg-4 col-sm-4">
                 <h1>
-                    Kontakt
+                    <?php echo $lang['CONTACT']; ?>
                 </h1>
             </div>
             <div class="col-lg-8 col-sm-8">
                 <ol class="breadcrumb pull-right">
                     <li>
                         <a href="index.php">
-                            Domov
+                            <?php echo $lang['HOME']; ?>
                         </a>
                     </li>
                     <li class="active">
-                        Kontakt
+                        <?php echo $lang['CONTACT']; ?>
                     </li>
                 </ol>
             </div>
@@ -115,7 +138,7 @@
         <div class="col-lg-5 col-sm-5 address">
             <section class="contact-infos">
                 <h4 class="title custom-font text-black">
-                    Adresa
+                    <?php echo $lang['ADDRESS']; ?>
                 </h4>
                 <address>
                     Ústav automobilovej mechatroniky <br>
@@ -126,11 +149,11 @@
             </section>
             <section class="contact-infos">
                 <h4>
-                    Kontaktné informácie
+                    <?php echo $lang['CONTACT_INFO']; ?>
                 </h4>
                 <p>
                     Katarína Kermietová <br>
-                    Miestnosť: D 116 <br>
+                    <?php echo $lang['ROOM']; ?>: D 116 <br>
                 </p>
                 <p>
                     <i class="icon-phone">
@@ -150,31 +173,31 @@
 
         <div class="col-lg-7 col-sm-7 address">
             <h4>
-                Kontaktný formulár
+                <?php echo $lang['CONTACT_FORM']; ?>
             </h4>
             <div class="contact-form">
                 <form role="form" action="/web/?q=contact" id="contact-site-form" method="post" accept-charset="UTF-8">
                     <div class="form-group">
                         <label for="name">
-                            Vaše meno a priezvisko *
+                            <?php echo $lang['YOUR_NAME']; ?>
                         </label>
                         <input type="text" id="edit-name" name="name" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="email">
-                            Vaša e-mailová adresa *
+                            <?php echo $lang['YOUR_MAIL']; ?>
                         </label>
                         <input type="text" id="edit-mail" name="mail" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="phone">
-                            Predmet *
+                            <?php echo $lang['SUBJECT']; ?>
                         </label>
                         <input type="text" id="edit-subject" name="subject" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="phone">
-                            Správa *
+                            <?php echo $lang['MESSAGE']; ?>
                         </label>
                         <textarea id="edit-message" name="message" rows="5" class="form-control">
                 </textarea>
@@ -183,7 +206,7 @@
                         <input type="hidden" name="form_id" value="contact_site_form">
                     </div>
                     <button class="btn btn-info" type="submit" id="edit-submit" name="op">
-                        Submit
+                        <?php echo $lang['SEND']; ?>
                     </button>
                 </form>
             </div>
@@ -201,11 +224,18 @@
 <!--google map end-->
 
 <!--footer start-->
-<?php 
-	if(strcmp($_SESSION['lang'],'en') == 0)
-		include('footer-en.php'); 
-	if(strcmp($_SESSION['lang'],'sk') == 0)
-		include('footer-sk.php'); 
+<?php
+switch ($language) {
+    case 'en':
+        include('footer-en.php');
+        break;
+    case 'sk':
+        include('footer-sk.php');
+        break;
+    default:
+        include('footer-sk.php');
+
+}
 ?>
 
 <!--small footer end-->

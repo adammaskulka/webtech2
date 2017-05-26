@@ -310,58 +310,12 @@
 <!-- left menu end -->
 
 <!--container start-->
-<?php
-  require('src/shopController.php');
-    require('src/userController.php');
 
-  if (isset($_POST["delete"])) {
-      removeShop($_POST["delete"]);
-  }
-  if (isset($_POST["create"])) {
-      addShop($_POST["text"],$_POST["header"]);
-  }
-  if (isset($_POST["delete"])) {
-      removeShop($_POST["delete"]);
-  }
-  if (isset($_POST["update"])) {
-      $shop = new Shop();
-      $shop->create($_POST["update"], $_POST["text"], $_POST["header"]);
-      updateShop($shop);
-  }
-
-  $shops = getAllShop();
-?>
-
-<table>
-<?php foreach ($shops as $shop) { ?>
-<?php if(isAdmin() || isHR()){  ?>
-<form action="intranet-nakupy.php" method="post">
-  <tr><td><input type="text" name="header" value="<?php echo $shop->header ?>"></td> </tr>
-  <tr><td><input type="text" name="text" value="<?php echo $shop->text ?>"></td></tr>
-  <tr>
-    <td><button type="submit" name="update" value=<?php echo $shop->id ?>>UPDATE</button></td>
+<form method="post">
+    <textarea name="textarea" id="textarea"></textarea>
+    <button name="submitbtn"></button>
 </form>
-<form action="intranet-nakupy.php" method="post">
-    <td>
-        <button type="submit" name="delete" value=<?php echo $shop->id ?>>DELETE</button>
-    </td>
-</form>
-<<?php }else{ ?>
-  <tr><td><b><?php echo $shop->header ?></b></td> </tr>
-  <tr><td><?php echo $shop->text ?></td></tr>
-<?php }} ?>
-<?php if(isAdmin() || isHR()){  ?>
-<tr>
-    <form action="intranet-nakupy.php" method="post">
-        <td><input type="text" name="header" placeholder="nadpis"></td>
-        <td><input type="text" name="text" placeholder="text"></td>
-        <td>
-            <button type="submit" name="create" value="create">CREATE</button>
-        </td>
-    </form>
-</tr>
-<?php } ?>
-</table>
+
 
 <!--container end-->
 
@@ -493,6 +447,36 @@
 <!--<script src="js/slider/sequencejs-options.modern-slide-in.js"></script>-->
 <script src="js/seq-slider/sequencejs-options.apple-style.js"></script>
 <!-- end of sequence slider js-->
+
+
+<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=5ktqvn3aj7dgh0f6fljbyxd8ay6dawknt2m7ngaujkox4xvs"></script>
+<script>tinymce.init({
+        selector: 'textarea',
+        height: 700,
+        theme: 'modern',
+        save_enablewhendirty: true,
+        save_oncancelcallback: function () {
+            console.log('Save canceled');
+        },
+        save_onsavecallback: function () {
+            console.log('Saved');
+        },
+        plugins: [
+            "advlist autolink lists link image charmap print preview anchor",
+            "searchreplace visualblocks code fullscreen",
+            "save",
+            "insertdatetime media table contextmenu paste imagetools",
+            "image imagetools"
+
+        ],
+        toolbar: 'save | insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons',
+        imagetools_cors_hosts: ['www.tinymce.com', 'codepen.io'],
+        content_css: [
+//            'fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+//            'www.tinymce.com/css/codepen.min.css'
+        ]
+    });
+</script>
 
 
 <script>

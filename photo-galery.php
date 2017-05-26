@@ -1,19 +1,32 @@
-<?php 
-	session_start();
-	
-	if(isset($_GET['lang'])){
-		if(strcmp($_GET['lang'] , "sk") == 0 || strcmp($_GET['lang'] , "en") == 0)
-			$_SESSION['lang'] = $_GET['lang'];
-		else
-			$_SESSION['lang'] = "sk";
-		
+<?php
+session_start();
+header('Cache-control: private'); // IE 6 FIX
 
-		header("Location: photo-galery.php");
-		exit();
-	}
-	
-	if(!isset($_SESSION['lang']))  
-		$_SESSION['lang'] = 'sk';
+if (isset($_GET['lang'])) {
+    $language = $_GET['lang'];
+    $_SESSION['lang'] = $language;
+    setcookie('lang', $language, time() + (3600 * 24 * 30));
+} else if (isSet($_SESSION['lang'])) {
+    $language = $_SESSION['lang'];
+} else if (isSet($_COOKIE['lang'])) {
+    $language = $_COOKIE['lang'];
+} else {
+    $language = 'sk';
+    $_SESSION['lang'] = 'sk';
+    setcookie('lang', $language, time() + (3600 * 24 * 30));
+}
+switch ($language) {
+    case 'en':
+        $lang_file = 'lang-en.php';
+        break;
+    case 'sk':
+        $lang_file = 'lang-sk.php';
+        break;
+    default:
+        $lang_file = 'lang-sk.php';
+}
+
+include_once 'languages/' . $lang_file;
 
 ?>
 <!DOCTYPE html>
@@ -25,7 +38,7 @@
     <meta name="description" content="Ústav automobilovej mechatroniky FEI STU">
 
     <title>
-        Ústav automobilovej mechatroniky FEI STU | Fotogaléria
+        <?php echo $lang['INSTITUTE_UAMM']; ?> | <?php echo $lang['PHOTOGALERY']; ?>
     </title>
 
     <!-- Bootstrap core CSS -->
@@ -59,10 +72,19 @@
 <body>
 <!--header start-->
 <?php
-	if(strcmp($_SESSION['lang'],'en') == 0)
-		include('header-en.php'); 
-	if(strcmp($_SESSION['lang'],'sk') == 0)
-		include('header-sk.php'); 
+
+switch ($language) {
+    case 'en':
+        include('header-en.php');
+        break;
+    case 'sk':
+        include('header-sk.php');
+        break;
+    default:
+        include('header-sk.php');
+
+}
+
 ?>
     
 <!--header end-->
@@ -72,12 +94,12 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-sm-4">
-                <h1>Fotogaléria</h1>
+                <h1><?php echo $lang['PHOTOGALERY']; ?></h1>
             </div>
             <div class="col-lg-8 col-sm-8">
                 <ol class="breadcrumb pull-right">
-                    <li><a href="index.php">Domov</a></li>
-                    <li class="active">Fotogaléria</li>
+                    <li><a href="index.php"><?php echo $lang['HOME']; ?></a></li>
+                    <li class="active"><?php echo $lang['PHOTOGALERY']; ?></li>
                 </ol>
             </div>
         </div>
@@ -101,11 +123,21 @@
                 foreach ($folders as $folder) {
                     $folders_string = $folders_string . " " . $folder->folder;
                 }
-                echo '<li><span class="filter active" data-filter="' . $folders_string . '">Všetky</span></li>';
+                echo '<li><span class="filter active" data-filter="' . $folders_string . '">' . $lang["ALL"] . '</span></li>';
                 foreach ($folders as $folder) {
 
                     echo '<li><span class="filter" data-filter="' . $folder->folder . '">';
-                    echo $folder->title_sk;
+                    switch ($language) {
+                        case 'en':
+                            echo $folder->title_en;
+                            break;
+                        case 'sk':
+                            echo $folder->title_sk;
+                            break;
+                        default:
+                            echo $folder->title_sk;
+
+                    }
                     echo '</span></li>';
                 }
 
@@ -132,7 +164,7 @@
                         echo ' <div class="image-caption">';
                         echo '<a href="img/' . $folder->folder . '/' . $item . '" class="label magnefig label-info icon" data-toggle="tooltip" data-placement="left" title="Zoom"><i class="fa fa-eye"></i></a>';
                         echo '</div>';
-                        echo '<img src="img/' . $folder->folder . '/' . $item . '" alt="" />';
+                        echo '<img src="img/' . $folder->folder . '/' . $item . '" alt="chybYcka" />';
                         echo '</div> </div> </div>';
                     }
                 }
@@ -145,11 +177,18 @@
 
 
 <!--footer start-->
-<?php 
-	if(strcmp($_SESSION['lang'],'en') == 0)
-		include('footer-en.php'); 
-	if(strcmp($_SESSION['lang'],'sk') == 0)
-		include('footer-sk.php'); 
+<?php
+switch ($language) {
+    case 'en':
+        include('footer-en.php');
+        break;
+    case 'sk':
+        include('footer-sk.php');
+        break;
+    default:
+        include('footer-sk.php');
+
+}
 ?>
 <!--small footer end-->
 

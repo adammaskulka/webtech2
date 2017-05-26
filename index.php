@@ -1,19 +1,33 @@
-<?php 
-	session_start();
-	
-	if(isset($_GET['lang'])){
-		if(strcmp($_GET['lang'] , "sk") == 0 || strcmp($_GET['lang'] , "en") == 0)
-			$_SESSION['lang'] = $_GET['lang'];
-		else
-			$_SESSION['lang'] = "sk";
-		
+<?php
 
-		header("Location: index.php");
-		exit();
-	}
-	
-	if(!isset($_SESSION['lang']))  
-		$_SESSION['lang'] = 'sk';
+session_start();
+header('Cache-control: private'); // IE 6 FIX
+
+if (isset($_GET['lang'])) {
+    $language = $_GET['lang'];
+    $_SESSION['lang'] = $language;
+    setcookie('lang', $language, time() + (3600 * 24 * 30));
+} else if (isSet($_SESSION['lang'])) {
+    $language = $_SESSION['lang'];
+} else if (isSet($_COOKIE['lang'])) {
+    $language = $_COOKIE['lang'];
+} else {
+    $language = 'sk';
+    $_SESSION['lang'] = 'sk';
+    setcookie('lang', $language, time() + (3600 * 24 * 30));
+}
+switch ($language) {
+    case 'en':
+        $lang_file = 'lang-en.php';
+        break;
+    case 'sk':
+        $lang_file = 'lang-sk.php';
+        break;
+    default:
+        $lang_file = 'lang-sk.php';
+}
+
+include_once 'languages/' . $lang_file;
 
 ?>
 <!DOCTYPE html>
@@ -73,10 +87,19 @@
 <body>
 
 <?php
-	if(strcmp($_SESSION['lang'],'en') == 0)
-		include('header-en.php'); 
-	if(strcmp($_SESSION['lang'],'sk') == 0)
-		include('header-sk.php'); 
+
+switch ($language) {
+    case 'en':
+        include('header-en.php');
+        break;
+    case 'sk':
+        include('header-sk.php');
+        break;
+    default:
+        include('header-sk.php');
+
+}
+
 ?>
 
 <div id="sequence-theme">
@@ -86,7 +109,7 @@
             <li class="animate-in">
                 <div class="intro">
                     <h2>
-                        MULTIMÉDIÁ A MOBILNÉ PLATFORMY
+                        <?php echo $lang['MULTIMEDIA']; ?>
                     </h2>
                 </div>
                 <img class="iphone" src="img/fei/android.jpg" alt="iPhone4"/>
@@ -96,7 +119,7 @@
                 <img class="ipad" src="img/fei/IoT.jpg" alt="iPad"/>
                 <div class="slide2">
                     <h2>
-                        "INTERNET OF THINGS" V MECHATRONIKE
+                        <?php echo $lang['IOT']; ?>
                     </h2>
                 </div>
                 <img class="ipad-shadow" src="img/seq-slider/ipad-shadow.png" alt=""/>
@@ -104,7 +127,7 @@
             <li>
                 <div class="slide3">
                     <h2>
-                        VYUŽITIE VIRTUÁLNEJ REALITY V PRIEMYSLE
+                        <?php echo $lang['VIRTUAL_REALITY']; ?>
                     </h2>
                 </div>
                 <img class="iphone2" src="img/fei/vr1.jpg" alt="iPhone4"/>
@@ -126,7 +149,7 @@
             <div class="col-md-12">
                 <div class="text-center feature-head wow fadeInDown">
                     <h1 class="">
-                        Vitajte na stránkach Ústavu automobilovej mechatroniky FEI STU
+                        <?php echo $lang['WELCOME']; ?>
                     </h1>
 
                 </div>
@@ -140,14 +163,11 @@
 
                             </em>
                             <h4>
-                                <b>APLIKÁCIE TAKMER VŠADE</b>
+                                <b><?php echo $lang['APPLICATIONS_EVERYWHERE']; ?></b>
                             </h4>
                         </div>
                         <p class="text-center">
-                            Mechatronika je veľmi komplexná so širokým spektrom aplikácií: automobilový, letecký
-                            priemysel, farmaceutický priemysel, biotechnológie, energetika, vrtné plošiny, technika pre
-                            domácnosť, inteligentné domy a mnohé iné oblasti vyžadujúce multidisciplinárne technické
-                            vedomosti.
+                            <?php echo $lang['APPLICATIONS_EVERYWHERE_TEXT']; ?>
                         </p>
                     </div>
                     <div class="col-md-4 col-sm-4 text-center wow fadeInUp">
@@ -156,13 +176,11 @@
                                 <img src="img/icons/trophy.png" alt="" width="100" height="100">
                             </em>
                             <h4>
-                                <b>BUDEŠ PROFESIONÁL</b>
+                                <b><?php echo $lang['PROFESIONAL']; ?></b>
                             </h4>
                         </div>
                         <p class="text-center">
-                            Mechatronika umožňuje rýchlu a efektívnu tvorbu nových produktov a aplikácií. Patrí medzi
-                            priority vlády Slovenskej republiky. Ide o moderný trend inžinierstva 21. storočia.
-                            Absolventi – mechatronici sú dnes žiadaní na Slovensku aj v celom svete.
+                            <?php echo $lang['PROFESIONAL_TEXT']; ?>
                         </p>
                     </div>
                     <div class="col-md-4 col-sm-4 text-center wow fadeInUp">
@@ -171,13 +189,11 @@
                                 <img src="img/icons/puzzle.png" alt="" width="100" height="100">
                             </em>
                             <h4>
-                                <b>UČENIE SA EXPERIMENTOVANÍM</b>
+                                <b><?php echo $lang['EXPERIMENT']; ?></b>
                             </h4>
                         </div>
                         <p class="text-center">
-                            V našich predmetoch je kladený veľký dôraz na prácu s reálnymi zariadeniami. Snažíme sa, aby
-                            študenti mali čo najviac praktických zručností. V rámci bakalárskych a diplomových projektov
-                            môžeš priamo prispieť k riešeniu problémov, ktoré si žiada prax.
+                            <?php echo $lang['EXPERIMENT_TEXT']; ?>
                         </p>
                     </div>
                 </div>
@@ -197,13 +213,13 @@
             <section class="tab wow fadeInLeft">
                 <div class="col-lg-7" id="skillz">
                     <h3 class="skills">
-                        Hrubá mzda absolventov
+                        <?php echo $lang['SALARY']; ?>
                     </h3>
 
                     <div class="skill_bar">
                         <div class="skill_bar_progress skill_one">
                             <p>
-                                Programátor 1500 €
+                                <?php echo $lang['SALARY_PROGRAMMER']; ?> 1500 €
                             </p>
                         </div>
                     </div>
@@ -211,7 +227,7 @@
                     <div class="skill_bar">
                         <div class="skill_bar_progress skill_two">
                             <p>
-                                CATIA konštruktér 1090 €
+                                <?php echo $lang['SALARY_CATIA']; ?> 1090 €
                             </p>
                         </div>
                     </div>
@@ -219,7 +235,7 @@
                     <div class="skill_bar">
                         <div class="skill_bar_progress skill_three">
                             <p>
-                                Vedúci predajne 800 €
+                                <?php echo $lang['SALARY_SELLER']; ?> 800 €
                             </p>
                         </div>
                     </div>
@@ -227,7 +243,7 @@
                     <div class="skill_bar">
                         <div class="skill_bar_progress skill_four">
                             <p>
-                                SBS 530€
+                                <?php echo $lang['SALARY_SBS']; ?> 530€
                             </p>
                         </div>
                     </div>
@@ -243,48 +259,48 @@
                         <ul class="slides about-flex-slides">
                             <li>
                                 <div class="about-testimonial-image ">
-                                    <img alt="" src="img/staff_photo/rabek.jpg">
+                                    <img alt="rabek" src="img/staff_photo/rabek.jpg">
                                 </div>
                                 <a class="about-testimonial-author" href="#">
                                     Ing. Matej Rábek
                                 </a>
-                                <span class="about-testimonial-company">Doktorand </span>
+                                <span class="about-testimonial-company"><?php echo $lang['DOCTOR']; ?> </span>
                                 <div class="about-testimonial-content">
                                     <p class="about-testimonial-quote">
-                                        Oddelenie informačných, komunikačných a riadiacich systémov <br>
-                                        Miestnosť: D 103 <br>
-                                        Klapka: 628
+                                        <?php echo $lang['DEPARTMENT_IKRS']; ?> <br>
+                                        <?php echo $lang['ROOM']; ?>: D 103 <br>
+                                        <?php echo $lang['PHONE']; ?>: 628
                                     </p>
                                 </div>
                             </li>
                             <li>
                                 <div class="about-testimonial-image ">
-                                    <img alt="" src="img/staff_photo/zakova.jpg">
+                                    <img alt="zakova" src="img/staff_photo/zakova.jpg">
                                 </div>
                                 <a class="about-testimonial-author" href="#">
                                     Doc. Ing. Katarína Žáková, PhD.
                                 </a>
-                                <span class="about-testimonial-company">Zástupkyňa vedúcej oddelenia OIKR</span>
+                                <span class="about-testimonial-company"><?php echo $lang['FUNKCIA_ZAKOVA']; ?></span>
                                 <div class="about-testimonial-content">
                                     <p class="about-testimonial-quote">
-                                        Oddelenie informačných, komunikačných a riadiacich systémov <br>
-                                        Miestnosť: D 119 <br>
-                                        Klapka: 742
+                                        <?php echo $lang['DEPARTMENT_IKRS']; ?> <br>
+                                        <?php echo $lang['ROOM']; ?>: D 119 <br>
+                                        <?php echo $lang['PHONE']; ?>: 742
                                     </p>
                                 </div>
                             </li>
                             <li>
                                 <div class="about-testimonial-image ">
-                                    <img alt="" src="img/staff_photo/kocur.jpg">
+                                    <img alt="kocur" src="img/staff_photo/kocur.jpg">
                                 </div>
                                 <a class="about-testimonial-author" href="#">
                                     Ing. Michal Kocúr, PhD.
                                 </a>
                                 <div class="about-testimonial-content">
                                     <p class="about-testimonial-quote">
-                                        Oddelenie E-mobility, automatizácie a pohonov <br>
-                                        Miestnosť: D 104 <br>
-                                        Klapka: 686
+                                        <?php echo $lang['DEPARTMENT_EAP']; ?> <br>
+                                        <?php echo $lang['ROOM']; ?>: D 104 <br>
+                                        <?php echo $lang['PHONE']; ?>: 686
                                     </p>
                                 </div>
                             </li>
@@ -304,7 +320,7 @@
         <div class="row">
             <div class="col-lg-12 recent">
                 <h3 class="recent-work">
-                    Fotky z našich podujatí
+                    <?php echo $lang['EVENT_PHOTOS']; ?>
                 </h3>
                 <div id="owl-demo" class="owl-carousel owl-theme wow fadeIn">
 
@@ -362,7 +378,7 @@
     <div class="row mar-b-50 our-clients">
         <div class="col-md-3">
             <h2>
-                Spolupracujeme
+                <?php echo $lang['COOPERATE']; ?>
             </h2>
 
         </div>
@@ -433,11 +449,18 @@
 
 <!--container end-->
 
-<?php 
-	if(strcmp($_SESSION['lang'],'en') == 0)
-		include('footer-en.php'); 
-	if(strcmp($_SESSION['lang'],'sk') == 0)
-		include('footer-sk.php'); 
+<?php
+switch ($language) {
+    case 'en':
+        include('footer-en.php');
+        break;
+    case 'sk':
+        include('footer-sk.php');
+        break;
+    default:
+        include('footer-sk.php');
+
+}
 ?>
 
 
